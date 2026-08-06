@@ -84,7 +84,7 @@ export default function LoginPage() {
                 
                 {loginMutation.error && (
                   <div className="text-sm text-destructive font-medium p-3 bg-destructive/10 rounded-md border border-destructive/20">
-                    {loginMutation.error.error || "Failed to login. Check credentials."}
+                    {(loginMutation.error?.data as any)?.error || loginMutation.error?.message || "Failed to login. Check credentials."}
                   </div>
                 )}
 

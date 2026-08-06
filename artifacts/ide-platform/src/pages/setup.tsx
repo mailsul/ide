@@ -117,7 +117,7 @@ export default function SetupPage() {
                 
                 {registerMutation.error && (
                   <div className="text-sm text-destructive font-medium p-3 bg-destructive/10 rounded-md border border-destructive/20">
-                    {registerMutation.error.error || "Failed to complete setup."}
+                    {(registerMutation.error?.data as any)?.error || registerMutation.error?.message || "Failed to complete setup."}
                   </div>
                 )}
 
