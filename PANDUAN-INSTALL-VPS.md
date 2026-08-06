@@ -7,11 +7,9 @@ Baca setiap langkah dengan teliti — jangan skip.
 
 ## 📋 Yang Anda Butuhkan Sebelum Mulai
 
-Sebelum mulai, pastikan Anda sudah punya:
-
 | Kebutuhan | Keterangan |
 |-----------|------------|
-| VPS Ubuntu 22.04 | Minimal 2 CPU, 4GB RAM, 50GB disk |
+| VPS Ubuntu 22.04 / 24.04 | Minimal 2 CPU, 4GB RAM, 50GB disk |
 | Domain | Sudah dibeli (contoh: `myplatform.com`) |
 | Akses SSH ke VPS | Username `root` atau sudo |
 | DNS sudah diarahkan | Lihat Langkah 2 di bawah |
@@ -40,13 +38,15 @@ Ganti `IP_VPS_ANDA` dengan IP VPS yang sebenarnya.
 
 | Type | Name | Value | Proxy/TTL |
 |------|------|-------|-----------|
-| A | `@` | `IP_VPS_ANDA` | Proxied (Cloudflare) atau TTL 300 |
-| A | `api` | `IP_VPS_ANDA` | Proxied |
-| A | `phpmyadmin` | `IP_VPS_ANDA` | Proxied |
-| A | `pgadmin` | `IP_VPS_ANDA` | Proxied |
+| A | `@` | `IP_VPS_ANDA` | **DNS only** (abu-abu, bukan orange) |
+| A | `api` | `IP_VPS_ANDA` | **DNS only** |
+| A | `phpmyadmin` | `IP_VPS_ANDA` | **DNS only** |
+| A | `pgadmin` | `IP_VPS_ANDA` | **DNS only** |
 | CNAME | `www` | `yourdomain.com` | Proxied |
 | CNAME | `*.preview` | `yourdomain.com` | Proxied ← untuk subdomain workspace |
 | CNAME | `*` | `yourdomain.com` | Proxied ← untuk custom domain user |
+
+> ⚠️ **PENTING untuk Cloudflare**: A record utama (`@`, `api`, `phpmyadmin`, `pgadmin`) **HARUS** DNS only (icon abu-abu), bukan Proxied (orange). Jika Proxied diaktifkan, Let's Encrypt tidak bisa generate SSL certificate.
 
 > **Catatan:** Perubahan DNS bisa memakan waktu 5–30 menit untuk aktif.
 
@@ -108,7 +108,7 @@ systemctl enable --now docker
 docker --version
 ```
 
-Output yang benar: `Docker version 25.x.x, build ...`
+Output yang benar: `Docker version 29.x.x, build ...`
 
 ```bash
 # Install Docker Compose plugin
@@ -137,20 +137,19 @@ mkdir -p /opt/platform/docker/traefik/dynamic
 
 ## LANGKAH 7 — Clone Project dari GitHub
 
-> ℹ️ Jika Anda belum upload ke GitHub, lihat **Bagian B** di akhir panduan ini dulu, lalu kembali ke sini.
-
 ```bash
-# Pindah ke folder yang bagus untuk menyimpan project
+# Pindah ke folder /opt
 cd /opt
 
-# Clone project Anda dari GitHub
-git clone https://github.com/USERNAME_GITHUB_ANDA/NAMA_REPO.git platform
+# Clone project dari GitHub
+git clone https://github.com/mailsul/ide.git platform
 
 # Masuk ke folder project
 cd platform
-```
 
-> Ganti `USERNAME_GITHUB_ANDA` dan `NAMA_REPO` dengan milik Anda.
+# Cek isinya
+ls
+```
 
 ---
 
@@ -182,14 +181,16 @@ PGADMIN_PASSWORD=               ← Password untuk pgAdmin
 
 **Cara generate password acak yang kuat:**
 
-Buka terminal baru (atau buka tab baru di terminal), jalankan:
 ```bash
-# Untuk password database (copy hasilnya)
+# Untuk password database — TANPA karakter khusus seperti @, #, spasi
 openssl rand -hex 32
 
-# Untuk SESSION_SECRET (copy hasilnya — harus panjang!)
+# Untuk SESSION_SECRET
 openssl rand -hex 64
 ```
+
+> ⚠️ **PENTING**: Password **JANGAN** mengandung karakter `@`, `#`, `?`, `&`, spasi, atau simbol khusus lainnya.  
+> Gunakan format hex (huruf a-f dan angka 0-9) dari perintah `openssl rand -hex` di atas.
 
 Setelah selesai edit, simpan di `nano`:
 - Tekan `Ctrl + X`
@@ -235,23 +236,23 @@ docker compose logs -f
 docker compose ps
 ```
 
-Output yang benar (semua harus `running`):
+Output yang benar (semua harus `running` / `Up`):
 ```
 NAME                    STATUS
-platform-traefik        running
-platform-postgres       running
-platform-mysql          running
-platform-postgres-ws    running
-platform-backend        running
-platform-frontend       running
-platform-phpmyadmin     running
-platform-pgadmin        running
+platform-traefik        Up
+platform-postgres       Up (healthy)
+platform-mysql          Up
+platform-postgres-ws    Up
+platform-backend        Up
+platform-frontend       Up
+platform-phpmyadmin     Up
+platform-pgadmin        Up
 ```
 
-Jika ada yang `exited`, cek errornya:
+Jika ada yang `Restarting`, cek errornya:
 ```bash
 docker compose logs nama-service
-# Contoh: docker compose logs platform-backend
+# Contoh: docker compose logs backend
 ```
 
 ---
@@ -259,50 +260,67 @@ docker compose logs nama-service
 ## LANGKAH 11 — Setup Database Platform
 
 ```bash
-# Jalankan migrasi database (buat tabel-tabel yang dibutuhkan)
-docker compose exec backend node -e "
-const { db } = require('./lib/db/src/index.js');
-console.log('Database connected!');
-"
+# Jalankan migrasi database (buat semua tabel)
+docker compose exec backend sh -c "cd /app/lib/db && pnpm run push"
 ```
 
-> Jika perintah di atas gagal, jalankan ini:
-```bash
-docker compose exec backend sh -c "cd /app && npx drizzle-kit push"
+Output yang benar:
+```
+[✓] Pulling schema from database...
+[✓] Changes applied
 ```
 
 ---
 
-## LANGKAH 12 — Verifikasi Platform Berjalan
+## LANGKAH 12 — Tunggu SSL Certificate
+
+Traefik akan otomatis generate SSL certificate untuk semua domain Anda via Let's Encrypt.  
+Proses ini memakan waktu **2–5 menit**.
+
+Cek status SSL:
+```bash
+docker compose logs traefik | grep -i "obtain\|certif\|acme" | tail -10
+```
+
+Verifikasi SSL sudah aktif:
+```bash
+# Harus berhasil TANPA error SSL
+curl https://api.YOURDOMAIN.COM/api/healthz
+# Output: {"status":"ok"}
+```
+
+---
+
+## LANGKAH 13 — Verifikasi Platform Berjalan
 
 Buka browser dan akses:
 
 | URL | Yang Seharusnya Muncul |
 |-----|----------------------|
-| `https://yourdomain.com` | Halaman login/setup platform |
+| `https://yourdomain.com` | Halaman First-Run Setup |
 | `https://api.yourdomain.com/api/healthz` | `{"status":"ok"}` |
 | `https://phpmyadmin.yourdomain.com` | Halaman login phpMyAdmin |
 | `https://pgadmin.yourdomain.com` | Halaman login pgAdmin |
 
-> **SSL belum muncul?** Tunggu 2–5 menit untuk Let's Encrypt generate sertifikat.
+> **SSL "Not Secure" masih muncul?** Tunggu 3–5 menit lalu refresh. SSL di-generate sekali saja.
 
 ---
 
-## LANGKAH 13 — Buat Akun Admin Pertama
+## LANGKAH 14 — Buat Akun Admin Pertama
 
 Buka `https://yourdomain.com` di browser.  
-Jika belum ada user, platform akan otomatis tampilkan form **"Buat Akun Admin"**.
+Platform akan otomatis menampilkan halaman **"First-Run Setup"**.
 
 Isi:
-- Nama Lengkap
-- Username
-- Email
-- Password
+- **Username**
+- **Email**
+- **Full Name** (opsional)
+- **Password** (minimal 8 karakter)
 
-Klik **"Buat Akun Admin"** → Anda langsung masuk sebagai Admin.
+Klik **"Complete Setup"** → Anda langsung masuk sebagai Admin.
 
-> **Catatan:** Setelah akun admin dibuat, halaman register tidak bisa diakses publik lagi.  
-> Untuk tambah user baru, masuk ke Admin Panel → Users → Tambah User.
+> **Catatan:** Setelah akun admin dibuat, halaman setup tidak bisa diakses publik lagi.  
+> Untuk tambah user baru: Admin Panel → Users → Tambah User.
 
 ---
 
@@ -318,6 +336,7 @@ docker compose logs -f
 # Lihat log service tertentu
 docker compose logs -f backend
 docker compose logs -f frontend
+docker compose logs -f traefik
 
 # Restart semua service
 docker compose restart
@@ -340,20 +359,44 @@ docker compose exec postgres pg_dump -U platform platform > backup_$(date +%Y%m%
 
 ## 🚨 Troubleshooting Umum
 
+### ❌ Backend terus "Restarting"
+Cek log backend:
+```bash
+docker compose logs backend --tail 30
+```
+Penyebab umum: `DATABASE_URL` tidak valid karena password mengandung karakter khusus (`@`, spasi, dll).  
+**Fix**: Edit `.env`, ubah password menjadi hex murni (gunakan `openssl rand -hex 32`), lalu:
+```bash
+docker compose down && docker compose up -d
+```
+
+### ❌ SSL "Not Secure" / certificate error
+- Pastikan A records DNS sudah **DNS only** (bukan Proxied) di Cloudflare
+- Restart Traefik untuk trigger generate ulang cert:
+```bash
+docker run --rm -v platform_traefik_letsencrypt:/data alpine rm -f /data/acme.json
+docker compose up -d --force-recreate traefik
+```
+- Tunggu 3–5 menit, cek: `curl https://api.YOURDOMAIN.COM/api/healthz`
+
+### ❌ "404 page not found" di browser
+Traefik tidak bisa baca Docker (Docker API version mismatch). Routes sudah dikonfigurasi via file statis.  
+Cek: `docker compose logs traefik | tail -5`
+
+### ❌ "Failed to complete setup" saat register admin
+Test API langsung dari VPS:
+```bash
+curl -X POST https://api.YOURDOMAIN.COM/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","email":"youremail@gmail.com","password":"password123","fullName":"Admin"}'
+```
+Lihat error yang muncul, lalu cek: `docker compose logs backend --tail 20`
+
 ### ❌ "Cannot connect to Docker daemon"
 ```bash
 systemctl start docker
 systemctl enable docker
 ```
-
-### ❌ SSL tidak muncul / "Not Secure"
-- Pastikan DNS sudah mengarah ke IP VPS (cek di: https://dnschecker.org)
-- Tunggu 5 menit lalu refresh
-- Cek log Traefik: `docker compose logs traefik`
-
-### ❌ Backend error "Cannot connect to database"
-- Pastikan postgres container running: `docker compose ps`
-- Restart backend: `docker compose restart backend`
 
 ### ❌ Build gagal karena memory
 ```bash
@@ -376,7 +419,6 @@ echo '/swapfile none swap sw 0 0' | tee -a /etc/fstab
 1. Buka https://github.com
 2. Klik **Sign up**
 3. Daftar dengan email Anda
-4. Verifikasi email
 
 ## Langkah B2 — Install Git di Komputer Lokal
 
@@ -386,7 +428,6 @@ echo '/swapfile none swap sw 0 0' | tee -a /etc/fstab
 
 **Mac:**
 ```bash
-# Buka Terminal, ketik:
 git --version
 # Jika belum ada, macOS akan otomatis minta install
 ```
@@ -406,58 +447,34 @@ git config --global user.email "email@anda.com"
 ## Langkah B4 — Buat Repository Baru di GitHub
 
 1. Login ke https://github.com
-2. Klik tombol **"New"** (tombol hijau) atau klik **"+"** di kanan atas → **"New repository"**
-3. Isi:
-   - **Repository name:** `replit-clone` (atau nama lain yang Anda mau)
-   - **Description:** Platform IDE self-hosted mirip Replit
-   - Pilih **Private** (supaya kode tidak publik)
-4. **JANGAN centang** "Initialize this repository with a README"
-5. Klik **"Create repository"**
+2. Klik **"New"** → isi nama repo → pilih **Private**
+3. **JANGAN centang** "Initialize this repository with a README"
+4. Klik **"Create repository"**
 
-## Langkah B5 — Upload Project dari Replit/Komputer ke GitHub
-
-Di terminal lokal Anda, masuk ke folder project ini:
+## Langkah B5 — Upload Project dari Replit ke GitHub
 
 ```bash
-# Inisialisasi git (jika belum)
 git init
-
-# Tambahkan semua file
 git add .
-
-# Commit pertama
-git commit -m "Initial commit: Replit clone platform"
-
-# Hubungkan dengan repository GitHub Anda
-# Ganti USERNAME dan NAMA_REPO dengan milik Anda
+git commit -m "Initial commit"
 git remote add origin https://github.com/USERNAME/NAMA_REPO.git
-
-# Upload ke GitHub
 git branch -M main
 git push -u origin main
 ```
 
-> **Minta username/password?** GitHub sekarang pakai token.  
-> Buat token di: GitHub → Settings → Developer settings → Personal access tokens → Generate new token  
-> Centang scope: `repo`. Copy tokennya dan pakai sebagai password.
+> **Minta username/password?** GitHub pakai Personal Access Token.  
+> Buat di: GitHub → Settings → Developer settings → Personal access tokens → Generate new token  
+> Centang scope: `repo`. Pakai token sebagai password.
 
-## Langkah B6 — Verifikasi di GitHub
-
-Buka `https://github.com/USERNAME/NAMA_REPO` — semua file harus sudah muncul di sana.
-
-## Langkah B7 — Update Project ke GitHub (setelah ada perubahan)
-
-Setiap kali ada perubahan file, lakukan ini:
+## Langkah B6 — Update Project ke GitHub (setelah ada perubahan)
 
 ```bash
 git add .
-git commit -m "Deskripsi perubahan Anda"
+git commit -m "Deskripsi perubahan"
 git push
 ```
 
-## Langkah B8 — Pull Update di VPS
-
-Setelah push ke GitHub, update di VPS:
+## Langkah B7 — Pull Update di VPS
 
 ```bash
 cd /opt/platform
@@ -469,14 +486,15 @@ docker compose up -d --build
 
 ## ✅ Checklist Akhir
 
-- [ ] VPS Ubuntu 22.04 aktif dan bisa di-SSH
-- [ ] DNS domain sudah diarahkan ke IP VPS
+- [ ] VPS Ubuntu aktif dan bisa di-SSH
+- [ ] DNS domain A records → **DNS only** (bukan Proxied) di Cloudflare
 - [ ] Firewall aktif (port 22, 80, 443 terbuka)
 - [ ] Docker dan Docker Compose terinstall
-- [ ] File `.env` sudah diisi dengan data yang benar
+- [ ] File `.env` sudah diisi dengan password **hex murni** (tanpa karakter khusus)
 - [ ] `docker compose up -d --build` berhasil
-- [ ] Semua container berstatus `running`
-- [ ] Bisa buka `https://yourdomain.com` di browser
-- [ ] Akun admin pertama sudah dibuat
+- [ ] Semua container berstatus `Up`
+- [ ] `curl https://api.DOMAIN/api/healthz` mengembalikan `{"status":"ok"}`
+- [ ] Bisa buka `https://yourdomain.com` di browser (ada gembok SSL)
+- [ ] Akun admin pertama sudah dibuat via "First-Run Setup"
 
 🎉 **Selamat! Platform Anda sudah berjalan!**
