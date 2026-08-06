@@ -1,0 +1,31 @@
+root@ide:/opt/platform# docker compose exec backend sh -c "cd /app/lib/db && npx --yes drizzle-kit@0.31.10 push"
+npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.hirok.io
+npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.hirok.io
+No config path provided, using default 'drizzle.config.ts'
+Reading config file '/app/lib/db/drizzle.config.ts'
+Cannot find module 'drizzle-kit'
+Require stack:
+- /app/lib/db/drizzle.config.ts
+- /root/.npm/_npx/c9cef48327eee003/node_modules/drizzle-kit/bin.cjs
+root@ide:/opt/platform# docker compose logs traefik | grep -i "acme\|certificate\|error" | tail -20
+platform-traefik  | 2026-08-06T03:24:48Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:24:48Z ERR Provider error, retrying in 1.425055362s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:24:49Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:24:49Z ERR Provider error, retrying in 1.413625972s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:24:51Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:24:51Z ERR Provider error, retrying in 5.401059164s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:24:56Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:24:56Z ERR Provider error, retrying in 4.639677624s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:01Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:01Z ERR Provider error, retrying in 5.862280207s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:06Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:06Z ERR Provider error, retrying in 15.317719808s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:22Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:22Z ERR Provider error, retrying in 653.638752ms error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:22Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:22Z ERR Provider error, retrying in 548.099974ms error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:23Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:23Z ERR Provider error, retrying in 1.333997186s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:24Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:24Z ERR Provider error, retrying in 2.010832644s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+root@ide:/opt/platform#
