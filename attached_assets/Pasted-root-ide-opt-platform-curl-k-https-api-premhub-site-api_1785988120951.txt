@@ -1,0 +1,44 @@
+root@ide:/opt/platform# curl -k https://api.premhub.site/api/healthz
+{"status":"ok"}root@ide:cd /opt/platformd /opt/platform
+git pull
+
+# Reset acme.json (hapus cert lama yang gagal)
+docker run --rm -v platform_traefik_letsencrypt:/data alpine rm -f /data/acme.json
+
+# Restart Traefik dengan config baru (HTTP challenge)
+docker compose up -d --force-recreate traefik
+
+# Tunggu 30 detik lalu cek log
+sleep 30 && docker compose logs traefik | grep -i "obtain\|certif\|acme\|error" | tail -15
+remote: Enumerating objects: 10, done.
+remote: Counting objects: 100% (10/10), done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 8 (delta 4), reused 8 (delta 4), pack-reused 0 (from 0)
+Unpacking objects: 100% (8/8), 42.06 KiB | 2.80 MiB/s, done.
+From https://github.com/mailsul/ide
+   c7349a1..bb06512  main       -> origin/main
+Updating c7349a1..bb06512
+Fast-forward
+ attached_assets/image_1785987815309.png | Bin 0 -> 38215 bytes
+ attached_assets/image_1785987932358.png | Bin 0 -> 5394 bytes
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 attached_assets/image_1785987815309.png
+ create mode 100644 attached_assets/image_1785987932358.png
+[+] up 1/1
+ ✔ Container platform-traefik Started                                                                               1.8s
+platform-traefik  | 2026-08-06T03:47:30Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:30Z ERR Provider error, retrying in 1.15694361s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:31Z INF Register... providerName=letsencrypt.acme
+platform-traefik  | 2026-08-06T03:47:31Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:31Z ERR Provider error, retrying in 1.445806127s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:33Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:33Z ERR Provider error, retrying in 2.566486812s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:35Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:35Z ERR Provider error, retrying in 3.697531226s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:39Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:39Z ERR Provider error, retrying in 7.896987708s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:47Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:47Z ERR Provider error, retrying in 7.034677653s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:54Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:54Z ERR Provider error, retrying in 13.769386226s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+root@ide:/opt/platform#
