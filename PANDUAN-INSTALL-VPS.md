@@ -5,6 +5,120 @@ Baca setiap langkah dengan teliti — jangan skip.
 
 ---
 
+## 📊 Status Instalasi Anda (Update: 6 Agustus 2026)
+
+| Langkah | Status | Keterangan |
+|---------|--------|------------|
+| 1 — Koneksi SSH | ✅ Selesai | Login sebagai root |
+| 2 — Setting DNS | ✅ Selesai | Domain: `premhub.site` |
+| 3 — Update Ubuntu & Tools | ✅ Selesai | curl, git, wget, nano, ufw, htop |
+| 4 — Firewall | ✅ Selesai | Port 22, 80, 443 terbuka |
+| 5 — Docker | ✅ Selesai | Docker 29.7.1, Compose v5.4.0 |
+| 6 — Buat Folder | ✅ Selesai | `/workspaces`, `/opt/platform/docker/traefik/dynamic` |
+| 7 — Clone Project | ✅ Selesai | `/opt/platform` dari GitHub |
+| 8 — File .env | ✅ Selesai | Sudah diedit dan direstart bersih |
+| 9 — Build Workspace Image | ✅ Selesai | `platform/workspace-base:latest` |
+| 10 — Jalankan Platform | ✅ Selesai | Semua 8 container `Up` |
+| 11 — Migrasi Database | ✅ Selesai | `[✓] Changes applied` |
+| 12 — SSL Certificate | ⚠️ Sebagian | `api.premhub.site` ✅, `www.premhub.site` ❌ |
+| 13 — Verifikasi Platform | ✅ Selesai | `{"status":"ok"}` dari healthz |
+| 14 — Akun Admin | ✅ Selesai | Admin dibuat via API |
+
+---
+
+## 🔴 Yang Masih Perlu Dilakukan
+
+### 1. Fix SSL untuk `www.premhub.site`
+
+**Masalah:** SSL untuk `www.premhub.site` gagal karena record `www` di-Proxy Cloudflare (icon orange). Let's Encrypt menggunakan TLS-ALPN-01 challenge yang tidak bisa menembus proxy Cloudflare.
+
+**Solusi — Ubah `www` menjadi DNS Only di Cloudflare:**
+
+1. Login ke Cloudflare dashboard
+2. Pilih domain `premhub.site`
+3. Buka tab **DNS**
+4. Cari record CNAME untuk `www`
+5. Klik edit → ubah **Proxy status** dari orange (Proxied) ke **abu-abu (DNS only)**
+6. Simpan
+
+Kemudian di VPS, reset SSL dan tunggu generate ulang:
+```bash
+cd /opt/platform
+
+# Hapus certificate lama
+docker run --rm -v platform_traefik_letsencrypt:/data alpine rm -f /data/acme.json
+
+# Restart Traefik
+docker compose up -d --force-recreate traefik
+
+# Tunggu 3-5 menit, lalu cek
+curl https://www.premhub.site
+```
+
+---
+
+### 2. Verifikasi Login di Browser
+
+Buka browser dan akses **https://premhub.site**
+
+- Karena akun admin sudah dibuat via API, halaman yang muncul adalah **halaman Login** (bukan First-Run Setup)
+- Login dengan:
+  - **Email:** `maraazn069@gmail.com`
+  - **Password:** password yang Anda gunakan saat register
+
+Jika login berhasil → platform siap digunakan! 🎉
+
+---
+
+### 3. (Opsional) Perbaiki Password di .env ke Hex Murni
+
+> ⚠️ Ini **opsional** — jika platform sudah bisa login dan berjalan normal, Anda tidak wajib melakukan ini sekarang. Tapi untuk keamanan jangka panjang, disarankan.
+
+Saat ini `.env` masih memiliki:
+- Password DB: `"intinya ini password"` (mengandung spasi)
+- SESSION_SECRET: format base64 (mengandung `+`, `/`, `=`)
+
+Jika ingin memperbaiki (ini akan **menghapus semua data dan user**):
+
+```bash
+cd /opt/platform
+
+# Generate semua password baru (hex murni)
+PLATFORM_DB_PASS=$(openssl rand -hex 32)
+MYSQL_PASS=$(openssl rand -hex 32)
+POSTGRES_PASS=$(openssl rand -hex 32)
+SESSION=$(openssl rand -hex 64)
+
+echo "Salin nilai-nilai ini:"
+echo "PLATFORM_DB_PASS=$PLATFORM_DB_PASS"
+echo "MYSQL_ROOT_PASSWORD=$MYSQL_PASS"
+echo "POSTGRES_ROOT_PASSWORD=$POSTGRES_PASS"
+echo "SESSION_SECRET=$SESSION"
+
+# Edit .env dengan nilai baru
+nano .env
+```
+
+Setelah edit, hapus data lama dan restart:
+```bash
+# PERINGATAN: Ini hapus semua data!
+docker compose down -v
+docker compose up -d --build
+
+# Tunggu semua container Up (~30 detik)
+sleep 30
+
+# Jalankan ulang migrasi
+docker compose exec backend sh -c "cd /app/lib/db && pnpm run push"
+
+# Buat ulang akun admin
+curl -X POST https://api.premhub.site/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","email":"EMAIL_ANDA","password":"PASSWORD_BARU","fullName":"Admin"}'
+```
+
+---
+
 ## 📋 Yang Anda Butuhkan Sebelum Mulai
 
 | Kebutuhan | Keterangan |
@@ -42,11 +156,11 @@ Ganti `IP_VPS_ANDA` dengan IP VPS yang sebenarnya.
 | A | `api` | `IP_VPS_ANDA` | **DNS only** |
 | A | `phpmyadmin` | `IP_VPS_ANDA` | **DNS only** |
 | A | `pgadmin` | `IP_VPS_ANDA` | **DNS only** |
-| CNAME | `www` | `yourdomain.com` | Proxied |
+| A | `www` | `IP_VPS_ANDA` | **DNS only** ← PENTING: jangan Proxied! |
 | CNAME | `*.preview` | `yourdomain.com` | Proxied ← untuk subdomain workspace |
 | CNAME | `*` | `yourdomain.com` | Proxied ← untuk custom domain user |
 
-> ⚠️ **PENTING untuk Cloudflare**: A record utama (`@`, `api`, `phpmyadmin`, `pgadmin`) **HARUS** DNS only (icon abu-abu), bukan Proxied (orange). Jika Proxied diaktifkan, Let's Encrypt tidak bisa generate SSL certificate.
+> ⚠️ **PENTING untuk Cloudflare**: Semua A record (`@`, `api`, `phpmyadmin`, `pgadmin`, `www`) **HARUS** DNS only (icon abu-abu), bukan Proxied (orange). Jika Proxied diaktifkan, Let's Encrypt tidak bisa generate SSL certificate menggunakan TLS-ALPN-01 challenge.
 
 > **Catatan:** Perubahan DNS bisa memakan waktu 5–30 menit untuk aktif.
 
@@ -387,13 +501,17 @@ docker compose down && docker compose up -d
 ```
 
 ### ❌ SSL "Not Secure" / certificate error
-- Pastikan A records DNS sudah **DNS only** (bukan Proxied) di Cloudflare
+- Pastikan **semua** A records DNS sudah **DNS only** (bukan Proxied) di Cloudflare — termasuk `www`
 - Restart Traefik untuk trigger generate ulang cert:
 ```bash
 docker run --rm -v platform_traefik_letsencrypt:/data alpine rm -f /data/acme.json
 docker compose up -d --force-recreate traefik
 ```
 - Tunggu 3–5 menit, cek: `curl https://api.YOURDOMAIN.COM/api/healthz`
+
+### ❌ SSL www gagal dengan error "Cannot negotiate ALPN protocol"
+Ini terjadi karena record `www` masih di-Proxy Cloudflare (orange). Let's Encrypt TLS-ALPN-01 tidak bisa menembus proxy Cloudflare.  
+**Fix**: Di Cloudflare, ubah record `www` dari **Proxied** (orange) ke **DNS only** (abu-abu), lalu reset SSL seperti di atas.
 
 ### ❌ "404 page not found" di browser
 Traefik tidak bisa baca Docker (Docker API version mismatch). Routes sudah dikonfigurasi via file statis.  
@@ -557,15 +675,15 @@ docker compose up -d --build
 
 ## ✅ Checklist Akhir
 
-- [ ] VPS Ubuntu aktif dan bisa di-SSH
-- [ ] DNS domain A records → **DNS only** (bukan Proxied) di Cloudflare
-- [ ] Firewall aktif (port 22, 80, 443 terbuka)
-- [ ] Docker dan Docker Compose terinstall
-- [ ] File `.env` sudah diisi dengan password **hex murni** (tanpa karakter khusus)
-- [ ] `docker compose up -d --build` berhasil
-- [ ] Semua container berstatus `Up`
-- [ ] `curl https://api.DOMAIN/api/healthz` mengembalikan `{"status":"ok"}`
-- [ ] Bisa buka `https://yourdomain.com` di browser (ada gembok SSL)
-- [ ] Akun admin pertama sudah dibuat via "First-Run Setup"
+- [x] VPS Ubuntu aktif dan bisa di-SSH
+- [x] DNS domain A records → **DNS only** (bukan Proxied) di Cloudflare ← **pastikan `www` juga DNS only!**
+- [x] Firewall aktif (port 22, 80, 443 terbuka)
+- [x] Docker dan Docker Compose terinstall
+- [x] File `.env` sudah diisi dengan password **hex murni** (tanpa karakter khusus)
+- [x] `docker compose up -d --build` berhasil
+- [x] Semua container berstatus `Up`
+- [x] `curl https://api.DOMAIN/api/healthz` mengembalikan `{"status":"ok"}`
+- [ ] SSL `www.premhub.site` aktif (ubah record `www` ke DNS only di Cloudflare)
+- [ ] Bisa login ke `https://premhub.site` di browser
 
-🎉 **Selamat! Platform Anda sudah berjalan!**
+🎉 **Hampir selesai! Tinggal 2 langkah terakhir.**
