@@ -1,7 +1,7 @@
 http:
   routers:
     frontend:
-      rule: "Host(`premhub.site`) || Host(`www.premhub.site`)"
+      rule: "Host(`premhub.site`)"
       entryPoints:
         - websecure
       service: svc-frontend
