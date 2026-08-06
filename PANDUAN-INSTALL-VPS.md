@@ -157,6 +157,23 @@ ls
 
 File `.env` berisi password dan konfigurasi rahasia platform Anda.
 
+**Pertama, generate semua password yang dibutuhkan (jalankan satu per satu, catat hasilnya):**
+
+```bash
+# Generate password untuk database (hex murni, aman untuk URL)
+echo "PLATFORM_DB_PASS:" && openssl rand -hex 32
+echo "MYSQL_ROOT_PASSWORD:" && openssl rand -hex 32
+echo "POSTGRES_ROOT_PASSWORD:" && openssl rand -hex 32
+echo "PGADMIN_PASSWORD:" && openssl rand -hex 16
+echo "SESSION_SECRET:" && openssl rand -hex 64
+```
+
+> ⚠️ **PENTING — Baca ini sebelum mengisi .env:**
+> - Password **WAJIB** menggunakan output `openssl rand -hex` (hanya huruf a-f dan angka 0-9)
+> - **JANGAN** gunakan `openssl rand -base64` — hasilnya mengandung `+`, `/`, `=` yang merusak DATABASE_URL
+> - **JANGAN** isi manual seperti "mypassword123" atau "intinya ini password" — spasi dan karakter khusus akan membuat backend tidak bisa terhubung ke database
+> - Jika password salah, backend akan jalan (healthz OK) tapi **tidak bisa buat akun** ("Failed to complete setup")
+
 ```bash
 # Salin template
 cp .env.example .env
@@ -165,41 +182,40 @@ cp .env.example .env
 nano .env
 ```
 
-Di editor `nano`, edit setiap baris:
+Di editor `nano`, edit setiap baris dengan nilai yang sudah digenerate:
 
 ```
-DOMAIN=yourdomain.com           ← Ganti dengan domain Anda (tanpa https://)
-ACME_EMAIL=email@anda.com       ← Email untuk sertifikat SSL
+DOMAIN=yourdomain.com                    ← Ganti dengan domain Anda (tanpa https://)
+ACME_EMAIL=email@anda.com               ← Email untuk sertifikat SSL
 
-PLATFORM_DB_PASS=               ← Password acak (jalankan perintah di bawah untuk generate)
-MYSQL_ROOT_PASSWORD=            ← Password acak lain
-POSTGRES_ROOT_PASSWORD=         ← Password acak lain
-SESSION_SECRET=                 ← Secret JWT panjang (jalankan perintah di bawah)
-PGADMIN_EMAIL=admin@domain.com  ← Email untuk login pgAdmin
-PGADMIN_PASSWORD=               ← Password untuk pgAdmin
+PLATFORM_DB_PASS=abc123def456...        ← Hasil openssl rand -hex 32 (HANYA hex!)
+MYSQL_ROOT_PASSWORD=abc123def456...     ← Hasil openssl rand -hex 32 yang berbeda
+POSTGRES_ROOT_PASSWORD=abc123def456...  ← Hasil openssl rand -hex 32 yang berbeda
+SESSION_SECRET=abc123def456...          ← Hasil openssl rand -hex 64 (HANYA hex!)
+PGADMIN_EMAIL=admin@domain.com          ← Email untuk login pgAdmin
+PGADMIN_PASSWORD=abc123def456...        ← Hasil openssl rand -hex 16
 ```
-
-**Cara generate password acak yang kuat:**
-
-```bash
-# Untuk password database — TANPA karakter khusus seperti @, #, spasi
-openssl rand -hex 32
-
-# Untuk SESSION_SECRET
-openssl rand -hex 64
-```
-
-> ⚠️ **PENTING**: Password **JANGAN** mengandung karakter `@`, `#`, `?`, `&`, spasi, atau simbol khusus lainnya.  
-> Gunakan format hex (huruf a-f dan angka 0-9) dari perintah `openssl rand -hex` di atas.
 
 Setelah selesai edit, simpan di `nano`:
 - Tekan `Ctrl + X`
 - Tekan `Y`
 - Tekan `Enter`
 
-**Verifikasi file .env sudah benar:**
+**Verifikasi file .env sudah benar (tidak boleh ada spasi di nilai password):**
 ```bash
 cat .env
+```
+
+Contoh output yang BENAR:
+```
+PLATFORM_DB_PASS=3f8a1b2c4d5e6f7a8b9c0d1e2f3a4b5c
+SESSION_SECRET=1a2b3c4d5e6f...panjang 128 karakter...
+```
+
+Contoh output yang SALAH (jangan seperti ini!):
+```
+PLATFORM_DB_PASS=intinya ini password   ← ADA SPASI, akan rusak!
+SESSION_SECRET=YoVOP5Rw...w==           ← Ada +/=, gunakan hex!
 ```
 
 ---
@@ -384,13 +400,68 @@ Traefik tidak bisa baca Docker (Docker API version mismatch). Routes sudah dikon
 Cek: `docker compose logs traefik | tail -5`
 
 ### ❌ "Failed to complete setup" saat register admin
-Test API langsung dari VPS:
+
+**Penyebab paling umum: password di .env mengandung spasi atau karakter khusus.**
+
+Jika `PLATFORM_DB_PASS` berisi spasi (contoh: `intinya ini password`), maka `DATABASE_URL` yang terbentuk adalah:
+`postgresql://platform:intinya ini password@postgres:5432/platform` — ini **INVALID**, backend jalan tapi tidak bisa query database.
+
+**Langkah diagnosis:**
+
+**Step 1 — Test API dari VPS:**
 ```bash
 curl -X POST https://api.YOURDOMAIN.COM/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{"username":"admin","email":"youremail@gmail.com","password":"password123","fullName":"Admin"}'
 ```
-Lihat error yang muncul, lalu cek: `docker compose logs backend --tail 20`
+
+Jika output: `{"id":"usr_...","username":"admin",...}` → API OK, masalah di browser (lihat Step 3)  
+Jika output: error atau tidak ada → lanjut Step 2
+
+**Step 2 — Cek log backend:**
+```bash
+docker compose logs backend --tail 30
+```
+Jika ada error `SASL` atau `password authentication failed` atau `invalid connection string` → **fix .env** (lihat di bawah).
+
+**Fix .env (password salah):**
+```bash
+cd /opt/platform
+
+# Generate password baru yang BENAR (hex murni)
+PLATFORM_DB_PASS=$(openssl rand -hex 32)
+MYSQL_PASS=$(openssl rand -hex 32)
+POSTGRES_PASS=$(openssl rand -hex 32)
+SESSION=$(openssl rand -hex 64)
+
+# Tampilkan untuk dicatat
+echo "PLATFORM_DB_PASS=$PLATFORM_DB_PASS"
+echo "MYSQL_ROOT_PASSWORD=$MYSQL_PASS"
+echo "POSTGRES_ROOT_PASSWORD=$POSTGRES_PASS"
+echo "SESSION_SECRET=$SESSION"
+
+# Edit .env dengan nilai baru
+nano .env
+```
+
+Setelah .env diupdate, hapus volume database lama dan restart:
+```bash
+# PERINGATAN: Ini hapus semua data database!
+docker compose down -v
+docker compose up -d --build
+
+# Tunggu semua Up, lalu jalankan ulang migrasi
+sleep 20
+docker compose exec backend sh -c "cd /app/lib/db && pnpm run push"
+```
+
+**Step 3 — Jika curl berhasil tapi browser gagal:**
+Kemungkinan SSL belum valid di browser. Buka browser → `https://api.DOMAIN.COM/api/healthz`
+- Jika ada peringatan "Not Secure" / SSL error → tunggu 5 menit, SSL masih digenerate
+- Jika muncul `{"status":"ok"}` tapi setup masih gagal → cek bagian Traefik di bawah
+
+### ⚠️ Traefik log penuh dengan "client version 1.24 is too old"
+Ini adalah warning normal — Traefik tidak bisa auto-discover container via Docker API, tapi **tidak berpengaruh** karena routes sudah dikonfigurasi via file statis (`docker/traefik/dynamic/routes.yml`). Platform tetap berjalan normal. Abaikan error ini.
 
 ### ❌ "Cannot connect to Docker daemon"
 ```bash
