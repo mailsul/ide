@@ -22,8 +22,10 @@ RUN apt-get update && apt-get install -y \
   && pip3 install poetry \
   && rm -rf /var/lib/apt/lists/*
 
-# PHP 8.2 + Composer
-RUN apt-get update && apt-get install -y \
+# PHP 8.2 + Composer (pakai PPA ondrej/php karena tidak ada di repo default Ubuntu 22.04)
+RUN apt-get update && apt-get install -y software-properties-common \
+  && add-apt-repository -y ppa:ondrej/php \
+  && apt-get update && apt-get install -y \
   php8.2 php8.2-cli php8.2-curl php8.2-mbstring \
   php8.2-xml php8.2-mysql php8.2-pgsql php8.2-zip \
   && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
