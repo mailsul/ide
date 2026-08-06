@@ -42,6 +42,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# ─── File upload sementara (dari Replit) ─────────────────────────────────────
+attached_assets/
+
 # ─── OS / Editor ──────────────────────────────────────────────────────────────
 .DS_Store
 Thumbs.db
