@@ -1,0 +1,34 @@
+# .workspace.toml — Docker + Node.js Template
+# Node.js development + Docker untuk packaging & deployment.
+# Cocok untuk: membangun app Node.js yang di-deploy sebagai Docker container.
+
+[workspace]
+template = "docker-node"
+name = "My Docker + Node.js App"
+
+# ─── Runner Configuration ─────────────────────────────────────────────────────
+[[run]]
+name = "Dev (node langsung)"
+command = "node index.js"
+port = 3000
+autoStart = false
+
+[[run]]
+name = "Docker Compose"
+command = "docker compose up --build"
+port = 3000
+autoStart = false
+
+# ─── Package Managers ─────────────────────────────────────────────────────────
+[packages]
+manager = "npm"
+
+# ─── Docker Configuration ─────────────────────────────────────────────────────
+[docker]
+socket = "/var/run/docker.sock"
+compose_file = "docker-compose.yml"
+
+# ─── Environment ──────────────────────────────────────────────────────────────
+[env]
+NODE_ENV = "development"
+PORT = "3000"

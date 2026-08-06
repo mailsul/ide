@@ -62,6 +62,18 @@ RUN apt-get update && apt-get install -y mysql-client \
 RUN apt-get update && apt-get install -y postgresql-client \
   && rm -rf /var/lib/apt/lists/*
 
+# Docker CLI — untuk Docker-in-Docker (DinD) template
+# Hanya CLI, bukan daemon — daemon dari host di-mount via socket
+RUN apt-get update \
+  && install -m 0755 -d /etc/apt/keyrings \
+  && curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc \
+  && chmod a+r /etc/apt/keyrings/docker.asc \
+  && echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu jammy stable" \
+     > /etc/apt/sources.list.d/docker.list \
+  && apt-get update \
+  && apt-get install -y docker-ce-cli docker-compose-plugin \
+  && rm -rf /var/lib/apt/lists/*
+
 # Working directory
 WORKDIR /workspace
 

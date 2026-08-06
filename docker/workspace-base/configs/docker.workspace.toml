@@ -1,0 +1,29 @@
+# .workspace.toml — Docker-in-Docker Template
+# Template ini mengaktifkan Docker CLI di dalam workspace.
+# Docker daemon dari host di-mount via /var/run/docker.sock — jadi "docker" CLI
+# yang Anda jalankan di terminal workspace bisa build images, jalankan containers, dll.
+
+[workspace]
+template = "docker"
+name = "My Docker Project"
+
+# ─── Runner Configuration ─────────────────────────────────────────────────────
+[[run]]
+name = "Docker Compose Up"
+command = "docker compose up --build"
+port = 80
+autoStart = false          # Docker template tidak auto-start — jalankan manual
+
+# [[run]]
+# name = "Build Image"
+# command = "docker build -t myapp:latest ."
+# autoStart = false
+
+# ─── Package Manager ─────────────────────────────────────────────────────────
+[packages]
+manager = "apt"            # package manager sistem (untuk install tools tambahan)
+
+# ─── Docker Configuration ─────────────────────────────────────────────────────
+[docker]
+socket = "/var/run/docker.sock"   # path ke Docker socket (dari host, di-mount)
+compose_file = "docker-compose.yml"

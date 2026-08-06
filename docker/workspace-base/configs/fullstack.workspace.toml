@@ -1,0 +1,43 @@
+# .workspace.toml — Full Stack Template
+# Node.js (frontend) + Python (backend) + Docker.
+# Semua runtime tersedia di 1 workspace — jalankan service yang Anda butuhkan.
+
+[workspace]
+template = "fullstack"
+name = "My Full Stack App"
+
+# ─── Runner Configuration ─────────────────────────────────────────────────────
+[[run]]
+name = "Frontend (Node.js)"
+command = "npm run dev"
+port = 3000
+autoStart = false
+
+[[run]]
+name = "Backend (Python)"
+command = "python backend/main.py"
+port = 8000
+autoStart = false
+
+[[run]]
+name = "Docker Compose (semua service)"
+command = "docker compose up --build"
+port = 80
+autoStart = false
+
+# ─── Package Managers ─────────────────────────────────────────────────────────
+[packages]
+nodejs_manager = "npm"
+python_manager = "pip"
+
+# ─── Docker ───────────────────────────────────────────────────────────────────
+[docker]
+socket = "/var/run/docker.sock"
+compose_file = "docker-compose.yml"
+
+# ─── Environment ──────────────────────────────────────────────────────────────
+[env]
+NODE_ENV = "development"
+PYTHON_ENV = "development"
+FRONTEND_PORT = "3000"
+BACKEND_PORT = "8000"

@@ -1,0 +1,30 @@
+# .workspace.toml — Node.js Template
+# Taruh file ini di root workspace Anda sebagai ".workspace.toml"
+# Platform membaca file ini untuk menentukan cara menjalankan workspace.
+
+[workspace]
+template = "nodejs"
+name = "My Node.js App"
+
+# ─── Runner Configuration ─────────────────────────────────────────────────────
+# Minimal 1 run block wajib ada. autoStart = true artinya langsung jalan saat workspace diboot.
+[[run]]
+name = "Start Dev Server"
+command = "node index.js"
+port = 3000
+autoStart = true
+
+# Contoh workflow tambahan (opsional):
+# [[run]]
+# name = "Run Tests"
+# command = "npm test"
+# autoStart = false
+
+# ─── Package Manager ─────────────────────────────────────────────────────────
+[packages]
+manager = "npm"    # npm | pnpm | yarn | bun
+
+# ─── Environment Variables ────────────────────────────────────────────────────
+[env]
+NODE_ENV = "development"
+PORT = "3000"

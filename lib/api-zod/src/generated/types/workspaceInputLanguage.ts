@@ -10,6 +10,7 @@ export type WorkspaceInputLanguage = typeof WorkspaceInputLanguage[keyof typeof 
 
 
 export const WorkspaceInputLanguage = {
+  // ─── Single-language templates ─────────────────────────────────────────────
   nodejs: 'nodejs',
   python: 'python',
   php: 'php',
@@ -22,4 +23,15 @@ export const WorkspaceInputLanguage = {
   bash: 'bash',
   html: 'html',
   cpp: 'cpp',
+
+  // ─── Docker-in-Docker templates ────────────────────────────────────────────
+  // Docker CLI tersedia, daemon dari host di-mount via /var/run/docker.sock
+  docker: 'docker',           // Docker-only — Dockerfile, Compose, images
+  docker_node: 'docker-node', // Docker + Node.js (deploy via container)
+  docker_python: 'docker-python', // Docker + Python (FastAPI/Flask in containers)
+
+  // ─── Multi-language / Fullstack templates ──────────────────────────────────
+  // Semua runtime tersedia di 1 workspace image
+  fullstack: 'fullstack',     // Node.js (frontend) + Python (backend) + Docker
+  node_python: 'node-python', // Node.js + Python (data science + web)
 } as const;

@@ -10,8 +10,9 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import {
   Play, Square, Trash2, Plus, Copy, Check, Eye, EyeOff, RefreshCw,
   Globe, Lock, Unlock, ExternalLink, GitBranch, Loader2, Info, Database,
-  Activity, Key, Workflow, Server, ChevronDown, ChevronRight
+  Activity, Key, Workflow, Server, ChevronDown, ChevronRight, Package, Container
 } from "lucide-react";
+import { getTemplate } from "@/lib/workspace-templates";
 import {
   useListWorkflows, useCreateWorkflow, useStartWorkflow, useStopWorkflow, useDeleteWorkflow,
   useListPorts, useCreatePort, useDeletePort,
@@ -29,6 +30,7 @@ interface Workspace {
   id: string;
   name: string;
   slug: string;
+  language: string;
   status: string;
   isPublished: boolean;
   publishedUrl?: string | null;
@@ -737,6 +739,175 @@ function MonitoringTab({ workspaceId }: { workspaceId: string }) {
   );
 }
 
+// ─── PACKAGER ─────────────────────────────────────────────────
+function PackagerTab({ workspaceId, language }: { workspaceId: string; language: string }) {
+  const template = getTemplate(language);
+  const [activePm, setActivePm] = useState(template.packageManagers[0]?.id ?? "npm");
+  const [searchPkg, setSearchPkg] = useState("");
+  const [devDep, setDevDep] = useState(false);
+  const [copied, setCopied] = useState<string | null>(null);
+
+  const pm = template.packageManagers.find(p => p.id === activePm) ?? template.packageManagers[0];
+
+  const copyCmd = (cmd: string, key: string) => {
+    navigator.clipboard.writeText(cmd).catch(() => {});
+    setCopied(key);
+    setTimeout(() => setCopied(null), 2000);
+  };
+
+  const installCmd = pm
+    ? searchPkg.trim()
+      ? (devDep && pm.devInstallCmd ? pm.devInstallCmd(searchPkg.trim()) : pm.installCmd(searchPkg.trim()))
+      : null
+    : null;
+
+  return (
+    <div className="p-3 space-y-4">
+      {/* Header */}
+      <div className="flex items-center gap-2">
+        <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Packages</span>
+        <InfoTip text="Panel Packager membantu Anda menginstall packages. Salin perintah lalu jalankan di terminal workspace." />
+      </div>
+
+      {/* Template info */}
+      <div className="bg-muted/30 border border-border/40 rounded-lg px-3 py-2.5 space-y-1.5">
+        <div className="flex items-center gap-2">
+          <span className="text-base">{template.icon}</span>
+          <span className="text-xs font-semibold">{template.name}</span>
+          {template.dind && (
+            <Badge variant="outline" className="text-[10px] text-blue-400 border-blue-500/30 bg-blue-500/10 gap-1">
+              <Container className="w-2.5 h-2.5" /> DinD
+            </Badge>
+          )}
+        </div>
+        <div className="flex flex-wrap gap-1">
+          {template.runtimes.map((rt, i) => (
+            <span key={rt} className={`text-[10px] font-mono px-1.5 py-0.5 rounded border ${template.badgeColors[i] ?? template.badgeColors[0] ?? "bg-muted text-muted-foreground border-border/30"}`}>
+              {rt}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Package manager tabs (if multi-pm) */}
+      {template.packageManagers.length > 1 && (
+        <div className="flex gap-1 flex-wrap">
+          {template.packageManagers.map(p => (
+            <button
+              key={p.id}
+              onClick={() => { setActivePm(p.id); setSearchPkg(""); }}
+              className={`px-2.5 py-1 rounded-md text-xs font-mono font-medium transition-colors border ${
+                activePm === p.id
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "border-border/50 text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {p.name}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Install input */}
+      {pm && (
+        <div className="space-y-2">
+          <div className="relative">
+            <Package className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
+            <Input
+              placeholder={`Nama package (misal: express)`}
+              value={searchPkg}
+              onChange={e => setSearchPkg(e.target.value)}
+              className="pl-8 h-9 text-xs font-mono bg-background/50"
+            />
+          </div>
+
+          {/* Dev dep toggle (nodejs only) */}
+          {pm.devInstallCmd && (
+            <label className="flex items-center gap-2 cursor-pointer select-none">
+              <div
+                onClick={() => setDevDep(v => !v)}
+                className={`w-7 h-4 rounded-full transition-colors ${devDep ? "bg-primary" : "bg-muted"}`}
+              >
+                <div className={`w-3.5 h-3.5 rounded-full bg-white transition-transform mt-0.5 ${devDep ? "translate-x-3.5" : "translate-x-0.5"}`} />
+              </div>
+              <span className="text-xs text-muted-foreground">Dev dependency</span>
+            </label>
+          )}
+
+          {/* Generated command */}
+          {installCmd && (
+            <div className="space-y-1">
+              <p className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wider">Perintah install</p>
+              <div className="flex items-start gap-2 bg-background/60 border border-border/40 rounded-lg px-3 py-2">
+                <code className="text-[11px] font-mono text-green-400 flex-1 leading-relaxed whitespace-pre-wrap break-all">{installCmd}</code>
+                <Button
+                  variant="ghost" size="icon" className="h-6 w-6 shrink-0"
+                  onClick={() => copyCmd(installCmd, "install")}
+                >
+                  {copied === "install" ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
+                </Button>
+              </div>
+              <p className="text-[10px] text-muted-foreground">Jalankan perintah ini di terminal workspace ↓</p>
+            </div>
+          )}
+        </div>
+      )}
+
+      <Separator className="opacity-30" />
+
+      {/* Common packages */}
+      {pm && pm.commonPackages.length > 0 && (
+        <div className="space-y-2">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Package Populer</p>
+          <div className="space-y-1">
+            {pm.commonPackages.map(pkg => {
+              const cmd = pm.installCmd(pkg);
+              return (
+                <div key={pkg} className="flex items-center justify-between bg-card/30 border border-border/30 rounded-md px-3 py-1.5 group">
+                  <code className="text-[11px] font-mono">{pkg}</code>
+                  <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Button
+                      variant="ghost" size="icon" className="h-6 w-6"
+                      onClick={() => copyCmd(cmd, pkg)}
+                    >
+                      {copied === pkg ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
+                    </Button>
+                    <Button
+                      variant="ghost" size="sm" className="h-6 text-[10px] px-2"
+                      onClick={() => setSearchPkg(pkg)}
+                    >
+                      Pilih
+                    </Button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      <Separator className="opacity-30" />
+
+      {/* List installed */}
+      {pm && (
+        <div className="space-y-2">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Lihat Package Terinstall</p>
+          <div className="flex items-center gap-2 bg-background/60 border border-border/40 rounded-lg px-3 py-2">
+            <code className="text-[11px] font-mono text-yellow-400 flex-1">{pm.listCmd}</code>
+            <Button
+              variant="ghost" size="icon" className="h-6 w-6 shrink-0"
+              onClick={() => copyCmd(pm.listCmd, "list")}
+            >
+              {copied === "list" ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
+            </Button>
+          </div>
+          <p className="text-[10px] text-muted-foreground">Jalankan di terminal untuk melihat packages yang sudah terinstall.</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── GIT ─────────────────────────────────────────────────────
 function GitTab() {
   const [expanded, setExpanded] = useState<string | null>(null);
@@ -804,6 +975,7 @@ export function ToolsPanel({ workspace }: { workspace: Workspace }) {
           <TabsList className="w-full justify-start bg-transparent border-b border-border/30 rounded-none h-9 px-3 gap-1 overflow-x-auto">
             {[
               { value: "workflows", icon: Workflow, label: "Workflows" },
+              { value: "packages", icon: Package, label: "Packages" },
               { value: "ports", icon: Server, label: "Ports" },
               { value: "database", icon: Database, label: "Database" },
               { value: "secrets", icon: Key, label: "Secrets" },
@@ -821,6 +993,9 @@ export function ToolsPanel({ workspace }: { workspace: Workspace }) {
 
           <TabsContent value="workflows" className="mt-0 border-0 p-0">
             <WorkflowsTab workspaceId={workspace.id} />
+          </TabsContent>
+          <TabsContent value="packages" className="mt-0 border-0 p-0">
+            <PackagerTab workspaceId={workspace.id} language={workspace.language} />
           </TabsContent>
           <TabsContent value="ports" className="mt-0 border-0 p-0">
             <PortsTab workspaceId={workspace.id} />
