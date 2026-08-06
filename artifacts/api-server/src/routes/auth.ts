@@ -104,7 +104,9 @@ router.post("/auth/login", async (req, res): Promise<void> => {
     return;
   }
 
-  const token = signToken({ userId: user.id, email: user.email, role: user.role });
+  const rememberMe = req.body.rememberMe === true;
+  const expiresIn = rememberMe ? "30d" : "7d";
+  const token = signToken({ userId: user.id, email: user.email, role: user.role }, expiresIn);
 
   res.json({
     user: {

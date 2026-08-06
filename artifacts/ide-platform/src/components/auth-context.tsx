@@ -6,8 +6,30 @@ import { useLocation } from "wouter";
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
-  login: (token: string) => void;
+  login: (token: string, rememberMe?: boolean) => void;
   logout: () => void;
+}
+
+const TOKEN_KEY = "ide_token";
+
+// Cek token di localStorage (remember me) atau sessionStorage (sesi saja)
+function getStoredToken(): string | null {
+  return localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY);
+}
+
+function storeToken(token: string, rememberMe: boolean) {
+  if (rememberMe) {
+    localStorage.setItem(TOKEN_KEY, token);
+    sessionStorage.removeItem(TOKEN_KEY);
+  } else {
+    sessionStorage.setItem(TOKEN_KEY, token);
+    localStorage.removeItem(TOKEN_KEY);
+  }
+}
+
+function clearToken() {
+  localStorage.removeItem(TOKEN_KEY);
+  sessionStorage.removeItem(TOKEN_KEY);
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -18,10 +40,10 @@ const AuthContext = createContext<AuthContextType>({
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [token, setToken] = useState<string | null>(localStorage.getItem("ide_token"));
+  const [token, setToken] = useState<string | null>(getStoredToken());
   const [, setLocation] = useLocation();
 
-  const { data: user, isLoading, error, refetch } = useGetMe({
+  const { data: user, isLoading, error } = useGetMe({
     query: {
       enabled: !!token,
       queryKey: ["/api/auth/me", token],
@@ -31,18 +53,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (error) {
+      clearToken();
       setToken(null);
-      localStorage.removeItem("ide_token");
     }
   }, [error]);
 
-  const login = (newToken: string) => {
-    localStorage.setItem("ide_token", newToken);
+  const login = (newToken: string, rememberMe: boolean = false) => {
+    storeToken(newToken, rememberMe);
     setToken(newToken);
   };
 
   const logout = () => {
-    localStorage.removeItem("ide_token");
+    clearToken();
     setToken(null);
     setLocation("/login");
   };
