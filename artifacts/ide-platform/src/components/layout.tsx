@@ -19,13 +19,14 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 import { useLogout } from "@workspace/api-client-react";
-import { Code2, LayoutDashboard, Settings, LogOut, HelpCircle, Menu } from "lucide-react";
+import { Code2, LayoutDashboard, Settings, LogOut, HelpCircle, Menu, Zap } from "lucide-react";
 
 const navLinks = (role: string) => [
   { href: "/", label: "Dashboard", icon: LayoutDashboard, match: (loc: string) => loc === "/" },
   ...(role === "admin"
     ? [{ href: "/admin", label: "Admin", icon: Settings, match: (loc: string) => loc.startsWith("/admin") }]
     : []),
+  { href: "/changelog", label: "Changelog", icon: Zap, match: (loc: string) => loc.startsWith("/changelog") },
   { href: "/help", label: "Bantuan", icon: HelpCircle, match: (loc: string) => loc.startsWith("/help") },
 ];
 

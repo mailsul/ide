@@ -15,6 +15,7 @@ import NewWorkspace from '@/pages/new-workspace';
 import WorkspaceIDE from '@/pages/ide';
 import AdminPanel from '@/pages/admin';
 import HelpPage from '@/pages/help';
+import ChangelogPage from '@/pages/changelog';
 import { Loader2 } from 'lucide-react';
 import { useEffect } from 'react';
 
@@ -90,6 +91,7 @@ function Router() {
         <Route path="/workspaces/:id" component={WorkspaceIDE} />
         <Route path="/admin" component={AdminPanel} />
         <Route path="/help" component={HelpPage} />
+        <Route path="/changelog" component={ChangelogPage} />
         <Route component={NotFound} />
       </Switch>
     </AuthGuard>

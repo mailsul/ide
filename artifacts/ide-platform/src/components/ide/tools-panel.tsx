@@ -113,9 +113,44 @@ function WorkflowsTab({ workspaceId }: { workspaceId: string }) {
       {isLoading ? (
         <div className="flex justify-center py-4"><Loader2 className="w-5 h-5 animate-spin text-muted-foreground" /></div>
       ) : workflows?.length === 0 ? (
-        <div className="text-center py-6 text-xs text-muted-foreground space-y-2">
-          <Workflow className="w-8 h-8 mx-auto opacity-30" />
-          <p>Belum ada workflow. Tambah perintah untuk menjalankan aplikasi Anda.</p>
+        <div className="space-y-3 py-1">
+          <div className="bg-muted/20 border border-border/40 rounded-xl p-4 space-y-3">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                <Workflow className="w-4 h-4 text-primary" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold">Jalankan Aplikasi Anda</p>
+                <p className="text-[11px] text-muted-foreground">Workflow = perintah untuk start server atau proses</p>
+              </div>
+            </div>
+            <div className="space-y-1.5">
+              {[
+                { step: "1", text: 'Klik "+ Tambah" di kanan atas' },
+                { step: "2", text: "Isi nama (misal: Start Dev) dan perintah (misal: npm run dev)" },
+                { step: "3", text: "Opsional: isi port jika app membuka port tertentu (misal: 3000)" },
+                { step: "4", text: 'Klik "Run" untuk mulai — status workflow tampil real-time' },
+              ].map(s => (
+                <div key={s.step} className="flex items-start gap-2 text-xs">
+                  <span className="w-4 h-4 rounded-full bg-muted/60 text-muted-foreground flex items-center justify-center shrink-0 text-[10px] font-bold mt-0.5">{s.step}</span>
+                  <span className="text-muted-foreground leading-snug">{s.text}</span>
+                </div>
+              ))}
+            </div>
+            <div className="bg-background/50 border border-border/30 rounded-lg p-2.5 space-y-1">
+              <p className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wider">Contoh perintah</p>
+              {[
+                { lang: "Node.js", cmd: "npm run dev" },
+                { lang: "Python", cmd: "python app.py" },
+                { lang: "Go", cmd: "go run main.go" },
+              ].map(e => (
+                <div key={e.lang} className="flex items-center justify-between text-[11px]">
+                  <span className="text-muted-foreground">{e.lang}</span>
+                  <code className="font-mono text-green-400">{e.cmd}</code>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       ) : (
         <div className="space-y-2">
@@ -210,9 +245,36 @@ function PortsTab({ workspaceId }: { workspaceId: string }) {
       {isLoading ? (
         <div className="flex justify-center py-4"><Loader2 className="w-5 h-5 animate-spin text-muted-foreground" /></div>
       ) : ports?.length === 0 ? (
-        <div className="text-center py-6 text-xs text-muted-foreground space-y-2">
-          <Server className="w-8 h-8 mx-auto opacity-30" />
-          <p>Belum ada port. Tambah port untuk mendapat URL publik bagi aplikasi Anda.</p>
+        <div className="space-y-3 py-1">
+          <div className="bg-muted/20 border border-border/40 rounded-xl p-4 space-y-3">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shrink-0">
+                <Server className="w-4 h-4 text-blue-400" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold">Expose Port ke Internet</p>
+                <p className="text-[11px] text-muted-foreground">Ubah port internal jadi URL publik via Traefik</p>
+              </div>
+            </div>
+            {/* Visual diagram */}
+            <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground bg-background/50 border border-border/30 rounded-lg px-3 py-2">
+              <code className="font-mono text-green-400">localhost:3000</code>
+              <span className="flex-1 text-center">──→</span>
+              <code className="font-mono text-primary">ws-abc.premhub.site</code>
+            </div>
+            <div className="space-y-1.5">
+              {[
+                { step: "1", text: "Jalankan app di workspace (misal: npm run dev di port 3000)" },
+                { step: "2", text: 'Klik "+ Tambah", isi port internal (3000) dan beri nama' },
+                { step: "3", text: "Platform generate URL publik otomatis untuk port tersebut" },
+              ].map(s => (
+                <div key={s.step} className="flex items-start gap-2 text-xs">
+                  <span className="w-4 h-4 rounded-full bg-muted/60 text-muted-foreground flex items-center justify-center shrink-0 text-[10px] font-bold mt-0.5">{s.step}</span>
+                  <span className="text-muted-foreground leading-snug">{s.text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       ) : (
         <div className="space-y-2">
@@ -379,6 +441,35 @@ function DatabaseTab({ workspaceId }: { workspaceId: string }) {
         <div className="flex justify-center py-4"><Loader2 className="w-5 h-5 animate-spin text-muted-foreground" /></div>
       ) : (
         <>
+          {/* Guide saat belum ada database sama sekali */}
+          {mysqlDbs.length === 0 && postgresDbs.length === 0 && (
+            <div className="bg-muted/20 border border-border/40 rounded-xl p-4 space-y-3">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0">
+                  <Database className="w-4 h-4 text-emerald-400" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold">Database Terisolasi per Workspace</p>
+                  <p className="text-[11px] text-muted-foreground">MySQL dan PostgreSQL tersedia gratis, tidak berbagi antar workspace</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  { label: "MySQL", color: "text-orange-400", border: "border-orange-500/20 bg-orange-500/5", use: "WordPress, Laravel, PHP" },
+                  { label: "PostgreSQL", color: "text-blue-400", border: "border-blue-500/20 bg-blue-500/5", use: "Node.js, Django, Go, Rust" },
+                ].map(db => (
+                  <div key={db.label} className={`border rounded-lg p-2.5 ${db.border}`}>
+                    <p className={`text-xs font-semibold ${db.color}`}>{db.label}</p>
+                    <p className="text-[10px] text-muted-foreground mt-0.5">{db.use}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="text-[11px] text-muted-foreground">
+                Klik <span className="font-semibold text-foreground/70">Buat Database</span> di bawah untuk mendapat host, port, nama DB, user, dan password siap pakai.
+              </p>
+            </div>
+          )}
+
           {/* MySQL section */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
@@ -469,9 +560,35 @@ function SecretsTab({ workspaceId }: { workspaceId: string }) {
       {isLoading ? (
         <div className="flex justify-center py-4"><Loader2 className="w-5 h-5 animate-spin text-muted-foreground" /></div>
       ) : secrets?.length === 0 ? (
-        <div className="text-center py-6 text-xs text-muted-foreground space-y-2">
-          <Key className="w-8 h-8 mx-auto opacity-30" />
-          <p>Belum ada secrets. Tambah API key atau konfigurasi rahasia di sini.</p>
+        <div className="space-y-3 py-1">
+          <div className="bg-muted/20 border border-border/40 rounded-xl p-4 space-y-3">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center shrink-0">
+                <Key className="w-4 h-4 text-yellow-400" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold">Simpan Konfigurasi Rahasia</p>
+                <p className="text-[11px] text-muted-foreground">API key, password, token — terenkripsi, tidak pernah di kode</p>
+              </div>
+            </div>
+            <div className="bg-background/50 border border-border/30 rounded-lg p-2.5 space-y-1.5">
+              <p className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wider">Contoh secrets</p>
+              {[
+                { key: "OPENAI_API_KEY", hint: "API key OpenAI" },
+                { key: "DATABASE_URL", hint: "Connection string DB" },
+                { key: "JWT_SECRET", hint: "Secret untuk JWT token" },
+              ].map(e => (
+                <div key={e.key} className="flex items-center justify-between text-[11px]">
+                  <code className="font-mono text-yellow-400">{e.key}</code>
+                  <span className="text-muted-foreground">{e.hint}</span>
+                </div>
+              ))}
+            </div>
+            <div className="bg-blue-500/5 border border-blue-500/20 rounded-lg px-3 py-2 text-[11px] text-blue-300 flex items-start gap-2">
+              <Info className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+              <span>Secrets diakses di kode via <code className="font-mono">process.env.KEY</code> (Node.js) atau <code className="font-mono">os.environ['KEY']</code> (Python). Diinjeksikan ke container saat workspace start.</span>
+            </div>
+          </div>
         </div>
       ) : (
         <div className="space-y-1.5">
@@ -596,7 +713,26 @@ function DomainsTab({ workspaceId, workspace }: { workspaceId: string; workspace
         {isLoading ? (
           <div className="flex justify-center py-4"><Loader2 className="w-5 h-5 animate-spin text-muted-foreground" /></div>
         ) : domains?.length === 0 ? (
-          <p className="text-xs text-muted-foreground text-center py-3">Belum ada domain terhubung.</p>
+          <div className="bg-muted/20 border border-border/40 rounded-xl p-3.5 space-y-2.5">
+            <div className="flex items-center gap-2">
+              <Globe className="w-4 h-4 text-muted-foreground shrink-0" />
+              <p className="text-xs font-medium">Hubungkan Domain Sendiri</p>
+            </div>
+            <div className="space-y-1.5">
+              {[
+                { step: "1", text: 'Klik "Hubungkan" lalu masukkan domain (misal: app.saya.com)' },
+                { step: "2", text: "Salin DNS record yang ditampilkan, buka panel Cloudflare/registrar Anda" },
+                { step: "3", text: "Tambahkan CNAME record sesuai instruksi, klik Cek DNS Sekarang" },
+                { step: "4", text: "Domain aktif otomatis setelah propagasi DNS (biasanya <5 menit)" },
+              ].map(s => (
+                <div key={s.step} className="flex items-start gap-2 text-xs">
+                  <span className="w-4 h-4 rounded-full bg-muted/60 text-muted-foreground flex items-center justify-center shrink-0 text-[10px] font-bold mt-0.5">{s.step}</span>
+                  <span className="text-muted-foreground leading-snug">{s.text}</span>
+                </div>
+              ))}
+            </div>
+            <p className="text-[10px] text-muted-foreground">💡 Belum punya domain? Gunakan tombol Publish di atas untuk mendapat URL gratis dari platform.</p>
+          </div>
         ) : (
           <div className="space-y-2">
             {domains?.map(d => (
@@ -733,7 +869,38 @@ function MonitoringTab({ workspaceId }: { workspaceId: string }) {
           </div>
         </div>
       ) : (
-        <p className="text-xs text-muted-foreground text-center py-4">Data tidak tersedia</p>
+        <div className="space-y-3">
+          <div className="bg-muted/20 border border-border/40 rounded-xl p-4 space-y-3">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-muted/40 border border-border/40 flex items-center justify-center shrink-0">
+                <Activity className="w-4 h-4 text-muted-foreground" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold">Workspace Tidak Aktif</p>
+                <p className="text-[11px] text-muted-foreground">Monitoring hanya tersedia saat workspace berjalan</p>
+              </div>
+            </div>
+            <div className="bg-background/50 border border-border/30 rounded-lg p-3 space-y-2">
+              <p className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wider">Yang akan ditampilkan saat aktif</p>
+              {[
+                { icon: "⚡", label: "CPU Usage", desc: "Persentase pemakaian prosesor" },
+                { icon: "🧠", label: "RAM Usage", desc: "Memori terpakai vs batas (MB)" },
+                { icon: "💾", label: "Disk Usage", desc: "Storage terpakai vs kapasitas" },
+                { icon: "🌐", label: "Network I/O", desc: "Bytes masuk dan keluar per detik" },
+                { icon: "⏱", label: "Uptime", desc: "Berapa lama workspace sudah berjalan" },
+              ].map(m => (
+                <div key={m.label} className="flex items-center gap-2 text-xs">
+                  <span className="text-base leading-none">{m.icon}</span>
+                  <span className="font-medium w-24 shrink-0">{m.label}</span>
+                  <span className="text-muted-foreground">{m.desc}</span>
+                </div>
+              ))}
+            </div>
+            <p className="text-[11px] text-muted-foreground">
+              Kembali ke dashboard, start workspace, lalu buka tab ini untuk melihat statistik real-time (update tiap 5 detik).
+            </p>
+          </div>
+        </div>
       )}
     </div>
   );
