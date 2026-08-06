@@ -46,4 +46,4 @@ COPY --from=builder /app/lib/db ./lib/db
 
 EXPOSE 8080
 
-CMD ["node", "artifacts/api-server/dist/index.cjs"]
+CMD ["node", "artifacts/api-server/dist/index.mjs"]
