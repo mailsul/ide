@@ -18,19 +18,22 @@ COPY artifacts/ide-platform ./artifacts/ide-platform
 # Install dependencies
 RUN pnpm install --frozen-lockfile
 
-# Build frontend (requires BASE_PATH and VITE_API_URL at build time)
+# Set env vars yang dibutuhkan saat build
 ARG BASE_PATH=/
 ARG VITE_API_URL=/api
 ENV BASE_PATH=$BASE_PATH
 ENV VITE_API_URL=$VITE_API_URL
+ENV PORT=3000
+ENV NODE_ENV=production
 
+# Build frontend
 RUN pnpm --filter @workspace/ide-platform run build
 
-# --- Production: Nginx to serve static files ---
+# --- Production: Nginx serve static files ---
 FROM nginx:alpine
 
 COPY docker/nginx/nginx-frontend.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /app/artifacts/ide-platform/dist /usr/share/nginx/html
+COPY --from=builder /app/artifacts/ide-platform/dist/public /usr/share/nginx/html
 
 EXPOSE 80
 

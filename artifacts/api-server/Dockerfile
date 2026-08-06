@@ -2,10 +2,9 @@ FROM node:20-slim AS builder
 
 WORKDIR /app
 
-# Install pnpm
 RUN npm install -g pnpm
 
-# Copy workspace files for pnpm
+# Copy workspace files
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 COPY tsconfig.base.json tsconfig.json ./
 
@@ -17,35 +16,32 @@ COPY lib/api-spec ./lib/api-spec
 # Copy backend source
 COPY artifacts/api-server ./artifacts/api-server
 
-# Install all workspace dependencies
+# Install semua dependencies
 RUN pnpm install --frozen-lockfile
 
-# Build libs first (composite packages)
-RUN pnpm run typecheck:libs
-
-# Build the backend bundle
+# Build backend bundle langsung (skip typecheck — tidak perlu di Docker)
 RUN pnpm --filter @workspace/api-server run build
 
-# --- Production image ---
+# --- Production image (lebih kecil) ---
 FROM node:20-slim
 
 WORKDIR /app
 
 RUN npm install -g pnpm
 
-# Copy workspace manifests for production install
+# Copy workspace manifests untuk production install
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 COPY lib/db/package.json ./lib/db/
 COPY lib/api-zod/package.json ./lib/api-zod/
 COPY artifacts/api-server/package.json ./artifacts/api-server/
 
-# Install production deps only
+# Install production deps saja
 RUN pnpm install --frozen-lockfile --prod
 
-# Copy built output
+# Copy hasil build
 COPY --from=builder /app/artifacts/api-server/dist ./artifacts/api-server/dist
 
-# Copy drizzle config and schema for migrations
+# Copy lib/db untuk drizzle migrations
 COPY --from=builder /app/lib/db ./lib/db
 
 EXPOSE 8080
