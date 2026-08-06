@@ -1,0 +1,21 @@
+root@ide:/opt/platform# curl -X POST https://api.premhub.site/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","email":"maraazn069@gmail.com","password":"password123","fullName":"Admin"}'
+{"user":{"id":"usr_b8a31db570f3b01296cc4884","username":"admin","fullName":"Admin","email":"maraazn069@gmail.com","role":"admin","plan":"free","createdAt":"2026-08-06T04:11:08.246Z","onboardingCompleted":false},"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c3JfYjhhMzFkYjU3MGYzYjAxMjk2Y2M0ODg0IiwiZW1haWwiOiJtYXJhYXpuMDY5QGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4NTk4OTQ2OCwiZXhwIjoxNzg2NTk0MjY4fQ._X73VMqUMwtyTwlMCsjlnNSTFK7SCzBIIOJ5NNyl7Lo"}root@ide:/opt/platform# cd /opt/platforcd /opt/platform
+
+# Hapus akun lama dan buat ulang dengan password Anda
+curl -X POST https://api.premhub.site/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","email":"maraazn069@gmail.com","password":"@Test1234567","fullName":"Admin"}'
+{"error":"Email already # Hapus user lama via database langsungapus user lama via database langsung
+docker compose exec postgres psql -U platform -d platform -c "DELETE FROM users WHERE email='maraazn069@gmail.com';"
+
+# Buat ulang dengan password Anda
+curl -X POST https://api.premhub.site/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","email":"maraazn069@gmail.com","password":"jgntanyakenapa pass gini krn gw tutup","fullName":"Admin"}'
+DELETE 1
+{"user":{"id":"usr_91c02044b7233672312cfc9c","username":"admin","fullName":"Admin","email":"maraazn069@gmail.com","role":"admin","plan":"free","createdAt":"2026-08-06T04:18:56.776Z","onboardingCompleted":false},"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c3JfOTFjMDIwNDRiNzIzMzY3MjMxMmNmYzljIiwiZW1haWwiOiJtYXJhYXpuMDY5QGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4NTk4OTkzNiwiZXhwIjoxNzg2NTk0NzM2fQ.yE6PWmYAGwBDSRQDfIIWh7tHguzyp20ZyYzy7xyVttY"}root@ide:/opt/platform# # Hapus user la# Hapus user lama via database langsung
+docker compose exec postgres psql -U platform -d platform -c "DELETE FROM users WHERE email='maraazn069@gmail.com';"
+DELETE 1
+root@ide:/opt/platform#
