@@ -1,0 +1,54 @@
+http:
+  routers:
+    frontend:
+      rule: "Host(`premhub.site`) || Host(`www.premhub.site`)"
+      entryPoints:
+        - websecure
+      service: svc-frontend
+      tls:
+        certResolver: letsencrypt
+
+    backend:
+      rule: "Host(`api.premhub.site`)"
+      entryPoints:
+        - websecure
+      service: svc-backend
+      tls:
+        certResolver: letsencrypt
+
+    phpmyadmin:
+      rule: "Host(`phpmyadmin.premhub.site`)"
+      entryPoints:
+        - websecure
+      service: svc-phpmyadmin
+      tls:
+        certResolver: letsencrypt
+
+    pgadmin:
+      rule: "Host(`pgadmin.premhub.site`)"
+      entryPoints:
+        - websecure
+      service: svc-pgadmin
+      tls:
+        certResolver: letsencrypt
+
+  services:
+    svc-frontend:
+      loadBalancer:
+        servers:
+          - url: "http://frontend:80"
+
+    svc-backend:
+      loadBalancer:
+        servers:
+          - url: "http://backend:8080"
+
+    svc-phpmyadmin:
+      loadBalancer:
+        servers:
+          - url: "http://phpmyadmin:80"
+
+    svc-pgadmin:
+      loadBalancer:
+        servers:
+          - url: "http://pgadmin:80"
