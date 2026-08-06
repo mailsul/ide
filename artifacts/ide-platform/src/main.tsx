@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import { setBaseUrl } from '@workspace/api-client-react';
+import { setBaseUrl, setAuthTokenGetter } from '@workspace/api-client-react';
 import App from './App';
 
 import './index.css';
@@ -10,5 +10,9 @@ const apiUrl = import.meta.env.VITE_API_URL;
 if (apiUrl && apiUrl !== '/api') {
   setBaseUrl(apiUrl);
 }
+
+// Pasang token getter — setiap request API akan otomatis menyertakan
+// Authorization: Bearer <token> jika token ada di localStorage
+setAuthTokenGetter(() => localStorage.getItem('ide_token'));
 
 createRoot(document.getElementById('root')!).render(<App />);
