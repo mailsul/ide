@@ -1,8 +1,10 @@
 services:
   # ─── REVERSE PROXY ───────────────────────────────────────────────────────────
   traefik:
-    image: traefik:v3.0
+    image: traefik:v3.3
     container_name: platform-traefik
+    environment:
+      - DOCKER_API_VERSION=1.41
     command:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
