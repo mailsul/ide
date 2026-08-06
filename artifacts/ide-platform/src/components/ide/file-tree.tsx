@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FileNode } from "@workspace/api-client-react";
 import { Folder, FolderOpen, FileText, ChevronRight, ChevronDown, Plus, MoreVertical } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { SiNodedotjs, SiPython, SiPhp, SiGo, SiRust, SiJavascript, SiCss3, SiHtml5, SiTypescript, SiReact, SiJson, SiMarkdown } from "react-icons/si";
+import { SiNodedotjs, SiPython, SiPhp, SiGo, SiRust, SiJavascript, SiCss, SiHtml5, SiTypescript, SiReact, SiJson, SiMarkdown } from "react-icons/si";
 
 export function FileTree({ 
   workspaceId, 
@@ -69,7 +69,7 @@ function FileTreeNode({
       case 'tsx': return <SiReact className="w-3.5 h-3.5 text-blue-500" />;
       case 'json': return <SiJson className="w-3.5 h-3.5 text-yellow-500" />;
       case 'html': return <SiHtml5 className="w-3.5 h-3.5 text-orange-500" />;
-      case 'css': return <SiCss3 className="w-3.5 h-3.5 text-blue-400" />;
+      case 'css': return <SiCss className="w-3.5 h-3.5 text-blue-400" />;
       case 'py': return <SiPython className="w-3.5 h-3.5 text-blue-500" />;
       case 'php': return <SiPhp className="w-3.5 h-3.5 text-purple-400" />;
       case 'go': return <SiGo className="w-3.5 h-3.5 text-cyan-500" />;
