@@ -22,23 +22,30 @@ const queryClient = new QueryClient();
 
 function AuthGuard({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
-  const { data: setupStatus, isLoading: setupLoading } = useGetSetupStatus();
+  const { data: setupStatus, isLoading: setupLoading, isError: setupError } = useGetSetupStatus();
   const [location, setLocation] = useLocation();
 
   useEffect(() => {
     if (setupLoading || isLoading) return;
+
+    // Kalau API tidak bisa dihubungi (SSL belum siap, dll), arahkan ke /setup
+    // supaya admin bisa buat akun pertama
+    if (setupError && location !== '/setup' && location !== '/login') {
+      setLocation('/setup');
+      return;
+    }
 
     if (setupStatus?.needsSetup && location !== '/setup') {
       setLocation('/setup');
       return;
     }
 
-    if (!setupStatus?.needsSetup && location === '/setup') {
+    if (setupStatus?.needsSetup === false && location === '/setup') {
       setLocation('/login');
       return;
     }
 
-    if (!setupStatus?.needsSetup && !user && location !== '/login') {
+    if (setupStatus?.needsSetup === false && !user && location !== '/login') {
       setLocation('/login');
       return;
     }
@@ -48,7 +55,7 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
       return;
     }
 
-  }, [user, isLoading, setupStatus, setupLoading, location, setLocation]);
+  }, [user, isLoading, setupStatus, setupLoading, setupError, location, setLocation]);
 
   if (isLoading || setupLoading) {
     return (
