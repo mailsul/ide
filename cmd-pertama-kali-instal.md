@@ -1,0 +1,2478 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+PS C:\Users\naufa> ssh ide@70.153.136.59
+ide@70.153.136.59's password:
+Welcome to Ubuntu 24.04.4 LTS (GNU/Linux 6.17.0-1021-azure x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Thu Aug  6 01:55:05 UTC 2026
+
+  System load:  0.0               Processes:             147
+  Usage of /:   5.6% of 28.02GB   Users logged in:       0
+  Memory usage: 2%                IPv4 address for eth0: 10.2.0.4
+  Swap usage:   0%
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ide@ide:~$ sudo -i
+root@ide:~# # Update sistem
+apt update && apt upgrade -y
+
+# Install tools yang dibutuhkan
+apt install -y curl git wget nano ufw htop
+Hit:1 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+Get:3 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+Get:4 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+Get:5 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 Packages [15.0 MB]
+Get:6 http://azure.archive.ubuntu.com/ubuntu noble/universe Translation-en [5982 kB]
+Get:7 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 Components [3871 kB]
+Get:8 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 c-n-f Metadata [301 kB]
+Get:9 http://azure.archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [269 kB]
+Get:10 http://azure.archive.ubuntu.com/ubuntu noble/multiverse Translation-en [118 kB]
+Get:11 http://azure.archive.ubuntu.com/ubuntu noble/multiverse amd64 Components [35.0 kB]
+Get:12 http://azure.archive.ubuntu.com/ubuntu noble/multiverse amd64 c-n-f Metadata [8328 B]
+Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1183 kB]
+Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [281 kB]
+Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
+Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1681 kB]
+Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [334 kB]
+Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [387 kB]
+Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 c-n-f Metadata [34.9 kB]
+Get:20 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1414 kB]
+Get:21 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [320 kB]
+Get:22 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [45.4 kB]
+Get:23 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse Translation-en [12.3 kB]
+Get:24 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:25 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 c-n-f Metadata [656 B]
+Get:26 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [40.6 kB]
+Get:27 http://azure.archive.ubuntu.com/ubuntu noble-backports/main Translation-en [9172 B]
+Get:28 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5780 B]
+Get:29 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 c-n-f Metadata [368 B]
+Get:30 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [31.0 kB]
+Get:31 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe Translation-en [18.6 kB]
+Get:32 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
+Get:33 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 c-n-f Metadata [1588 B]
+Get:34 http://azure.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 Components [212 B]
+Get:35 http://azure.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:36 http://azure.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 Packages [748 B]
+Get:37 http://azure.archive.ubuntu.com/ubuntu noble-backports/multiverse Translation-en [340 B]
+Get:38 http://azure.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 Components [212 B]
+Get:39 http://azure.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 c-n-f Metadata [116 B]
+Get:40 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [925 kB]
+Get:41 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [201 kB]
+Get:42 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [46.3 kB]
+Get:43 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1199 kB]
+Get:44 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [239 kB]
+Get:45 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.2 kB]
+Get:46 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 c-n-f Metadata [24.2 kB]
+Get:47 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1316 kB]
+Get:48 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [301 kB]
+Get:49 http://azure.archive.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [40.3 kB]
+Get:50 http://azure.archive.ubuntu.com/ubuntu noble-security/multiverse Translation-en [10.6 kB]
+Get:51 http://azure.archive.ubuntu.com/ubuntu noble-security/multiverse amd64 Components [208 B]
+Get:52 http://azure.archive.ubuntu.com/ubuntu noble-security/multiverse amd64 c-n-f Metadata [468 B]
+Fetched 36.4 MB in 4s (9320 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+7 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Calculating upgrade... Done
+The following NEW packages will be installed:
+  linux-azure-6.17-cloud-tools-6.17.0-1022 linux-azure-6.17-headers-6.17.0-1022 linux-azure-6.17-tools-6.17.0-1022
+  linux-cloud-tools-6.17.0-1022-azure linux-headers-6.17.0-1022-azure linux-image-6.17.0-1022-azure
+  linux-modules-6.17.0-1022-azure linux-tools-6.17.0-1022-azure
+The following packages will be upgraded:
+  linux-azure linux-cloud-tools-azure linux-cloud-tools-common linux-headers-azure linux-image-azure linux-tools-azure
+  linux-tools-common
+7 upgraded, 8 newly installed, 0 to remove and 0 not upgraded.
+2 standard LTS security updates
+Need to get 73.3 MB of archives.
+After this operation, 187 MB of additional disk space will be used.
+Get:1 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-modules-6.17.0-1022-azure amd64 6.17.0-1022.22 [36.7 MB]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-image-6.17.0-1022-azure amd64 6.17.0-1022.22 [15.3 MB]
+Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-azure amd64 6.17.0-1022.22 [1750 B]
+Get:4 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-image-azure amd64 6.17.0-1022.22 [2436 B]
+Get:5 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-azure-6.17-headers-6.17.0-1022 all 6.17.0-1022.22 [14.4 MB]
+Get:6 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-headers-6.17.0-1022-azure amd64 6.17.0-1022.22 [3515 kB]
+Get:7 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-headers-azure amd64 6.17.0-1022.22 [2326 B]
+Get:8 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-tools-common all 6.8.0-137.137 [363 kB]
+Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-azure-6.17-tools-6.17.0-1022 amd64 6.17.0-1022.22 [2738 kB]
+Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-tools-6.17.0-1022-azure amd64 6.17.0-1022.22 [1632 B]
+Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-tools-azure amd64 6.17.0-1022.22 [2338 B]
+Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-cloud-tools-common all 6.8.0-137.137 [131 kB]
+Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-azure-6.17-cloud-tools-6.17.0-1022 amd64 6.17.0-1022.22 [54.6 kB]
+Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-cloud-tools-6.17.0-1022-azure amd64 6.17.0-1022.22 [1616 B]
+Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 linux-cloud-tools-azure amd64 6.17.0-1022.22 [2352 B]
+Fetched 73.3 MB in 3s (28.5 MB/s)
+Selecting previously unselected package linux-modules-6.17.0-1022-azure.
+(Reading database ... 69377 files and directories currently installed.)
+Preparing to unpack .../00-linux-modules-6.17.0-1022-azure_6.17.0-1022.22_amd64.deb ...
+Unpacking linux-modules-6.17.0-1022-azure (6.17.0-1022.22) ...
+Selecting previously unselected package linux-image-6.17.0-1022-azure.
+Preparing to unpack .../01-linux-image-6.17.0-1022-azure_6.17.0-1022.22_amd64.deb ...
+Unpacking linux-image-6.17.0-1022-azure (6.17.0-1022.22) ...
+Preparing to unpack .../02-linux-azure_6.17.0-1022.22_amd64.deb ...
+Unpacking linux-azure (6.17.0-1022.22) over (6.17.0-1021.21~24.04.1) ...
+Preparing to unpack .../03-linux-image-azure_6.17.0-1022.22_amd64.deb ...
+Unpacking linux-image-azure (6.17.0-1022.22) over (6.17.0-1021.21~24.04.1) ...
+Selecting previously unselected package linux-azure-6.17-headers-6.17.0-1022.
+Preparing to unpack .../04-linux-azure-6.17-headers-6.17.0-1022_6.17.0-1022.22_all.deb ...
+Unpacking linux-azure-6.17-headers-6.17.0-1022 (6.17.0-1022.22) ...
+Selecting previously unselected package linux-headers-6.17.0-1022-azure.
+Preparing to unpack .../05-linux-headers-6.17.0-1022-azure_6.17.0-1022.22_amd64.deb ...
+Unpacking linux-headers-6.17.0-1022-azure (6.17.0-1022.22) ...
+Preparing to unpack .../06-linux-headers-azure_6.17.0-1022.22_amd64.deb ...
+Unpacking linux-headers-azure (6.17.0-1022.22) over (6.17.0-1021.21~24.04.1) ...
+Preparing to unpack .../07-linux-tools-common_6.8.0-137.137_all.deb ...
+Unpacking linux-tools-common (6.8.0-137.137) over (6.8.0-136.136) ...
+Selecting previously unselected package linux-azure-6.17-tools-6.17.0-1022.
+Preparing to unpack .../08-linux-azure-6.17-tools-6.17.0-1022_6.17.0-1022.22_amd64.deb ...
+Unpacking linux-azure-6.17-tools-6.17.0-1022 (6.17.0-1022.22) ...
+Selecting previously unselected package linux-tools-6.17.0-1022-azure.
+Preparing to unpack .../09-linux-tools-6.17.0-1022-azure_6.17.0-1022.22_amd64.deb ...
+Unpacking linux-tools-6.17.0-1022-azure (6.17.0-1022.22) ...
+Preparing to unpack .../10-linux-tools-azure_6.17.0-1022.22_amd64.deb ...
+Unpacking linux-tools-azure (6.17.0-1022.22) over (6.17.0-1021.21~24.04.1) ...
+Preparing to unpack .../11-linux-cloud-tools-common_6.8.0-137.137_all.deb ...
+Unpacking linux-cloud-tools-common (6.8.0-137.137) over (6.8.0-136.136) ...
+Selecting previously unselected package linux-azure-6.17-cloud-tools-6.17.0-1022.
+Preparing to unpack .../12-linux-azure-6.17-cloud-tools-6.17.0-1022_6.17.0-1022.22_amd64.deb ...
+Unpacking linux-azure-6.17-cloud-tools-6.17.0-1022 (6.17.0-1022.22) ...
+Selecting previously unselected package linux-cloud-tools-6.17.0-1022-azure.
+Preparing to unpack .../13-linux-cloud-tools-6.17.0-1022-azure_6.17.0-1022.22_amd64.deb ...
+Unpacking linux-cloud-tools-6.17.0-1022-azure (6.17.0-1022.22) ...
+Preparing to unpack .../14-linux-cloud-tools-azure_6.17.0-1022.22_amd64.deb ...
+Unpacking linux-cloud-tools-azure (6.17.0-1022.22) over (6.17.0-1021.21~24.04.1) ...
+Setting up linux-cloud-tools-common (6.8.0-137.137) ...
+Setting up linux-tools-common (6.8.0-137.137) ...
+Setting up linux-azure-6.17-cloud-tools-6.17.0-1022 (6.17.0-1022.22) ...
+Setting up linux-azure-6.17-headers-6.17.0-1022 (6.17.0-1022.22) ...
+Setting up linux-modules-6.17.0-1022-azure (6.17.0-1022.22) ...
+Setting up linux-headers-6.17.0-1022-azure (6.17.0-1022.22) ...
+Setting up linux-headers-azure (6.17.0-1022.22) ...
+Setting up linux-cloud-tools-6.17.0-1022-azure (6.17.0-1022.22) ...
+Setting up linux-image-6.17.0-1022-azure (6.17.0-1022.22) ...
+I: /boot/vmlinuz is now a symlink to vmlinuz-6.17.0-1022-azure
+I: /boot/initrd.img is now a symlink to initrd.img-6.17.0-1022-azure
+Setting up linux-azure-6.17-tools-6.17.0-1022 (6.17.0-1022.22) ...
+Setting up linux-cloud-tools-azure (6.17.0-1022.22) ...
+Setting up linux-tools-6.17.0-1022-azure (6.17.0-1022.22) ...
+Setting up linux-image-azure (6.17.0-1022.22) ...
+Setting up linux-tools-azure (6.17.0-1022.22) ...
+Setting up linux-azure (6.17.0-1022.22) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Processing triggers for linux-image-6.17.0-1022-azure (6.17.0-1022.22) ...
+/etc/kernel/postinst.d/initramfs-tools:
+update-initramfs: Generating /boot/initrd.img-6.17.0-1022-azure
+/etc/kernel/postinst.d/zz-update-grub:
+Sourcing file `/etc/default/grub'
+Sourcing file `/etc/default/grub.d/40-force-partuuid.cfg'
+Sourcing file `/etc/default/grub.d/50-cloudimg-settings.cfg'
+Generating grub configuration file ...
+GRUB_FORCE_PARTUUID is set, will attempt initrdless boot
+Found linux image: /boot/vmlinuz-6.17.0-1022-azure
+Found initrd image: /boot/initrd.img-6.17.0-1022-azure
+Found linux image: /boot/vmlinuz-6.17.0-1021-azure
+Found initrd image: /boot/initrd.img-6.17.0-1021-azure
+Warning: os-prober will not be executed to detect other bootable partitions.
+Systems on them will not be added to the GRUB boot configuration.
+Check GRUB_DISABLE_OS_PROBER documentation entry.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+Scanning processes...
+Scanning linux images...
+
+Pending kernel upgrade!
+Running kernel version:
+  6.17.0-1021-azure
+Diagnostics:
+  The currently running kernel version is not the expected kernel version 6.17.0-1022-azure.
+
+Restarting the system to load the new kernel will not be handled automatically, so you should consider rebooting.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+curl is already the newest version (8.5.0-2ubuntu10.11).
+curl set to manually installed.
+git is already the newest version (1:2.43.0-1ubuntu7.3).
+git set to manually installed.
+wget is already the newest version (1.21.4-1ubuntu4.4).
+wget set to manually installed.
+nano is already the newest version (7.2-2ubuntu0.2).
+nano set to manually installed.
+ufw is already the newest version (0.36.2-6).
+ufw set to manually installed.
+htop is already the newest version (3.3.0-4build1).
+htop set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+root@ide:~# # Izinkan SSH (PENTING! Jangan skip ini atau Anda terkunci keluar)
+ufw allow 22/tcp
+
+# Izinkan HTTP dan HTTPS
+ufw allow 80/tcp
+ufw allow 443/tcp
+
+# Aktifkan firewall
+ufw enable
+
+# Cek status
+ufw status
+Rules updated
+Rules updated (v6)
+Rules updated
+Rules updated (v6)
+Rules updated
+Rules updated (v6)
+Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+Firewall is active and enabled on system startup
+Status: active
+
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW       Anywhere
+80/tcp                     ALLOW       Anywhere
+443/tcp                    ALLOW       Anywhere
+22/tcp (v6)                ALLOW       Anywhere (v6)
+80/tcp (v6)                ALLOW       Anywhere (v6)
+443/tcp (v6)               ALLOW       Anywhere (v6)
+
+root@ide:~# # Download dan jalankan script install Docker resmi
+curl -fsSL https://get.docker.com | sh
+
+# Aktifkan Docker agar auto-start saat VPS reboot
+systemctl enable --now docker
+
+# Cek apakah Docker berhasil terinstall
+docker --version
+# Executing docker install script, commit: 5ce20f2eef3615d08fea941eda5a109e949e8ebf
++ sh -c apt-get -qq update >/dev/null
++ sh -c DEBIAN_FRONTEND=noninteractive apt-get -y -qq install ca-certificates curl >/dev/null
++ sh -c install -m 0755 -d /etc/apt/keyrings
++ sh -c curl -fsSL "https://download.docker.com/linux/ubuntu/gpg" -o /etc/apt/keyrings/docker.asc
++ sh -c chmod a+r /etc/apt/keyrings/docker.asc
++ sh -c echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu noble stable" > /etc/apt/sources.list.d/docker.list
++ sh -c apt-get -qq update >/dev/null
++ apt_flags=-y -qq
++ [ -n  ]
++ sh -c DEBIAN_FRONTEND=noninteractive apt-get -y -qq install docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras docker-buildx-plugin docker-model-plugin >/dev/null
+Scanning processes...
+Scanning linux images...
+Using systemd to manage Docker service
++ sh -c systemctl enable --now docker.service 2>/dev/null
+INFO: Docker daemon enabled and started
+
++ sh -c docker version
+Client: Docker Engine - Community
+ Version:           29.7.1
+ API version:       1.55
+ Go version:        go1.26.5
+ Git commit:        e9452d6
+ Built:             Fri Jul 31 17:06:34 2026
+ OS/Arch:           linux/amd64
+ Context:           default
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          29.7.1
+  API version:      1.55 (minimum version 1.40)
+  Go version:       go1.26.5
+  Git commit:       c5b8ce9
+  Built:            Fri Jul 31 17:06:34 2026
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          v2.2.6
+  GitCommit:        11ce9d5f3c68c941867e82890e93e815c1304f1b
+ runc:
+  Version:          1.3.6
+  GitCommit:        v1.3.6-0-g491b69ba
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+
+================================================================================
+
+To run Docker as a non-privileged user, consider setting up the
+Docker daemon in rootless mode for your user:
+
+    dockerd-rootless-setuptool.sh install
+
+Visit https://docs.docker.com/go/rootless/ to learn about rootless mode.
+
+
+To run the Docker daemon as a fully privileged service, but granting non-root
+users access, refer to https://docs.docker.com/go/daemon-access/
+
+WARNING: Access to the remote API on a privileged Docker daemon is equivalent
+         to root access on the host. Refer to the 'Docker daemon attack surface'
+         documentation for details: https://docs.docker.com/go/attack-surface/
+
+================================================================================
+
+Synchronizing state of docker.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install enable docker
+Docker version 29.7.1, build e9452d6
+root@ide:~# # Install Docker Compose plugin
+apt install -y docker-compose-plugin
+
+# Cek Docker Compose
+docker compose version
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+docker-compose-plugin is already the newest version (5.4.0-1~ubuntu.24.04~noble).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Docker Compose version v5.4.0
+root@ide:~# # Folder ini menyimpan semua file user/workspace
+mkdir -p /workspaces
+chmod 755 /workspaces
+
+# Folder untuk config Traefik dinamis
+mkdir -p /opt/platform/docker/traefik/dynamic
+root@ide:~# # Pindah ke folder yang bagus untuk menyimpan project cd /opt # Clone project Anda dari GitHub git clone https://github.com/mailsul/ide.git platform # Masuk ke folder project cd platform
+root@ide:~# cd /opt
+root@ide:/opt# git clone https://github.com/mailsul/ide.git platform
+fatal: destination path 'platform' already exists and is not an empty directory.
+root@ide:/opt# cd platform
+root@ide:/opt/platform# # Salin template
+cp .env.example .env
+
+# Buka untuk diedit
+nano .env
+cp: cannot stat '.env.example': No such file or directory
+root@ide:/opt/platform# cat .env
+DOMAIN=premhub.site
+ACME_EMAIL=maraazn069@gmail.com
+
+PLATFORM_DB_PASS=intinya ini password
+MYSQL_ROOT_PASSWORD=intinya ini password
+POSTGRES_ROOT_PASSWORD=intinya ini password
+SESSION_SECRET=YoVOP5RwIEcLCM4w4+B/hIT65u1ThQRfkfollYywG8IvhiYl8cltj/BBaCwJ5oB84fUz6FHPHm/kR69NSyCM7w==
+PGADMIN_EMAIL=maraazn069@gmail.com
+PGADMIN_PASSWORD=intinya ini password
+root@ide:/opt/platform# # Build base image (proses ini 5–15 menit, tergantung internet VPS)
+docker build -t platform/workspace-base:latest docker/workspace-base/
+
+# Cek apakah image berhasil dibuat
+docker images | grep platform
+[+] Building 0.0s (0/0)                                                                                  docker:default
+ERROR: failed to build: unable to prepare context: path "docker/workspace-base/" not found
+root@ide:/opt/platform# cd /opt/platform
+git pull
+fatal: not a git repository (or any of the parent directories): .git
+root@ide:/opt/platform# cd /opt
+
+# Hapus folder yang bukan git repo
+rm -rf platform
+
+# Clone ulang dari GitHub
+git clone https://github.com/mailsul/ide.git platform
+
+# Masuk ke folder project
+cd platform
+
+# Cek isinya
+ls
+Cloning into 'platform'...
+remote: Enumerating objects: 264, done.
+remote: Counting objects: 100% (264/264), done.
+remote: Compressing objects: 100% (198/198), done.
+remote: Total 264 (delta 55), reused 264 (delta 55), pack-reused 0 (from 0)
+Receiving objects: 100% (264/264), 272.77 KiB | 4.79 MiB/s, done.
+Resolving deltas: 100% (55/55), done.
+PANDUAN-INSTALL-VPS.md  docker              lib             pnpm-workspace.yaml  tsconfig.base.json
+artifacts               docker-compose.yml  package.json    replit.md            tsconfig.json
+attached_assets         github_sync.sh      pnpm-lock.yaml  scripts
+root@ide:/opt/platform# # Verifikasi folder docker ada
+ls docker/workspace-base/
+
+# Build workspace base image
+docker build -t platform/workspace-base:latest docker/workspace-base/
+Dockerfile
+[+] Building 112.4s (8/16)                                                                               docker:default
+ => [internal] load build definition from Dockerfile                                                               0.1s
+ => => transferring dockerfile: 2.01kB                                                                             0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:22.04                                                    2.5s
+ => [internal] load .dockerignore                                                                                  0.0s
+ => => transferring context: 2B                                                                                    0.0s
+ => [ 1/13] FROM docker.io/library/ubuntu:22.04@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d  1.5s
+ => => resolve docker.io/library/ubuntu:22.04@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d91  0.0s
+ => => sha256:39a945af8df2ad9343f141c82355d3f2c4b576d432eda34c460d630607462b60 29.74MB / 29.74MB                   0.6s
+ => => extracting sha256:39a945af8df2ad9343f141c82355d3f2c4b576d432eda34c460d630607462b60                          0.7s
+ => [ 2/13] RUN apt-get update && apt-get install -y   curl wget git vim nano zip unzip   build-essential cmake   47.8s
+ => [ 3/13] RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -   && apt-get install -y nodejs   && np  29.7s
+ => [ 4/13] RUN apt-get update && apt-get install -y   python3.11 python3-pip python3-venv python3.11-venv   &&   24.6s
+ => ERROR [ 5/13] RUN apt-get update && apt-get install -y   php8.2 php8.2-cli php8.2-curl php8.2-mbstring   php8  6.0s
+------
+ > [ 5/13] RUN apt-get update && apt-get install -y   php8.2 php8.2-cli php8.2-curl php8.2-mbstring   php8.2-xml php8.2-mysql php8.2-pgsql php8.2-zip   && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer   && rm -rf /var/lib/apt/lists/*:
+0.473 Get:1 https://deb.nodesource.com/node_20.x nodistro InRelease [12.1 kB]
+0.542 Get:2 https://deb.nodesource.com/node_20.x nodistro/main amd64 Packages [14.7 kB]
+0.921 Get:3 http://archive.ubuntu.com/ubuntu jammy InRelease [270 kB]
+0.932 Get:4 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+1.149 Get:5 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [4190 kB]
+1.289 Get:6 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [7545 kB]
+1.343 Get:7 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [1314 kB]
+1.353 Get:8 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [84.1 kB]
+1.365 Get:9 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+1.688 Get:10 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+1.777 Get:11 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [266 kB]
+1.812 Get:12 http://archive.ubuntu.com/ubuntu jammy/restricted amd64 Packages [164 kB]
+1.828 Get:13 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages [1792 kB]
+1.885 Get:14 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [17.5 MB]
+1.991 Get:15 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [7836 kB]
+2.022 Get:16 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1616 kB]
+2.029 Get:17 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [92.7 kB]
+2.033 Get:18 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [4524 kB]
+2.056 Get:19 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [35.6 kB]
+2.061 Get:20 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [82.8 kB]
+3.023 Fetched 47.7 MB in 3s (17.4 MB/s)
+3.023 Reading package lists...
+3.966 Reading package lists...
+4.861 Building dependency tree...
+5.028 Reading state information...
+5.302 E: Unable to locate package php8.2
+5.302 E: Couldn't find any package by glob 'php8.2'
+5.302 E: Couldn't find any package by regex 'php8.2'
+5.302 E: Unable to locate package php8.2-cli
+5.302 E: Couldn't find any package by glob 'php8.2-cli'
+5.302 E: Couldn't find any package by regex 'php8.2-cli'
+5.302 E: Unable to locate package php8.2-curl
+5.302 E: Couldn't find any package by glob 'php8.2-curl'
+5.302 E: Couldn't find any package by regex 'php8.2-curl'
+5.302 E: Unable to locate package php8.2-mbstring
+5.302 E: Couldn't find any package by glob 'php8.2-mbstring'
+5.302 E: Couldn't find any package by regex 'php8.2-mbstring'
+5.302 E: Unable to locate package php8.2-xml
+5.302 E: Couldn't find any package by glob 'php8.2-xml'
+5.302 E: Couldn't find any package by regex 'php8.2-xml'
+5.302 E: Unable to locate package php8.2-mysql
+5.302 E: Couldn't find any package by glob 'php8.2-mysql'
+5.302 E: Couldn't find any package by regex 'php8.2-mysql'
+5.302 E: Unable to locate package php8.2-pgsql
+5.302 E: Couldn't find any package by glob 'php8.2-pgsql'
+5.302 E: Couldn't find any package by regex 'php8.2-pgsql'
+5.302 E: Unable to locate package php8.2-zip
+5.302 E: Couldn't find any package by glob 'php8.2-zip'
+5.302 E: Couldn't find any package by regex 'php8.2-zip'
+------
+Dockerfile:26
+--------------------
+  25 |     # PHP 8.2 + Composer
+  26 | >>> RUN apt-get update && apt-get install -y \
+  27 | >>>   php8.2 php8.2-cli php8.2-curl php8.2-mbstring \
+  28 | >>>   php8.2-xml php8.2-mysql php8.2-pgsql php8.2-zip \
+  29 | >>>   && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+  30 | >>>   && rm -rf /var/lib/apt/lists/*
+  31 |
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/sh -c apt-get update && apt-get install -y   php8.2 php8.2-cli php8.2-curl php8.2-mbstring   php8.2-xml php8.2-mysql php8.2-pgsql php8.2-zip   && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer   && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100
+root@ide:/opt/platform# cd /opt/platform
+
+# Ambil update terbaru dari GitHub
+git pull
+
+# Build ulang (proses ini 10-20 menit, biarkan berjalan)
+docker build -t platform/workspace-base:latest docker/workspace-base/
+remote: Enumerating objects: 18, done.
+remote: Counting objects: 100% (18/18), done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 13 (delta 7), reused 13 (delta 7), pack-reused 0 (from 0)
+Unpacking objects: 100% (13/13), 8.36 KiB | 2.79 MiB/s, done.
+From https://github.com/mailsul/ide
+   4e1b98a..81cb9ee  main       -> origin/main
+Updating 4e1b98a..81cb9ee
+Fast-forward
+ ...indows-PowerShell-Copyright-C-Microsoft-Corporation-Al_1785982550329.txt | 393 ++++++++++++++++++++++++++++++++++++
+ ...oot-ide-opt-platform-cd-opt-Hapus-folder-yang-bukan-gi_1785983014151.txt | 107 ++++++++++
+ docker/workspace-base/Dockerfile                                            |   6 +-
+ 3 files changed, 504 insertions(+), 2 deletions(-)
+ create mode 100644 attached_assets/Pasted-Windows-PowerShell-Copyright-C-Microsoft-Corporation-Al_1785982550329.txt
+ create mode 100644 attached_assets/Pasted-root-ide-opt-platform-cd-opt-Hapus-folder-yang-bukan-gi_1785983014151.txt
+[+] Building 273.9s (17/17) FINISHED                                                                     docker:default
+ => [internal] load build definition from Dockerfile                                                               0.0s
+ => => transferring dockerfile: 2.19kB                                                                             0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:22.04                                                    1.1s
+ => [internal] load .dockerignore                                                                                  0.0s
+ => => transferring context: 2B                                                                                    0.0s
+ => [ 1/13] FROM docker.io/library/ubuntu:22.04@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d  0.0s
+ => => resolve docker.io/library/ubuntu:22.04@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d91  0.0s
+ => CACHED [ 2/13] RUN apt-get update && apt-get install -y   curl wget git vim nano zip unzip   build-essential   0.0s
+ => CACHED [ 3/13] RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -   && apt-get install -y nodejs    0.0s
+ => CACHED [ 4/13] RUN apt-get update && apt-get install -y   python3.11 python3-pip python3-venv python3.11-venv  0.0s
+ => [ 5/13] RUN apt-get update && apt-get install -y software-properties-common   && add-apt-repository -y ppa:o  60.7s
+ => [ 6/13] RUN wget -q https://go.dev/dl/go1.21.6.linux-amd64.tar.gz -O /tmp/go.tar.gz   && tar -C /usr/local -x  5.0s
+ => [ 7/13] RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y                           23.1s
+ => [ 8/13] RUN apt-get update && apt-get install -y openjdk-21-jdk maven   && rm -rf /var/lib/apt/lists/*        41.2s
+ => [ 9/13] RUN apt-get update && apt-get install -y ruby-full   && gem install bundler   && rm -rf /var/lib/apt  14.5s
+ => [10/13] RUN curl -fsSL https://deno.land/install.sh | sh                                                       5.1s
+ => [11/13] RUN apt-get update && apt-get install -y mysql-client   && rm -rf /var/lib/apt/lists/*                 7.7s
+ => [12/13] RUN apt-get update && apt-get install -y postgresql-client   && rm -rf /var/lib/apt/lists/*            7.7s
+ => [13/13] WORKDIR /workspace                                                                                     0.1s
+ => exporting to image                                                                                           107.2s
+ => => exporting layers                                                                                           56.1s
+ => => exporting manifest sha256:beadd6d61fce203eb23c865558fb4a6f6d05efab03b7166523b0d51d2f143224                  0.0s
+ => => exporting config sha256:fa145dc2c24c14c839e7d071b20c7c58483151f06318b41599e0df2c1c50bb61                    0.0s
+ => => exporting attestation manifest sha256:17ff3836ecca9d654d038baf23e2019727f3bfed756d249a583df0a83bd64bad      0.1s
+ => => exporting manifest list sha256:2cae849195628df28480abaebfa80aa2ed750e76f5486d8982233bd42c813f42             0.0s
+ => => naming to docker.io/platform/workspace-base:latest                                                          0.0s
+ => => unpacking to docker.io/platform/workspace-base:latest                                                      50.9s
+root@ide:/opt/platform# cd /opt/platform
+
+# Cek apakah .env sudah ada
+cat .env
+cat: .env: No such file or directory
+root@ide:/opt/platform# # Salin template
+cp .env.example .env
+
+# Buka untuk diedit
+nano .env
+root@ide:/opt/platform# cd /opt/platform
+
+# Cek apakah .env sudah ada
+cat .env
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  REPLIT CLONE — Environment Variables                       ║
+# ║  Copy file ini menjadi .env lalu isi sesuai petunjuk        ║
+# ╚══════════════════════════════════════════════════════════════╝
+
+# ─── DOMAIN ──────────────────────────────────────────────────────────────────
+# Domain utama platform Anda (tanpa https://)
+# Contoh: myplatform.com
+DOMAIN=premhub.site
+
+# Email untuk sertifikat SSL Let's Encrypt
+ACME_EMAIL=maraazn069@gmail.com
+
+# ─── DATABASE PLATFORM (PostgreSQL internal) ─────────────────────────────────
+# Password untuk database utama platform
+# Buat password acak yang kuat, contoh: openssl rand -hex 32
+PLATFORM_DB_PASS=intinya ini password
+
+# ─── DATABASE WORKSPACE (MySQL — untuk user workspace) ───────────────────────
+# Password root MySQL
+MYSQL_ROOT_PASSWORD=intinya ini password
+
+# ─── DATABASE WORKSPACE (PostgreSQL — untuk user workspace) ──────────────────
+# Password root PostgreSQL workspace
+POSTGRES_ROOT_PASSWORD=intinya ini password
+
+# ─── KEAMANAN ────────────────────────────────────────────────────────────────
+# Secret untuk JWT token — WAJIB diisi, jangan pakai nilai default!
+# Generate dengan: openssl rand -hex 64
+SESSION_SECRET=YoVOP5RwIEcLCM4w4+B/hIT65u1ThQRfkfollYywG8IvhiYl8cltj/BBaCwJ5oB84fUz6FHPHm/kR69NSyCM7w==
+
+# ─── pgAdmin (Database Admin UI) ─────────────────────────────────────────────
+# Email dan password untuk login pgAdmin
+PGADMIN_EMAIL=maraazn069@gmail.com
+PGADMIN_PASSWORD=intinya ini password
+root@ide:/opt/platform# # Buat folder traefik dynamic (diperlukan docker-compose)
+mkdir -p docker/traefik/dynamic
+
+# Jalankan semua service platform
+docker compose up -d --build
+WARN[0000] /opt/platform/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion
+[+] up 71/73
+ ✔ Image phpmyadmin:latest                        Pulled                                                           28.4s
+ ✔ Image mysql:8.0                                Pulled                                                           29.0s
+ ✔ Image postgres:16-alpine                       Pulled                                                           18.5s
+ ✔ Image traefik:v3.0                             Pulled                                                           19.1s
+ ⠧ Image dpage/pgadmin4:latest [⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿] Pulling                                                          29.8s
+[+] Building 34.2s (32/36)
+ => [internal] load local bake definitions                                                                         0.0s
+ => => reading from stdin 1.00kB                                                                                   0.0s
+ => [frontend internal] load build definition from Dockerfile                                                      0.1s
+ => => transferring dockerfile: 964B                                                                               0.0s
+ => [backend internal] load build definition from Dockerfile                                                       0.1s
+ => => transferring dockerfile: 1.31kB                                                                             0.0s
+ => [frontend internal] load metadata for docker.io/library/node:20-slim                                           2.4s
+ => [frontend internal] load metadata for docker.io/library/nginx:alpine                                           2.3s
+ => [frontend internal] load .dockerignore                                                                         0.1s
+ => => transferring context: 2B                                                                                    0.0s
+ => [frontend stage-1 1/3] FROM docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3  4.7s
+ => => resolve docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3c2c3aeac22d2a470c  0.1s
+ => => sha256:46519e7231d2eb5604df229beb44d59719a489eaa7aca52982535a010b07a9ed 20.31MB / 20.31MB                   1.0s
+ => => sha256:390dc935348d8070e695fbaae2a4bb114fb9e69c59f628e7576036ee9d5244c9 1.40kB / 1.40kB                     0.8s
+ => => sha256:d0008c891db48b5f526d914bce9e8d889fe1a9d1f08291ae03fe97f871726f38 1.21kB / 1.21kB                     0.3s
+ => => sha256:46f977ee452f4399c208714afa034868d6056864f8a0cf3c643ab143dd802c80 404B / 404B                         0.3s
+ => => sha256:62bec68d7c31c4c8a19d812d84da5f7748e54690c037979945b6c5b6c924b142 957B / 957B                         0.5s
+ => => sha256:1223f016b4e4a2c21f7c49d4837fbfd47a9da6436b511690ca1e582fc2810d59 627B / 627B                         0.5s
+ => => sha256:3cd534fe98c64d68a1f4f1c83abb8d5cba7ecfd7be88e592389929d12e6253da 1.89MB / 1.89MB                     0.5s
+ => => extracting sha256:3cd534fe98c64d68a1f4f1c83abb8d5cba7ecfd7be88e592389929d12e6253da                          0.3s
+ => => extracting sha256:1223f016b4e4a2c21f7c49d4837fbfd47a9da6436b511690ca1e582fc2810d59                          0.0s
+ => => extracting sha256:62bec68d7c31c4c8a19d812d84da5f7748e54690c037979945b6c5b6c924b142                          0.0s
+ => => extracting sha256:46f977ee452f4399c208714afa034868d6056864f8a0cf3c643ab143dd802c80                          0.0s
+ => => extracting sha256:d0008c891db48b5f526d914bce9e8d889fe1a9d1f08291ae03fe97f871726f38                          0.0s
+ => => extracting sha256:390dc935348d8070e695fbaae2a4bb114fb9e69c59f628e7576036ee9d5244c9                          0.0s
+ => => extracting sha256:46519e7231d2eb5604df229beb44d59719a489eaa7aca52982535a010b07a9ed                          1.3s
+ => [frontend internal] load build context                                                                         0.2s
+ => => transferring context: 775.52kB                                                                              0.0s
+ => [backend internal] load build context                                                                          0.2s
+ => => transferring context: 399.25kB                                                                              0.0s
+ => [frontend builder  1/12] FROM docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a  10.3s
+ => => resolve docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f0193e162b5fe  0.1s
+ => => sha256:3c02fd806613748139b8b8a14a69ae3518a1b0e863c57c35aada3b92ed87fb31 447B / 447B                         0.3s
+ => => sha256:64cfb949317c9824fd081d55c59a7225bfe1f650c6395ba42d7ed0ccf51993d2 1.71MB / 1.71MB                     0.5s
+ => => sha256:804d4d68057cbb26cbcde9a735148ebc6589911bad32cf9dbddb5b0ba878bf1f 41.42MB / 41.42MB                   1.6s
+ => => sha256:e54aec64c365815cd7b91e718f00ac6e625562b1de09036b38614621b42c7582 3.31kB / 3.31kB                     0.7s
+ => => sha256:ff86ea2e5edce334d19a34fbc65d1a511aa1fc823dba1110422f991aa56b44d4 28.24MB / 28.24MB                   1.3s
+ => => extracting sha256:ff86ea2e5edce334d19a34fbc65d1a511aa1fc823dba1110422f991aa56b44d4                          0.8s
+ => => extracting sha256:e54aec64c365815cd7b91e718f00ac6e625562b1de09036b38614621b42c7582                          0.1s
+ => => extracting sha256:804d4d68057cbb26cbcde9a735148ebc6589911bad32cf9dbddb5b0ba878bf1f                          1.7s
+ => => extracting sha256:64cfb949317c9824fd081d55c59a7225bfe1f650c6395ba42d7ed0ccf51993d2                          0.2s
+ => => extracting sha256:3c02fd806613748139b8b8a14a69ae3518a1b0e863c57c35aada3b92ed87fb31                          5.3s
+ => [frontend stage-1 2/3] COPY docker/nginx/nginx-frontend.conf /etc/nginx/conf.d/default.conf                    9.0s
+ => [frontend builder  2/12] WORKDIR /app                                                                          2.1s
+ => [frontend builder  3/12] RUN npm install -g pnpm                                                               1.7s
+ => [frontend builder  4/12] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./                               0.2s
+ => [backend builder  5/12] COPY tsconfig.base.json tsconfig.json ./                                               0.1s
+ => [backend stage-1  5/10] COPY lib/db/package.json ./lib/db/                                                     0.1s
+ => [backend stage-1  6/10] COPY lib/api-zod/package.json ./lib/api-zod/                                           0.2s
+ => [backend builder  6/12] COPY lib/db ./lib/db                                                                   0.2s
+ => CACHED [frontend builder  4/10] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./                        0.0s
+ => CACHED [frontend builder  5/10] COPY tsconfig.base.json tsconfig.json ./                                       0.0s
+ => [frontend builder  6/10] COPY lib/api-client-react ./lib/api-client-react                                      0.2s
+ => [backend stage-1  7/10] COPY artifacts/api-server/package.json ./artifacts/api-server/                         0.2s
+ => [frontend builder  7/10] COPY lib/api-spec ./lib/api-spec                                                      0.2s
+ => [backend builder  7/12] COPY lib/api-zod ./lib/api-zod                                                         0.2s
+ => [backend stage-1  8/10] RUN pnpm install --frozen-lockfile --prod                                              5.6s
+ => [frontend builder  8/10] COPY artifacts/ide-platform ./artifacts/ide-platform                                  0.3s
+ => [backend builder  8/12] COPY lib/api-spec ./lib/api-spec                                                       0.2s
+ => [backend builder  9/12] COPY artifacts/api-server ./artifacts/api-server                                       0.2s
+ => [frontend builder  9/10] RUN pnpm install --frozen-lockfile                                                   12.6s
+ => [backend builder 10/12] RUN pnpm install --frozen-lockfile                                                    10.8s
+ => CANCELED [backend builder 11/12] RUN pnpm run typecheck:libs                                                   3.9s
+ => ERROR [frontend builder 10/10] RUN pnpm --filter @workspace/ide-platform run build                             2.0s
+------
+ > [frontend builder 10/10] RUN pnpm --filter @workspace/ide-platform run build:
+1.399
+1.399 > @workspace/ide-platform@0.0.0 build /app/artifacts/ide-platform
+1.399 > vite build --config vite.config.ts
+1.399
+1.839 failed to load config from /app/artifacts/ide-platform/vite.config.ts
+1.841 error during build:
+1.841 Error: PORT environment variable is required but was not provided.
+1.841     at file:///app/artifacts/ide-platform/node_modules/.vite-temp/vite.config.ts.timestamp-1785984416508-fecabf56fc1f.mjs:10:9
+1.841     at ModuleJob.run (node:internal/modules/esm/module_job:325:25)
+1.841     at async ModuleLoader.import (node:internal/modules/esm/loader:606:24)
+1.841     at async loadConfigFromBundledFile (file:///app/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.5_jiti@2.7.0_lightningcss@1.32.0_tsx@4.23.1_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:35996:12)
+1.841     at async bundleAndLoadConfigFile (file:///app/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.5_jiti@2.7.0_lightningcss@1.32.0_tsx@4.23.1_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:35884:17)
+1.841     at async loadConfigFromFile (file:///app/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.5_jiti@2.7.0_lightningcss@1.32.0_tsx@4.23.1_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:35851:42)
+1.841     at async resolveConfig (file:///app/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.5_jiti@2.7.0_lightningcss@1.32.0_tsx@4.23.1_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:35500:22)
+1.841     at async createBuilder (file:///app/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.5_jiti@2.7.0_lightningcss@1.32.0_tsx@4.23.1_yaml@2.9.0/node_modules/vite/dist/node/chunks/config.js:33955:19)
+[+] up 73/75 async CAC.<anonymous> (file:///app/node_modules/.pnpm/vite@7.3.6_@types+node@25.9.5_jiti@2.7.0_lightningcss
+ ✔ Image phpmyadmin:latest     Pulled                                                                              28.4s
+ ✔ Image mysql:8.0             Pulled                                                                              29.0s
+ ✔ Image postgres:16-alpine    Pulled                                                                              18.5s
+ ✔ Image traefik:v3.0          Pulled                                                                              19.1s
+ ✔ Image dpage/pgadmin4:latest Pulled                                                                              29.8s
+ ⠙ Image platform-frontend     Building                                                                            34.3s
+ ⠙ Image platform-backend      Building                                                                            34.3s
+Dockerfile:27
+
+--------------------
+
+  25 |     ENV VITE_API_URL=$VITE_API_URL
+
+  26 |
+
+  27 | >>> RUN pnpm --filter @workspace/ide-platform run build
+
+  28 |
+
+  29 |     # --- Production: Nginx to serve static files ---
+
+--------------------
+
+target frontend: failed to solve: process "/bin/sh -c pnpm --filter @workspace/ide-platform run build" did not complete successfully: exit code: 1
+
+root@ide:/opt/platform# docker compose logs -f
+WARN[0000] /opt/platform/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion
+root@ide:/opt/platform# docker compose ps
+WARN[0000] /opt/platform/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion
+NAME      IMAGE     COMMAND   SERVICE   CREATED   STATUS    PORTS
+root@ide:/opt/platform# cd /opt/platform
+
+# Ambil semua fix terbaru
+git pull
+
+# Hapus cache build Docker yang lama (agar tidak pakai build rusak sebelumnya)
+docker compose down
+docker builder prune -f
+
+# Build + jalankan ulang
+docker compose up -d --build
+remote: Enumerating objects: 21, done.
+remote: Counting objects: 100% (21/21), done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 12 (delta 8), reused 11 (delta 7), pack-reused 0 (from 0)
+Unpacking objects: 100% (12/12), 2.05 KiB | 698.00 KiB/s, done.
+From https://github.com/mailsul/ide
+   81cb9ee..1df3b2a  main       -> origin/main
+Updating 81cb9ee..1df3b2a
+Fast-forward
+ .gitignore                                                                  |   3 +
+ artifacts/api-server/Dockerfile                                             |  20 +-
+ artifacts/ide-platform/Dockerfile                                           |   9 +-
+ artifacts/ide-platform/vite.config.ts                                       | 116 +++++------
+ ...indows-PowerShell-Copyright-C-Microsoft-Corporation-Al_1785981677167.txt | 365 ---------------------------------
+ ...indows-PowerShell-Copyright-C-Microsoft-Corporation-Al_1785982550329.txt | 393 ------------------------------------
+ ...oot-ide-opt-platform-cd-opt-Hapus-folder-yang-bukan-gi_1785983014151.txt | 107 ----------
+ attached_assets/image_1785981561477.png                                     | Bin 56946 -> 0 bytes
+ docker-compose.yml                                                          |   2 -
+ 9 files changed, 67 insertions(+), 948 deletions(-)
+ delete mode 100644 attached_assets/Pasted-Windows-PowerShell-Copyright-C-Microsoft-Corporation-Al_1785981677167.txt
+ delete mode 100644 attached_assets/Pasted-Windows-PowerShell-Copyright-C-Microsoft-Corporation-Al_1785982550329.txt
+ delete mode 100644 attached_assets/Pasted-root-ide-opt-platform-cd-opt-Hapus-folder-yang-bukan-gi_1785983014151.txt
+ delete mode 100644 attached_assets/image_1785981561477.png
+ID                                              RECLAIMABLE     SIZE            LAST ACCESSED
+fs970jxkeoujxi27fjrg6hq2h*                      true            843.8kB         5 minutes ago
+vorovwrdkcm5mow4l69oks3ps*                      true    8.192kB         5 minutes ago
+707vxl2u5kekfwno7j4qlqzi4*                      true    28.67kB         5 minutes ago
+8bfvrqxolnez7ne9dp2mznknx*                      true    1.11MB          5 minutes ago
+yoph2g53fvypjcdaybly7bnm3*                      true    4.096kB         22 minutes ago
+y42r81yczjs7159fhseet8t1c*                      true    40.39MB         5 minutes ago
+q56odma0jhw8aqkj510shit40*                      true    8.192kB         22 minutes ago
+1vxbl67h5tee1ag0fo4pg5kic*                      true    8.192kB         5 minutes ago
+qzpvjqd0u3qxvndge0vbug1lb                       true    8.291kB         22 minutes ago
+84x6bahuhkwh91yg0lsnj38q5*                      true    4.096kB         5 minutes ago
+pkgwihq3acb1walqt7lcbfp4i                       true    20.48kB         5 minutes ago
+fisum70n0f8z4g6xnrcgh1ddh                       true    9.656MB         22 minutes ago
+qpusog6kx0gfhxwey4occ156r                       true    72.13MB         5 minutes ago
+821164jvogt7mnrda8t0giqgf                       true    535.7MB         5 minutes ago
+isn7ajvghc3s4yxf2ba43bm19                       true    82.71MB         22 minutes ago
+l7hvqfho867xqe4ol84d44x1e                       true    17.78kB         6 minutes ago
+2y6nyuk7epp4y61es7e7yettk                       true    618.5kB         5 minutes ago
+o0imy6dhsy2bgi5om7w2pz0jq                       true    24.58kB         5 minutes ago
+msndjnk7grfsqftl1m6885jth                       true    20.48kB         5 minutes ago
+ndqtlcqe8c164u7rpo428cdlo                       true    13.5kB          6 minutes ago
+jf29dadk0836zxo257yosvvxm                       true    77.82kB         5 minutes ago
+pdiit0eago5fn9qns0z4upt12                       true    149.6MB         22 minutes ago
+dtzy8uvggr761s7mxzpjqwi30                       true    130.7MB         22 minutes ago
+0c1ba5baxhf12s3i1e60j8ftf                       true    12.69kB         6 minutes ago
+k0adjgpkc37rubf13mquw4uf1                       true    188.4kB         5 minutes ago
+6dhwgktrogq24xjvxfqah4665                       true    1.101GB         22 minutes ago
+v1bsf4mnt5ra09zwtaxiyg257                       true    13.24kB         6 minutes ago
+mse28fmppj00p5s3srujepv00                       true    8.819kB         6 minutes ago
+jafhxlh33byb66bic4qzos8ul                       true    1.909GB         22 minutes ago
+qmzq7fe3jhae5nz97lbscmen6                       true    322.7MB         22 minutes ago
+wzbdijckdvd6b6kfd84w4mx4w                       true    7.535MB         6 minutes ago
+1n51fm6dya1md5o80w043jans                       true    147.2MB         22 minutes ago
+0bob6j8j8wbs4ov3elhu0slem                       true    3.846MB         6 minutes ago
+vukrkck2r4quqc09kllo0ntsg                       true    255.3MB         22 minutes ago
+z8igkindnaarccakzzxqg2hra                       true    1.149GB         31 minutes ago
+qmzut7xa18o47ddrrpq4vv2xj                       true    1.556GB         31 minutes ago
+w638aegfn2paxx49zfty33auc                       true    117.4MB         31 minutes ago
+Total:  7.593GB
+[+] Building 21.9s (35/36)
+ => [internal] load local bake definitions                                                                         0.0s
+ => => reading from stdin 1.00kB                                                                                   0.0s
+ => [backend internal] load build definition from Dockerfile                                                       0.1s
+ => => transferring dockerfile: 1.27kB                                                                             0.0s
+ => [frontend internal] load build definition from Dockerfile                                                      0.2s
+ => => transferring dockerfile: 996B                                                                               0.0s
+ => [frontend internal] load metadata for docker.io/library/node:20-slim                                           1.3s
+ => [frontend internal] load metadata for docker.io/library/nginx:alpine                                           2.5s
+ => [frontend internal] load .dockerignore                                                                         0.1s
+ => => transferring context: 2B                                                                                    0.0s
+ => [backend internal] load build context                                                                          0.1s
+ => => transferring context: 399.20kB                                                                              0.0s
+ => [frontend builder  1/11] FROM docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2  0.1s
+ => => resolve docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f0193e162b5fe  0.1s
+ => CACHED [frontend builder  2/11] WORKDIR /app                                                                   0.0s
+ => CACHED [frontend builder  3/11] RUN npm install -g pnpm                                                        0.0s
+ => CACHED [frontend builder  4/11] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./                        0.0s
+ => CACHED [frontend builder  5/11] COPY tsconfig.base.json tsconfig.json ./                                       0.0s
+ => CACHED [backend builder  6/11] COPY lib/db ./lib/db                                                            0.0s
+ => CACHED [backend builder  7/11] COPY lib/api-zod ./lib/api-zod                                                  0.0s
+ => CACHED [backend builder  8/11] COPY lib/api-spec ./lib/api-spec                                                0.0s
+ => [backend builder  9/11] COPY artifacts/api-server ./artifacts/api-server                                       0.4s
+ => [backend stage-1  5/10] COPY lib/db/package.json ./lib/db/                                                     0.4s
+ => [backend builder 10/11] RUN pnpm install --frozen-lockfile                                                    11.7s
+ => [backend stage-1  6/10] COPY lib/api-zod/package.json ./lib/api-zod/                                           0.2s
+ => [backend stage-1  7/10] COPY artifacts/api-server/package.json ./artifacts/api-server/                         0.1s
+ => [backend stage-1  8/10] RUN pnpm install --frozen-lockfile --prod                                              7.1s
+ => [frontend stage-1 1/3] FROM docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3  3.0s
+ => => resolve docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3c2c3aeac22d2a470c  0.1s
+ => => sha256:46519e7231d2eb5604df229beb44d59719a489eaa7aca52982535a010b07a9ed 20.31MB / 20.31MB                   0.5s
+ => => sha256:390dc935348d8070e695fbaae2a4bb114fb9e69c59f628e7576036ee9d5244c9 1.40kB / 1.40kB                     0.5s
+ => => sha256:d0008c891db48b5f526d914bce9e8d889fe1a9d1f08291ae03fe97f871726f38 1.21kB / 1.21kB                     0.7s
+ => => sha256:46f977ee452f4399c208714afa034868d6056864f8a0cf3c643ab143dd802c80 404B / 404B                         0.7s
+ => => sha256:62bec68d7c31c4c8a19d812d84da5f7748e54690c037979945b6c5b6c924b142 957B / 957B                         0.3s
+ => => sha256:1223f016b4e4a2c21f7c49d4837fbfd47a9da6436b511690ca1e582fc2810d59 627B / 627B                         0.3s
+ => => sha256:3cd534fe98c64d68a1f4f1c83abb8d5cba7ecfd7be88e592389929d12e6253da 1.89MB / 1.89MB                     0.3s
+ => => extracting sha256:3cd534fe98c64d68a1f4f1c83abb8d5cba7ecfd7be88e592389929d12e6253da                          0.2s
+ => => extracting sha256:1223f016b4e4a2c21f7c49d4837fbfd47a9da6436b511690ca1e582fc2810d59                          0.0s
+ => => extracting sha256:62bec68d7c31c4c8a19d812d84da5f7748e54690c037979945b6c5b6c924b142                          0.0s
+ => => extracting sha256:46f977ee452f4399c208714afa034868d6056864f8a0cf3c643ab143dd802c80                          0.0s
+ => => extracting sha256:d0008c891db48b5f526d914bce9e8d889fe1a9d1f08291ae03fe97f871726f38                          0.1s
+ => => extracting sha256:390dc935348d8070e695fbaae2a4bb114fb9e69c59f628e7576036ee9d5244c9                          0.0s
+ => => extracting sha256:46519e7231d2eb5604df229beb44d59719a489eaa7aca52982535a010b07a9ed                          0.7s
+ => [frontend internal] load build context                                                                         0.2s
+ => => transferring context: 775.57kB                                                                              0.0s
+ => CACHED [frontend builder  4/10] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./                        0.0s
+ => CACHED [frontend builder  5/10] COPY tsconfig.base.json tsconfig.json ./                                       0.0s
+ => [frontend builder  6/10] COPY lib/api-client-react ./lib/api-client-react                                      0.2s
+ => [frontend builder  7/10] COPY lib/api-spec ./lib/api-spec                                                      0.2s
+ => [frontend builder  8/10] COPY artifacts/ide-platform ./artifacts/ide-platform                                  0.3s
+ => [frontend builder  9/10] RUN pnpm install --frozen-lockfile                                                   11.4s
+ => [frontend stage-1 2/3] COPY docker/nginx/nginx-frontend.conf /etc/nginx/conf.d/default.conf                    3.6s
+ => [backend builder 11/11] RUN pnpm --filter @workspace/api-server run build                                      1.5s
+ => ERROR [frontend builder 10/10] RUN pnpm --filter @workspace/ide-platform run build                             6.3s
+ => [backend stage-1  9/10] COPY --from=builder /app/artifacts/api-server/dist ./artifacts/api-server/dist         0.8s
+ => [backend stage-1 10/10] COPY --from=builder /app/lib/db ./lib/db                                               0.2s
+ => CANCELED [backend] exporting to image                                                                          5.5s
+ => => exporting layers                                                                                            2.5s
+ => => exporting manifest sha256:109ab5386f7d1f7ecde1d602c68e5ebb7b6c7d3b4f87a1fd39f21aa0d9a33133                  0.0s
+ => => exporting config sha256:9b55b22989e416544e591e36e1214cf5773660d43b9ef19c43c48c30a32e862f                    0.0s
+ => => exporting attestation manifest sha256:c0b5d5005d5222cd163c760c137e001fcfa8827eabf5862f7d9c36db89a30d7d      0.0s
+ => => exporting manifest list sha256:1b04d2696a92b2fc230dc464c58abf6e464025b106f2011ae9eba7a9a520b5db             0.0s
+ => => naming to docker.io/library/platform-backend:latest                                                         0.0s
+ => => unpacking to docker.io/library/platform-backend:latest                                                      2.8s
+------
+ > [frontend builder 10/10] RUN pnpm --filter @workspace/ide-platform run build:
+1.406
+1.406 > @workspace/ide-platform@0.0.0 build /app/artifacts/ide-platform
+1.406 > vite build --config vite.config.ts
+1.406
+1.945 vite v7.3.6 building client environment for production...
+2.042 transforming...
+3.069 src/components/ui/tooltip.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+4.624 src/components/ui/dropdown-menu.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+4.632 src/components/ui/avatar.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+4.634 src/components/ui/resizable.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+4.638 src/components/ui/progress.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+4.796 src/components/ui/label.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+5.628 ✓ 1888 modules transformed.
+5.630 ✗ Build failed in 3.64s
+5.630 error during build:
+5.630 src/components/ide/file-tree.tsx (5:67): "SiCss3" is not exported by "../../node_modules/.pnpm/react-icons@5.7.0_react@19.1.0/node_modules/react-icons/si/index.mjs", imported by "src/components/ide/file-tree.tsx".
+5.630 file: /app/artifacts/ide-platform/src/components/ide/file-tree.tsx:5:67
+5.630
+5.630 3: import { Folder, FolderOpen, FileText, ChevronRight, ChevronDown, Plus, MoreVertical } from "lucide-react";
+5.630 4: import { ScrollArea } from "@/components/ui/scroll-area";
+5.630 5: import { SiNodedotjs, SiPython, SiPhp, SiGo, SiRust, SiJavascript, SiCss3, SiHtml5, SiTypescript, SiReact, SiJson, Si...
+5.630                                                                       ^
+5.630 6:
+5.630 7: export function FileTree({
+5.630
+5.630     at getRollupError (file:///app/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/parseAst.js:317:41)
+5.630     at error (file:///app/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/parseAst.js:313:42)
+5.630     at Module.error (file:///app/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/node-entry.js:17156:16)
+5.630     at Module.traceVariable (file:///app/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/node-entry.js:17589:29)
+5.630     at ModuleScope.findVariable (file:///app/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/node-entry.js:15179:39)
+5.630     at FunctionScope.findVariable (file:///app/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/node-entry.js:5399:38)
+5.630     at FunctionBodyScope.findVariable (file:///app/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/node-entry.js:5399:38)
+5.630     at ReturnValueScope.findVariable (file:///app/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/node-entry.js:5399:38)
+5.630     at FunctionBodyScope.findVariable (file:///app/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/node-entry.js:5399:38)
+5.630     at BlockScope.findVariable (file:///app/node_modules/.pnpm/rollup@4.62.3/node_modules/rollup/dist/es/shared/node-entry.js:5399:38)
+5.691 /app/artifacts/ide-platform:
+5.691  ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/ide-platform@0.0.0 build: `vite build --config vite.config.ts`
+5.691 Exit status 1
+------
+[+] up 0/2
+ ⠙ Image platform-frontend Building                                                                                21.9s
+ ⠙ Image platform-backend  Building                                                                                21.9s
+Dockerfile:30
+
+--------------------
+
+  28 |
+
+  29 |     # Build frontend
+
+  30 | >>> RUN pnpm --filter @workspace/ide-platform run build
+
+  31 |
+
+  32 |     # --- Production: Nginx serve static files ---
+
+--------------------
+
+target frontend: failed to solve: process "/bin/sh -c pnpm --filter @workspace/ide-platform run build" did not complete successfully: exit code: 1
+
+root@ide:/opt/platform# cd /opt/platform
+
+# Ambil fix terbaru
+git pull
+
+# Build + jalankan ulang
+docker compose up -d --build
+remote: Enumerating objects: 15, done.
+remote: Counting objects: 100% (15/15), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 8 (delta 6), reused 8 (delta 6), pack-reused 0 (from 0)
+Unpacking objects: 100% (8/8), 643 bytes | 321.00 KiB/s, done.
+From https://github.com/mailsul/ide
+   1df3b2a..508f836  main       -> origin/main
+Updating 1df3b2a..508f836
+Fast-forward
+ artifacts/ide-platform/src/components/ide/file-tree.tsx | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+[+] Building 18.7s (39/39) FINISHED
+ => [internal] load local bake definitions                                                                         0.0s
+ => => reading from stdin 1.00kB                                                                                   0.0s
+ => [backend internal] load build definition from Dockerfile                                                       0.0s
+ => => transferring dockerfile: 1.27kB                                                                             0.0s
+ => [frontend internal] load build definition from Dockerfile                                                      0.0s
+ => => transferring dockerfile: 996B                                                                               0.0s
+ => [frontend internal] load metadata for docker.io/library/nginx:alpine                                           1.5s
+ => [frontend internal] load metadata for docker.io/library/node:20-slim                                           1.5s
+ => [frontend internal] load .dockerignore                                                                         0.0s
+ => => transferring context: 2B                                                                                    0.0s
+ => [frontend builder  1/10] FROM docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2  0.1s
+ => => resolve docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f0193e162b5fe  0.1s
+ => [backend internal] load build context                                                                          0.1s
+ => => transferring context: 124.71kB                                                                              0.0s
+ => [frontend stage-1 1/3] FROM docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3  0.1s
+ => => resolve docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3c2c3aeac22d2a470c  0.1s
+ => [frontend internal] load build context                                                                         0.1s
+ => => transferring context: 501.08kB                                                                              0.0s
+ => CACHED [frontend stage-1 2/3] COPY docker/nginx/nginx-frontend.conf /etc/nginx/conf.d/default.conf             0.0s
+ => CACHED [backend builder  2/10] WORKDIR /app                                                                    0.0s
+ => CACHED [backend builder  3/10] RUN npm install -g pnpm                                                         0.0s
+ => CACHED [frontend builder  4/10] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./                        0.0s
+ => CACHED [frontend builder  5/10] COPY tsconfig.base.json tsconfig.json ./                                       0.0s
+ => CACHED [frontend builder  6/10] COPY lib/api-client-react ./lib/api-client-react                               0.0s
+ => CACHED [frontend builder  7/10] COPY lib/api-spec ./lib/api-spec                                               0.0s
+ => [frontend builder  8/10] COPY artifacts/ide-platform ./artifacts/ide-platform                                  0.2s
+ => CACHED [backend builder  4/11] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./                         0.0s
+ => CACHED [backend stage-1  5/10] COPY lib/db/package.json ./lib/db/                                              0.0s
+ => CACHED [backend stage-1  6/10] COPY lib/api-zod/package.json ./lib/api-zod/                                    0.0s
+ => CACHED [backend stage-1  7/10] COPY artifacts/api-server/package.json ./artifacts/api-server/                  0.0s
+ => CACHED [backend stage-1  8/10] RUN pnpm install --frozen-lockfile --prod                                       0.0s
+ => CACHED [backend builder  5/11] COPY tsconfig.base.json tsconfig.json ./                                        0.0s
+ => CACHED [backend builder  6/11] COPY lib/db ./lib/db                                                            0.0s
+ => CACHED [backend builder  7/11] COPY lib/api-zod ./lib/api-zod                                                  0.0s
+ => CACHED [backend builder  8/11] COPY lib/api-spec ./lib/api-spec                                                0.0s
+ => CACHED [backend builder  9/11] COPY artifacts/api-server ./artifacts/api-server                                0.0s
+ => CACHED [backend builder 10/11] RUN pnpm install --frozen-lockfile                                              0.0s
+ => CACHED [backend builder 11/11] RUN pnpm --filter @workspace/api-server run build                               0.0s
+ => CACHED [backend stage-1  9/10] COPY --from=builder /app/artifacts/api-server/dist ./artifacts/api-server/dist  0.0s
+ => CACHED [backend stage-1 10/10] COPY --from=builder /app/lib/db ./lib/db                                        0.0s
+ => [backend] exporting to image                                                                                   0.3s
+ => => exporting layers                                                                                            0.0s
+ => => exporting manifest sha256:109ab5386f7d1f7ecde1d602c68e5ebb7b6c7d3b4f87a1fd39f21aa0d9a33133                  0.0s
+ => => exporting config sha256:9b55b22989e416544e591e36e1214cf5773660d43b9ef19c43c48c30a32e862f                    0.0s
+ => => exporting attestation manifest sha256:0fd3ed15645f27cca041ec60c12b0a9d47b4888e0591ce65cd5439582722edd1      0.0s
+ => => exporting manifest list sha256:a04b3bbfaa7604df3afd6d74473d47a2c5948090df6cde9edb0b22542bbd5fd3             0.0s
+ => => naming to docker.io/library/platform-backend:latest                                                         0.0s
+ => => unpacking to docker.io/library/platform-backend:latest                                                      0.0s
+ => [frontend builder  9/10] RUN pnpm install --frozen-lockfile                                                    9.3s
+ => [backend] resolving provenance for metadata file                                                               0.0s
+ => [frontend builder 10/10] RUN pnpm --filter @workspace/ide-platform run build                                   6.6s
+ => [frontend stage-1 3/3] COPY --from=builder /app/artifacts/ide-platform/dist/public /usr/share/nginx/html       0.1s
+ => [frontend] exporting to image                                                                                  0.5s
+ => => exporting layers                                                                                            0.3s
+ => => exporting manifest sha256:082a5e72312dbc48c86202e419ed6319b6e673fa24d148772bac28cc03ee4036                  0.0s
+ => => exporting config sha256:a9c8df4ddc726b4058f38b9549a795599a648a2ca160f837b3d59e2e1052d38c                    0.0s
+ => => exporting attestation manifest sha256:d77456f9315ea94eb2cf1b71b40e003ba95061bf9fa35436e902ff92704633b2      0.0s
+ => => exporting manifest list sha256:22b6053f4db76d090e824caccd98a2b2c9390dd052b5abde332d8946fa98456c             0.0s
+ => => naming to docker.io/library/platform-frontend:latest                                                        0.0s
+ => => unpacking to docker.io/library/platform-frontend:latest                                                     0.1s
+ => [frontend] resolving provenance for metadata file                                                              0.0s
+[+] up 16/16
+ ✔ Image platform-frontend             Built                                                                       18.8s
+ ✔ Image platform-backend              Built                                                                       18.8s
+ ✔ Volume platform_traefik_letsencrypt Created                                                                      0.0s
+ ✔ Volume platform_postgres_ws_data    Created                                                                      0.0s
+ ✔ Volume platform_mysql_data          Created                                                                      0.0s
+ ✔ Network platform-net                Created                                                                      0.0s
+ ✔ Volume platform_postgres_data       Created                                                                      0.0s
+ ✔ Volume platform_pgadmin_data        Created                                                                      0.0s
+ ✔ Container platform-traefik          Started                                                                      1.0s
+ ✔ Container platform-postgres         Healthy                                                                     11.5s
+ ✔ Container platform-pgadmin          Started                                                                      1.1s
+ ✔ Container platform-mysql            Started                                                                      1.1s
+ ✔ Container platform-postgres-ws      Started                                                                      1.2s
+ ✔ Container platform-frontend         Started                                                                      1.2s
+ ✔ Container platform-phpmyadmin       Started                                                                      1.1s
+ ✔ Container platform-backend          Started                                                                     11.4s
+root@ide:/opt/platform# docker compose ps
+NAME                   IMAGE                   COMMAND                  SERVICE       CREATED         STATUS                          PORTS
+platform-backend       platform-backend        "docker-entrypoint.s…"   backend       2 minutes ago   Restarting (1) 52 seconds ago
+platform-frontend      platform-frontend       "/docker-entrypoint.…"   frontend      2 minutes ago   Up 2 minutes                    80/tcp
+platform-mysql         mysql:8.0               "docker-entrypoint.s…"   mysql         2 minutes ago   Up 2 minutes                    3306/tcp, 33060/tcp
+platform-pgadmin       dpage/pgadmin4:latest   "/entrypoint.sh"         pgadmin       2 minutes ago   Up 2 minutes                    80/tcp, 443/tcp
+platform-phpmyadmin    phpmyadmin:latest       "/docker-entrypoint.…"   phpmyadmin    2 minutes ago   Up 2 minutes                    80/tcp
+platform-postgres      postgres:16-alpine      "docker-entrypoint.s…"   postgres      2 minutes ago   Up 2 minutes (healthy)          5432/tcp
+platform-postgres-ws   postgres:16-alpine      "docker-entrypoint.s…"   postgres-ws   2 minutes ago   Up 2 minutes                    5432/tcp
+platform-traefik       traefik:v3.0            "/entrypoint.sh --pr…"   traefik       2 minutes ago   Up 2 minutes                    0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp
+root@ide:/opt/platform# docker compose exec backend sh -c "cd /app && npx drizzle-kit push"
+Error response from daemon: Container 29ee95d8a5de65d4109b64d7554c2a05e84c999c6b7321650a30c853d3e0126a is restarting, wait until the container is running
+root@ide:/opt/platform# cd /opt/platform
+
+# Ambil fix terbaru
+git pull
+
+# Stop dulu, prune cache lama, build ulang
+docker compose down
+docker builder prune -f
+docker compose up -d --build
+remote: Enumerating objects: 13, done.
+remote: Counting objects: 100% (13/13), done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 9 (delta 4), reused 9 (delta 4), pack-reused 0 (from 0)
+Unpacking objects: 100% (9/9), 14.37 KiB | 4.79 MiB/s, done.
+From https://github.com/mailsul/ide
+   508f836..fc39b22  main       -> origin/main
+Updating 508f836..fc39b22
+Fast-forward
+ .env.example                                                                |  35 --
+ .gitignore                                                                  |  54 ---
+ .npmrc                                                                      |   2 -
+ artifacts/api-server/Dockerfile                                             |   2 +-
+ ...indows-PowerShell-Copyright-C-Microsoft-Corporation-Al_1785985548226.txt | 926 ++++++++++++++++++++++++++++++++++++
+ 5 files changed, 927 insertions(+), 92 deletions(-)
+ delete mode 100644 .env.example
+ delete mode 100644 .gitignore
+ delete mode 100644 .npmrc
+ create mode 100644 attached_assets/Pasted-Windows-PowerShell-Copyright-C-Microsoft-Corporation-Al_1785985548226.txt
+[+] down 9/9
+ ✔ Container platform-pgadmin     Removed                                                                           2.0s
+ ✔ Container platform-backend     Removed                                                                           0.1s
+ ✔ Container platform-frontend    Removed                                                                           0.5s
+ ✔ Container platform-phpmyadmin  Removed                                                                           1.2s
+ ✔ Container platform-traefik     Removed                                                                           0.4s
+ ✔ Container platform-mysql       Removed                                                                           1.2s
+ ✔ Container platform-postgres-ws Removed                                                                           0.5s
+ ✔ Container platform-postgres    Removed                                                                           0.4s
+ ✔ Network platform-net           Removed                                                                           0.1s
+ID                                              RECLAIMABLE     SIZE            LAST ACCESSED
+sxzaci6j2n506cn4goj81sk9p*                      true            1.11MB          8 minutes ago
+y5cv2b542bcbxj2vxih4qk9sg*                      true    1.212MB         8 minutes ago
+74x7fpk0k0zpr2k5hosg8twui*                      true    8.192kB         8 minutes ago
+aenw0nam88v8ax4gvfydsp6mn*                      true    8.192kB         8 minutes ago
+r171kwp75qtkbzc8upqs058hy*                      true    4.096kB         8 minutes ago
+2hcbr5s1qwbgw9wrbvgkje5a9*                      true    8.028MB         24 minutes ago
+0gc30ziny9btxfpk0bd0i9bpu                       true    535.6MB         24 minutes ago
+9t57ze8ooy8gny9e2wzhxu3tp                       true    138.5kB         8 minutes ago
+vh85kk06sx7unjp5qpd0xccnj*                      true    843.8kB         8 minutes ago
+1o1g38ylrycva96l3942cm5w2                       true    618.5kB         24 minutes ago
+n8kjjqdhqmp0f23nwz6gj47qi                       true    152.4MB         24 minutes ago
+dkbqv1a1kstxpq2mm7numo9nj                       true    535.7MB         8 minutes ago
+qx3g2a3vo140ogez49zo0dyu4                       true    9.651MB         24 minutes ago
+zdyi2v9ni86b70y0x9i1hxakl                       true    618.5kB         8 minutes ago
+9y1giejjzrgevffh5ygvej5d2                       true    155.6kB         24 minutes ago
+nc4vf0wgzuz2z25gu4vjy8mgx                       true    45.58MB         24 minutes ago
+g8coadhfgw8mn2e0nasfcs9rs                       true    21.1kB          24 minutes ago
+oufd9xvzm5dgkp935ztpy3jqj                       true    77.82kB         8 minutes ago
+lf9oqc61v1ywkzr02413efa0y                       true    24.88kB         24 minutes ago
+nnlgldvzy63o60jgkc5pp6n8j                       true    188.4kB         24 minutes ago
+i2jfuiejqj6jhbxue8avkmvil                       true    20.91kB         24 minutes ago
+Total:  1.292GB
+[+] Building 25.3s (39/39) FINISHED
+ => [internal] load local bake definitions                                                                         0.0s
+ => => reading from stdin 1.00kB                                                                                   0.0s
+ => [frontend internal] load build definition from Dockerfile                                                      0.1s
+ => => transferring dockerfile: 996B                                                                               0.0s
+ => [backend internal] load build definition from Dockerfile                                                       0.1s
+ => => transferring dockerfile: 1.27kB                                                                             0.0s
+ => [backend internal] load metadata for docker.io/library/node:20-slim                                            1.2s
+ => [frontend internal] load metadata for docker.io/library/nginx:alpine                                           1.2s
+ => [backend internal] load .dockerignore                                                                          0.1s
+ => => transferring context: 2B                                                                                    0.0s
+ => [frontend builder  1/11] FROM docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2  0.1s
+ => => resolve docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f0193e162b5fe  0.1s
+ => [frontend stage-1 1/3] FROM docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3  0.4s
+ => => resolve docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3c2c3aeac22d2a470c  0.1s
+ => [frontend internal] load build context                                                                         0.2s
+ => => transferring context: 775.57kB                                                                              0.0s
+ => [backend internal] load build context                                                                          0.2s
+ => => transferring context: 399.20kB                                                                              0.0s
+ => CACHED [backend builder  2/11] WORKDIR /app                                                                    0.0s
+ => CACHED [backend builder  3/11] RUN npm install -g pnpm                                                         0.0s
+ => CACHED [backend builder  4/10] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./                         0.0s
+ => CACHED [backend builder  5/10] COPY tsconfig.base.json tsconfig.json ./                                        0.0s
+ => [frontend builder  6/10] COPY lib/api-client-react ./lib/api-client-react                                      0.4s
+ => CACHED [backend builder  4/11] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./                         0.0s
+ => CACHED [backend builder  5/11] COPY tsconfig.base.json tsconfig.json ./                                        0.0s
+ => CACHED [backend builder  6/11] COPY lib/db ./lib/db                                                            0.0s
+ => CACHED [backend builder  7/11] COPY lib/api-zod ./lib/api-zod                                                  0.0s
+ => CACHED [backend builder  8/11] COPY lib/api-spec ./lib/api-spec                                                0.0s
+ => [backend stage-1  5/10] COPY lib/db/package.json ./lib/db/                                                     0.5s
+ => [backend builder  9/11] COPY artifacts/api-server ./artifacts/api-server                                       0.5s
+ => [frontend stage-1 2/3] COPY docker/nginx/nginx-frontend.conf /etc/nginx/conf.d/default.conf                    0.5s
+ => [frontend builder  7/10] COPY lib/api-spec ./lib/api-spec                                                      0.4s
+ => [backend builder 10/11] RUN pnpm install --frozen-lockfile                                                    10.6s
+ => [backend stage-1  6/10] COPY lib/api-zod/package.json ./lib/api-zod/                                           0.3s
+ => [frontend builder  8/10] COPY artifacts/ide-platform ./artifacts/ide-platform                                  0.2s
+ => [backend stage-1  7/10] COPY artifacts/api-server/package.json ./artifacts/api-server/                         0.2s
+ => [frontend builder  9/10] RUN pnpm install --frozen-lockfile                                                   13.0s
+ => [backend stage-1  8/10] RUN pnpm install --frozen-lockfile --prod                                              8.7s
+ => [backend builder 11/11] RUN pnpm --filter @workspace/api-server run build                                      2.9s
+ => [frontend builder 10/10] RUN pnpm --filter @workspace/ide-platform run build                                   8.3s
+ => [backend stage-1  9/10] COPY --from=builder /app/artifacts/api-server/dist ./artifacts/api-server/dist         0.8s
+ => [backend stage-1 10/10] COPY --from=builder /app/lib/db ./lib/db                                               0.1s
+ => [backend] exporting to image                                                                                   4.6s
+ => => exporting layers                                                                                            1.8s
+ => => exporting manifest sha256:ffc277e64a3a2002409035533a546ffae8c7bad8dcee8e4e495f99769310dde1                  0.0s
+ => => exporting config sha256:51f2d0bcb1ab61193f9cdd3a384e7bf64bb3738b326bdc2c80c7280f2e60b0c0                    0.0s
+ => => exporting attestation manifest sha256:e3bb968baf4fc565fa9994291d2dc63244ec2eb155d04fbd08a7a57abf41c1b4      0.1s
+ => => exporting manifest list sha256:369fa3bbb1c1fb23a880f40122a014fb0bdea804c3bd8a9c84fedbdfba30072e             0.0s
+ => => naming to docker.io/library/platform-backend:latest                                                         0.0s
+ => => unpacking to docker.io/library/platform-backend:latest                                                      2.4s
+ => [backend] resolving provenance for metadata file                                                               0.0s
+ => [frontend stage-1 3/3] COPY --from=builder /app/artifacts/ide-platform/dist/public /usr/share/nginx/html       0.1s
+ => [frontend] exporting to image                                                                                  0.7s
+ => => exporting layers                                                                                            0.3s
+ => => exporting manifest sha256:979af6fe365cf28b4dece7383377191de04021610835884545749adb7c6c351a                  0.0s
+ => => exporting config sha256:719f1c19bf4d10934c6047f5a1389d7e40cbec387f522eac8a69dbde9a0e92f6                    0.1s
+ => => exporting attestation manifest sha256:9071e5935a35a378a2e661b81d4c737563ca93a27da025a046dee11b2bbf1c44      0.1s
+ => => exporting manifest list sha256:5139bd856514b9c4ef7a6cea53d4f1731ec302b24b21f4d85ff5d3c37ee86e63             0.0s
+ => => naming to docker.io/library/platform-frontend:latest                                                        0.0s
+ => => unpacking to docker.io/library/platform-frontend:latest                                                     0.1s
+ => [frontend] resolving provenance for metadata file                                                              0.0s
+[+] up 11/11
+ ✔ Image platform-frontend        Built                                                                            25.4s
+ ✔ Image platform-backend         Built                                                                            25.4s
+ ✔ Network platform-net           Created                                                                           0.1s
+ ✔ Container platform-traefik     Started                                                                           1.1s
+ ✔ Container platform-postgres-ws Started                                                                           1.4s
+ ✔ Container platform-mysql       Started                                                                           1.3s
+ ✔ Container platform-postgres    Healthy                                                                          11.7s
+ ✔ Container platform-pgadmin     Started                                                                           1.4s
+ ✔ Container platform-frontend    Started                                                                           1.1s
+ ✔ Container platform-phpmyadmin  Started                                                                           1.4s
+ ✔ Container platform-backend     Started                                                                          11.3s
+root@ide:/opt/platform# docker compose ps
+NAME                   IMAGE                   COMMAND                  SERVICE       CREATED              STATUS                        PORTS
+platform-backend       platform-backend        "docker-entrypoint.s…"   backend       About a minute ago   Up About a minute             8080/tcp
+platform-frontend      platform-frontend       "/docker-entrypoint.…"   frontend      About a minute ago   Up About a minute             80/tcp
+platform-mysql         mysql:8.0               "docker-entrypoint.s…"   mysql         About a minute ago   Up About a minute             3306/tcp, 33060/tcp
+platform-pgadmin       dpage/pgadmin4:latest   "/entrypoint.sh"         pgadmin       About a minute ago   Up About a minute             80/tcp, 443/tcp
+platform-phpmyadmin    phpmyadmin:latest       "/docker-entrypoint.…"   phpmyadmin    About a minute ago   Up About a minute             80/tcp
+platform-postgres      postgres:16-alpine      "docker-entrypoint.s…"   postgres      About a minute ago   Up About a minute (healthy)   5432/tcp
+platform-postgres-ws   postgres:16-alpine      "docker-entrypoint.s…"   postgres-ws   About a minute ago   Up About a minute             5432/tcp
+platform-traefik       traefik:v3.0            "/entrypoint.sh --pr…"   traefik       About a minute ago   Up About a minute             0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp
+root@ide:/opt/platform# # Setup database (buat semua tabel)
+docker compose exec backend npx drizzle-kit push
+Need to install the following packages:
+drizzle-kit@0.31.10
+Ok to proceed? (y) y
+
+npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.hirok.io
+npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.hirok.io
+No config path provided, using default 'drizzle.config.json'
+/app/drizzle.config.json file does not exist
+root@ide:/opt/platform# cd /opt/platform
+docker compose restart traefik
+[+] restart 0/1
+ ⠇ Container platform-traefik Restarting                                                                            0.8s
+root@ide:/opt/platform# cd /opt/platform
+docker compose restart traefik
+[+] restart 0/1
+ ⠸ Container platform-traefik Restarting                                                                            0.3s
+root@ide:/opt/platform# docker compose exec backend sh -c "cd /app/lib/db && DATABASE_URL=\$DATABASE_URL npx drizzle-kit push"
+node:internal/modules/cjs/loader:1210
+  throw err;
+  ^
+
+Error: Cannot find module '/app/lib/db/node_modules/drizzle-kit/bin.cjs'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1207:15)
+    at Module._load (node:internal/modules/cjs/loader:1038:27)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:164:12)
+    at node:internal/main/run_main_module:28:49 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
+
+Node.js v20.20.2
+root@ide:/opt/platform# docker compose exec backend sh -c "cd /app/lib/db && npx --yes drizzle-kit@0.31.10 push"
+npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.hirok.io
+npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.hirok.io
+No config path provided, using default 'drizzle.config.ts'
+Reading config file '/app/lib/db/drizzle.config.ts'
+Cannot find module 'drizzle-kit'
+Require stack:
+- /app/lib/db/drizzle.config.ts
+- /root/.npm/_npx/c9cef48327eee003/node_modules/drizzle-kit/bin.cjs
+root@ide:/opt/platform# docker compose logs traefik | grep -i "acme\|certificate\|error" | tail -20
+platform-traefik  | 2026-08-06T03:24:48Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:24:48Z ERR Provider error, retrying in 1.425055362s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:24:49Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:24:49Z ERR Provider error, retrying in 1.413625972s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:24:51Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:24:51Z ERR Provider error, retrying in 5.401059164s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:24:56Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:24:56Z ERR Provider error, retrying in 4.639677624s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:01Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:01Z ERR Provider error, retrying in 5.862280207s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:06Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:06Z ERR Provider error, retrying in 15.317719808s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:22Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:22Z ERR Provider error, retrying in 653.638752ms error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:22Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:22Z ERR Provider error, retrying in 548.099974ms error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:23Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:23Z ERR Provider error, retrying in 1.333997186s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:24Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:25:24Z ERR Provider error, retrying in 2.010832644s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+root@ide:/opt/platform# cd /opt/platform
+git pull
+docker compose down
+docker compose up -d --build
+remote: Enumerating objects: 28, done.
+remote: Counting objects: 100% (28/28), done.
+remote: Compressing objects: 100% (9/9), done.
+remote: Total 21 (delta 12), reused 21 (delta 12), pack-reused 0 (from 0)
+Unpacking objects: 100% (21/21), 269.43 KiB | 3.54 MiB/s, done.
+From https://github.com/mailsul/ide
+   fc39b22..d667547  main       -> origin/main
+Updating fc39b22..d667547
+Fast-forward
+ ...oot-ide-opt-platform-cd-opt-platform-Ambil-fix-terbaru_1785985937674.txt | 110 ++++++++++++
+ ...oot-ide-opt-platform-cd-opt-platform-Ambil-fix-terbaru_1785986415534.txt | 156 ++++++++++++++++
+ attached_assets/image_1785985942361.png                                     | Bin 0 -> 4876 bytes
+ attached_assets/image_1785985950326.png                                     | Bin 0 -> 153657 bytes
+ attached_assets/image_1785986641506.png                                     | Bin 0 -> 139280 bytes
+ docker-compose.yml                                                          |   4 +-
+ lib/db/package.json                                                         |   4 +-
+ pnpm-lock.yaml                                                              | 346 +-----------------------------------
+ 8 files changed, 274 insertions(+), 346 deletions(-)
+ create mode 100644 attached_assets/Pasted-root-ide-opt-platform-cd-opt-platform-Ambil-fix-terbaru_1785985937674.txt
+ create mode 100644 attached_assets/Pasted-root-ide-opt-platform-cd-opt-platform-Ambil-fix-terbaru_1785986415534.txt
+ create mode 100644 attached_assets/image_1785985942361.png
+ create mode 100644 attached_assets/image_1785985950326.png
+ create mode 100644 attached_assets/image_1785986641506.png
+[+] down 9/9
+ ✔ Container platform-mysql       Removed                                                                           1.9s
+ ✔ Container platform-backend     Removed                                                                          10.3s
+ ✔ Container platform-pgadmin     Removed                                                                           2.1s
+ ✔ Container platform-postgres-ws Removed                                                                           0.4s
+ ✔ Container platform-traefik     Removed                                                                           0.4s
+ ✔ Container platform-frontend    Removed                                                                           0.4s
+ ✔ Container platform-phpmyadmin  Removed                                                                           1.2s
+ ✔ Container platform-postgres    Removed                                                                           0.2s
+ ✔ Network platform-net           Removed                                                                           0.1s
+[+] up 5/7
+ ⠙ Image traefik:v3.3 [⣿⣿⣿⣿⣿⣿] 56.26MB / 57.81MB Pulling                                                            7.1s
+[+] Building 26.2s (39/39) FINISHED
+ => [internal] load local bake definitions                                                                         0.0s
+ => => reading from stdin 1.00kB                                                                                   0.0s
+ => [backend internal] load build definition from Dockerfile                                                       0.0s
+ => => transferring dockerfile: 1.27kB                                                                             0.0s
+ => [frontend internal] load build definition from Dockerfile                                                      0.0s
+ => => transferring dockerfile: 996B                                                                               0.0s
+ => [frontend internal] load metadata for docker.io/library/node:20-slim                                           1.2s
+ => [frontend internal] load metadata for docker.io/library/nginx:alpine                                           1.1s
+ => [backend internal] load .dockerignore                                                                          0.0s
+ => => transferring context: 2B                                                                                    0.0s
+ => [frontend builder  1/11] FROM docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2  0.1s
+ => => resolve docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f0193e162b5fe  0.1s
+ => [backend internal] load build context                                                                          0.1s
+ => => transferring context: 211.85kB                                                                              0.0s
+ => [frontend stage-1 1/3] FROM docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3  0.1s
+ => => resolve docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3c2c3aeac22d2a470c  0.1s
+ => [frontend internal] load build context                                                                         0.0s
+ => => transferring context: 211.13kB                                                                              0.0s
+ => CACHED [backend builder  2/11] WORKDIR /app                                                                    0.0s
+ => CACHED [backend builder  3/11] RUN npm install -g pnpm                                                         0.0s
+ => [frontend builder  4/10] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./                               1.8s
+ => [frontend builder  5/10] COPY tsconfig.base.json tsconfig.json ./                                              0.2s
+ => CACHED [backend builder  4/11] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./                         0.0s
+ => [backend stage-1  5/10] COPY lib/db/package.json ./lib/db/                                                     0.1s
+ => [backend stage-1  6/10] COPY lib/api-zod/package.json ./lib/api-zod/                                           0.2s
+ => [frontend builder  6/10] COPY lib/api-client-react ./lib/api-client-react                                      0.2s
+ => CACHED [backend builder  5/11] COPY tsconfig.base.json tsconfig.json ./                                        0.0s
+ => [backend builder  6/11] COPY lib/db ./lib/db                                                                   0.2s
+ => [backend stage-1  7/10] COPY artifacts/api-server/package.json ./artifacts/api-server/                         0.2s
+ => [frontend builder  7/10] COPY lib/api-spec ./lib/api-spec                                                      0.2s
+ => [backend builder  7/11] COPY lib/api-zod ./lib/api-zod                                                         0.2s
+ => [backend stage-1  8/10] RUN pnpm install --frozen-lockfile --prod                                              8.3s
+ => [frontend builder  8/10] COPY artifacts/ide-platform ./artifacts/ide-platform                                  0.2s
+ => [backend builder  8/11] COPY lib/api-spec ./lib/api-spec                                                       0.2s
+ => [frontend builder  9/10] RUN pnpm install --frozen-lockfile                                                   13.2s
+ => [backend builder  9/11] COPY artifacts/api-server ./artifacts/api-server                                       0.2s
+ => [backend builder 10/11] RUN pnpm install --frozen-lockfile                                                    10.5s
+ => [backend builder 11/11] RUN pnpm --filter @workspace/api-server run build                                      2.6s
+ => [frontend builder 10/10] RUN pnpm --filter @workspace/ide-platform run build                                   8.5s
+ => [backend stage-1  9/10] COPY --from=builder /app/artifacts/api-server/dist ./artifacts/api-server/dist         0.6s
+ => [backend stage-1 10/10] COPY --from=builder /app/lib/db ./lib/db                                               0.1s
+ => [backend] exporting to image                                                                                   5.7s
+ => => exporting layers                                                                                            2.8s
+ => => exporting manifest sha256:996af16e22a37f50b2fd50595170db9f4e5f511f846197f5ba8f3e1a5a833d25                  0.0s
+ => => exporting config sha256:2f099c10332a58e1187b61ee0730c73a1b27a3e448c39d550266f9e16ff00d39                    0.0s
+ => => exporting attestation manifest sha256:1ef58305b718ecd5aabaaeeea0dfae41e7f58fb15fc26c2e7ebc74aee357558a      0.0s
+ => => exporting manifest list sha256:3c0f6f7f5ef60b7b21a75e82c6bcc22e5257b25121c0138347473b7f2d830850             0.0s
+ => => naming to docker.io/library/platform-backend:latest                                                         0.0s
+ => => unpacking to docker.io/library/platform-backend:latest                                                      2.7s
+ => [backend] resolving provenance for metadata file                                                               0.0s
+ => CACHED [frontend stage-1 2/3] COPY docker/nginx/nginx-frontend.conf /etc/nginx/conf.d/default.conf             0.0s
+ => CACHED [frontend stage-1 3/3] COPY --from=builder /app/artifacts/ide-platform/dist/public /usr/share/nginx/ht  0.0s
+ => [frontend] exporting to image                                                                                  0.2s
+ => => exporting layers                                                                                            0.0s
+ => => exporting manifest sha256:979af6fe365cf28b4dece7383377191de04021610835884545749adb7c6c351a                  0.0s
+ => => exporting config sha256:719f1c19bf4d10934c6047f5a1389d7e40cbec387f522eac8a69dbde9a0e92f6                    0.0s
+ => => exporting attestation manifest sha256:dec7f59207781ad909f656b27dbe4bdc9ad8290963321a33c83eec328a16757f      0.1s
+ => => exporting manifest list sha256:f15cedb0ec419d33eabd2ab40fd55aaa7dc1f9bf2df11b7fda3841eed5690b39             0.0s
+ => => naming to docker.io/library/platform-frontend:latest                                                        0.0s
+[+] up 18/18king to docker.io/library/platform-frontend:latest                                                     0.0s
+ ✔ Image traefik:v3.3             Pulled                                                                            7.1s
+ ✔ Image platform-backend         Built                                                                            26.2s
+ ✔ Image platform-frontend        Built                                                                            26.2s
+ ✔ Network platform-net           Created                                                                           0.0s
+ ✔ Container platform-traefik     Started                                                                           1.4s
+ ✔ Container platform-postgres-ws Started                                                                           1.3s
+ ✔ Container platform-frontend    Started                                                                           1.2s
+ ✔ Container platform-postgres    Healthy                                                                          11.8s
+ ✔ Container platform-mysql       Started                                                                           0.8s
+ ✔ Container platform-phpmyadmin  Started                                                                           1.0s
+ ✔ Container platform-pgadmin     Started                                                                           1.3s
+ ✔ Container platform-backend     Started                                                                          11.5s
+root@ide:/opt/platform# docker compose exec backend sh -c "cd /app/lib/db && pnpm run push"
+
+> @workspace/db@0.0.0 push /app/lib/db
+> drizzle-kit push --config ./drizzle.config.ts
+
+Reading config file '/app/lib/db/drizzle.config.ts'
+Using 'pg' driver for database querying
+[✓] Pulling schema from database...
+[✓] Changes applied
+root@ide:/opt/platform# docker compose logs traefik --tail 10
+platform-traefik  | 2026-08-06T03:29:12Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:29:12Z ERR Provider error, retrying in 2.263978669s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:29:14Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:29:14Z ERR Provider error, retrying in 3.9220592s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:29:18Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:29:18Z ERR Provider error, retrying in 4.833417556s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:29:23Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:29:23Z ERR Provider error, retrying in 5.812611219s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:29:29Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:29:29Z ERR Provider error, retrying in 7.750855623s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+root@ide:/opt/platform# cd /opt/platform
+git pull
+remote: Enumerating objects: 16, done.
+remote: Counting objects: 100% (16/16), done.
+remote: Compressing objects: 100% (7/7), done.
+remote: Total 11 (delta 3), reused 11 (delta 3), pack-reused 0 (from 0)
+Unpacking objects: 100% (11/11), 1.96 KiB | 1005.00 KiB/s, done.
+From https://github.com/mailsul/ide
+   d667547..aff8220  main       -> origin/main
+Updating d667547..aff8220
+Fast-forward
+ .replit                                                                     |  1 +
+ ...oot-ide-opt-platform-docker-compose-exec-backend-sh-c-_1785986746235.txt | 31 +++++++++++++++++++++
+ docker/traefik/dynamic/routes.yml                                           | 54 +++++++++++++++++++++++++++++++++++++
+ 3 files changed, 86 insertions(+)
+ create mode 100644 .replit
+ create mode 100644 attached_assets/Pasted-root-ide-opt-platform-docker-compose-exec-backend-sh-c-_1785986746235.txt
+ create mode 100644 docker/traefik/dynamic/routes.yml
+root@ide:/opt/platform# docker compose logs traefik --tail 20
+platform-traefik  | 2026-08-06T03:36:53Z ERR Provider error, retrying in 7.426747251s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:37:00Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:37:00Z ERR Provider error, retrying in 17.968410812s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:37:18Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:37:18Z ERR Provider error, retrying in 412.084511ms error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:37:19Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:37:19Z ERR Provider error, retrying in 388.186598ms error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:37:19Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:37:19Z ERR Provider error, retrying in 1.637089445s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:37:21Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:37:21Z ERR Provider error, retrying in 2.134310783s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:37:23Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:37:23Z ERR Provider error, retrying in 3.121957356s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:37:26Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:37:26Z ERR Provider error, retrying in 4.812448787s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:37:31Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:37:31Z ERR Provider error, retrying in 5.950851386s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:37:37Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:37:37Z ERR Provider error, retrying in 11.356641588s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:37:45Z INF Register... providerName=letsencrypt.acme
+root@ide:/opt/platform# cd /opt/platform
+git pull
+remote: Enumerating objects: 7, done.
+remote: Counting objects: 100% (7/7), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 5 (delta 2), reused 5 (delta 2), pack-reused 0 (from 0)
+Unpacking objects: 100% (5/5), 9.51 KiB | 9.51 MiB/s, done.
+From https://github.com/mailsul/ide
+   aff8220..146abde  main       -> origin/main
+Updating aff8220..146abde
+Fast-forward
+ ...oot-ide-opt-platform-cd-opt-platform-git-pull-docker-c_1785986997526.txt | 133 ++++++++++++++++++++++++++++++++++++
+ attached_assets/image_1785986978687.png                                     | Bin 0 -> 7629 bytes
+ 2 files changed, 133 insertions(+)
+ create mode 100644 attached_assets/Pasted-root-ide-opt-platform-cd-opt-platform-git-pull-docker-c_1785986997526.txt
+ create mode 100644 attached_assets/image_1785986978687.png
+root@ide:/opt/platform# docker compose logs traefik --tail 20
+platform-traefik  | 2026-08-06T03:38:03Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:38:03Z ERR Provider error, retrying in 682.900386ms error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:38:03Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:38:03Z ERR Provider error, retrying in 864.632872ms error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:38:04Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:38:04Z ERR Provider error, retrying in 1.578573586s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:38:05Z ERR Unable to obtain ACME certificate for domains error="unable to generate a certificate for the domains [premhub.site www.premhub.site]: error: one or more domains had a problem:\n[www.premhub.site] invalid authorization: acme: error: 403 :: urn:ietf:params:acme:error:unauthorized :: Cannot negotiate ALPN protocol \"acme-tls/1\" for tls-alpn-01 challenge\n" ACME CA=https://acme-v02.api.letsencrypt.org/directory acmeCA=https://acme-v02.api.letsencrypt.org/directory domains=["premhub.site","www.premhub.site"] providerName=letsencrypt.acme routerName=frontend@file rule="Host(`premhub.site`) || Host(`www.premhub.site`)"
+platform-traefik  | 2026-08-06T03:38:06Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:38:06Z ERR Provider error, retrying in 1.346148652s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:38:07Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:38:07Z ERR Provider error, retrying in 1.557109336s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:38:09Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:38:09Z ERR Provider error, retrying in 4.453595895s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:38:10Z ERR Unable to obtain ACME certificate for domains error="unable to generate a certificate for the domains [premhub.site www.premhub.site]: error: one or more domains had a problem:\n[www.premhub.site] invalid authorization: acme: error: 403 :: urn:ietf:params:acme:error:unauthorized :: Cannot negotiate ALPN protocol \"acme-tls/1\" for tls-alpn-01 challenge\n" ACME CA=https://acme-v02.api.letsencrypt.org/directory acmeCA=https://acme-v02.api.letsencrypt.org/directory domains=["premhub.site","www.premhub.site"] providerName=letsencrypt.acme routerName=frontend@file rule="Host(`premhub.site`) || Host(`www.premhub.site`)"
+platform-traefik  | 2026-08-06T03:38:13Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:38:13Z ERR Provider error, retrying in 4.358278776s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:38:18Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:38:18Z ERR Provider error, retrying in 12.135305296s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:38:30Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:38:30Z ERR Provider error, retrying in 17.440405367s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+root@ide:/opt/platform# nano .env
+root@ide:/opt/platform# cd /opt/platform
+git pull
+
+# Hapus acme.json lama yang isinya cert gagal
+docker compose run --rm traefik sh -c "rm -f /letsencrypt/acme.json" 2>/dev/null || \
+  docker volume inspect platform_traefik_letsencrypt >/dev/null && \
+  docker run --rm -v platform_traefik_letsencrypt:/data alpine rm -f /data/acme.json
+
+# Recreate HANYA Traefik (tidak perlu rebuild semua)
+docker compose up -d --force-recreate traefik
+remote: Enumerating objects: 23, done.
+remote: Counting objects: 100% (23/23), done.
+remote: Compressing objects: 100% (10/10), done.
+remote: Total 16 (delta 7), reused 15 (delta 6), pack-reused 0 (from 0)
+Unpacking objects: 100% (16/16), 133.22 KiB | 4.44 MiB/s, done.
+From https://github.com/mailsul/ide
+   146abde..c7349a1  main       -> origin/main
+Updating 146abde..c7349a1
+Fast-forward
+ ...oot-ide-opt-platform-cd-opt-platform-git-pull-remote-E_1785987551382.txt |  38 ++++++++++++++++++++++++++++++++++++
+ attached_assets/image_1785987561118.png                                     | Bin 0 -> 85609 bytes
+ attached_assets/image_1785987668668.png                                     | Bin 0 -> 55834 bytes
+ docker-compose.yml                                                          |   3 ++-
+ docker/traefik/dynamic/routes.yml                                           |   2 +-
+ 5 files changed, 41 insertions(+), 2 deletions(-)
+ create mode 100644 attached_assets/Pasted-root-ide-opt-platform-cd-opt-platform-git-pull-remote-E_1785987551382.txt
+ create mode 100644 attached_assets/image_1785987561118.png
+ create mode 100644 attached_assets/image_1785987668668.png
+= 'sh' is not a Traefik command: assuming shell execution.
+Unable to find image 'alpine:latest' locally
+latest: Pulling from library/alpine
+56dceff11b33: Download complete
+f5124fb579e2: Download complete
+Digest: sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b
+Status: Downloaded newer image for alpine:latest
+[+] up 1/1
+ ✔ Container platform-traefik Started                                                                              10.8s
+root@ide:/opt/platform# curl -k https://api.premhub.site/api/healthz
+{"status":"ok"}root@ide:cd /opt/platformd /opt/platform
+git pull
+
+# Reset acme.json (hapus cert lama yang gagal)
+docker run --rm -v platform_traefik_letsencrypt:/data alpine rm -f /data/acme.json
+
+# Restart Traefik dengan config baru (HTTP challenge)
+docker compose up -d --force-recreate traefik
+
+# Tunggu 30 detik lalu cek log
+sleep 30 && docker compose logs traefik | grep -i "obtain\|certif\|acme\|error" | tail -15
+remote: Enumerating objects: 10, done.
+remote: Counting objects: 100% (10/10), done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 8 (delta 4), reused 8 (delta 4), pack-reused 0 (from 0)
+Unpacking objects: 100% (8/8), 42.06 KiB | 2.80 MiB/s, done.
+From https://github.com/mailsul/ide
+   c7349a1..bb06512  main       -> origin/main
+Updating c7349a1..bb06512
+Fast-forward
+ attached_assets/image_1785987815309.png | Bin 0 -> 38215 bytes
+ attached_assets/image_1785987932358.png | Bin 0 -> 5394 bytes
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 attached_assets/image_1785987815309.png
+ create mode 100644 attached_assets/image_1785987932358.png
+[+] up 1/1
+ ✔ Container platform-traefik Started                                                                               1.8s
+platform-traefik  | 2026-08-06T03:47:30Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:30Z ERR Provider error, retrying in 1.15694361s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:31Z INF Register... providerName=letsencrypt.acme
+platform-traefik  | 2026-08-06T03:47:31Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:31Z ERR Provider error, retrying in 1.445806127s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:33Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:33Z ERR Provider error, retrying in 2.566486812s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:35Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:35Z ERR Provider error, retrying in 3.697531226s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:39Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:39Z ERR Provider error, retrying in 7.896987708s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:47Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:47Z ERR Provider error, retrying in 7.034677653s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:54Z ERR Failed to retrieve information of the docker client and server host error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+platform-traefik  | 2026-08-06T03:47:54Z ERR Provider error, retrying in 13.769386226s error="Error response from daemon: client version 1.24 is too old. Minimum supported API version is 1.40, please upgrade your client to a newer version" providerName=docker
+root@ide:/opt/platform# # Di VPS, tunggu dulu 30 detik lagi lalu akses API domain via curl (tanpa -k):
+curl https://api.premhub.site/api/healthz
+curl https://phpmyadmin.premhub.site
+curl https://pgadmin.premhub.site
+
+# Cek log traefik setelahnya
+docker compose logs traefik | grep -i "obtain\|certif\|obtain\|acme" | tail -20
+{"status":"ok"}<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="same-origin">
+  <meta name="robots" content="noindex,nofollow,notranslate">
+  <meta name="google" content="notranslate">
+  <style id="cfs-style">html{display: none;}</style>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="./themes/pmahomme/jquery/jquery-ui.css">
+  <link rel="stylesheet" type="text/css" href="js/vendor/codemirror/lib/codemirror.css?v=5.2.3">
+  <link rel="stylesheet" type="text/css" href="js/vendor/codemirror/addon/hint/show-hint.css?v=5.2.3">
+  <link rel="stylesheet" type="text/css" href="js/vendor/codemirror/addon/lint/lint.css?v=5.2.3">
+  <link rel="stylesheet" type="text/css" href="./themes/pmahomme/css/theme.css?v=5.2.3">
+  <title>phpMyAdmin</title>
+    <script data-cfasync="false" type="text/javascript" src="js/vendor/jquery/jquery.min.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/vendor/jquery/jquery-migrate.min.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/vendor/sprintf.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/dist/ajax.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/dist/keyhandler.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/vendor/jquery/jquery-ui.min.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/dist/name-conflict-fixes.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/vendor/bootstrap/bootstrap.bundle.min.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/vendor/js.cookie.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/vendor/jquery/jquery.validate.min.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/vendor/jquery/jquery-ui-timepicker-addon.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/vendor/jquery/jquery.debounce-1.0.6.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/dist/menu_resizer.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/dist/cross_framing_protection.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/messages.php?l=en&v=5.2.3&lang=en"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/dist/config.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/dist/doclinks.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/dist/functions.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/dist/navigation.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/dist/indexes.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/dist/common.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/dist/page_settings.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/vendor/codemirror/lib/codemirror.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/vendor/codemirror/mode/sql/sql.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/vendor/codemirror/addon/runmode/runmode.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/vendor/codemirror/addon/hint/show-hint.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/vendor/codemirror/addon/hint/sql-hint.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/vendor/codemirror/addon/lint/lint.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/dist/codemirror/addon/lint/sql-lint.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/vendor/tracekit.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/dist/error_report.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/dist/drag_drop_import.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/dist/shortcuts_handler.js?v=5.2.3"></script>
+  <script data-cfasync="false" type="text/javascript" src="js/dist/console.js?v=5.2.3"></script>
+
+<script data-cfasync="false" type="text/javascript">
+// <![CDATA[
+CommonParams.setAll({common_query:"lang=en",opendb_url:"index.php?route=/database/structure&lang=en",lang:"en",server:"1",table:"",db:"",token:"6d50363c7a2428535f6a533c59633143",text_dir:"ltr",LimitChars:"50",pftext:"",confirm:true,LoginCookieValidity:"1440",session_gc_maxlifetime:"1440",logged_in:false,is_https:true,rootPath:true,arg_separator:"&",version:"5.2.3",auth_type:"cookie",user:"root"});
+var firstDayOfCalendar = '0';
+var themeImagePath = '.\/themes\/pmahomme\/img\/';
+var mysqlDocTemplate = '.\/url.php\u003Furl\u003Dhttps\u00253A\u00252F\u00252Fdev.mysql.com\u00252Fdoc\u00252Frefman\u00252F5.7\u00252Fen\u00252F\u002525s.html';
+var maxInputVars = 10000;
+
+if ($.datepicker) {
+  $.datepicker.regional[''].closeText = 'Done';
+  $.datepicker.regional[''].prevText = 'Prev';
+  $.datepicker.regional[''].nextText = 'Next';
+  $.datepicker.regional[''].currentText = 'Today';
+  $.datepicker.regional[''].monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  $.datepicker.regional[''].monthNamesShort = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+  $.datepicker.regional[''].dayNames = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+  $.datepicker.regional[''].dayNamesShort = [
+    'Sun',
+    'Mon',
+    'Tue',
+    'Wed',
+    'Thu',
+    'Fri',
+    'Sat',
+  ];
+  $.datepicker.regional[''].dayNamesMin = [
+    'Su',
+    'Mo',
+    'Tu',
+    'We',
+    'Th',
+    'Fr',
+    'Sa',
+  ];
+  $.datepicker.regional[''].weekHeader = 'Wk';
+  $.datepicker.regional[''].showMonthAfterYear = false;
+  $.datepicker.regional[''].yearSuffix = '';
+  $.extend($.datepicker._defaults, $.datepicker.regional['']);
+}
+
+if ($.timepicker) {
+  $.timepicker.regional[''].timeText = 'Time';
+  $.timepicker.regional[''].hourText = 'Hour';
+  $.timepicker.regional[''].minuteText = 'Minute';
+  $.timepicker.regional[''].secondText = 'Second';
+  $.extend($.timepicker._defaults, $.timepicker.regional['']);
+}
+
+function extendingValidatorMessages () {
+  $.extend($.validator.messages, {
+    required: 'This\u0020field\u0020is\u0020required',
+    remote: 'Please\u0020fix\u0020this\u0020field',
+    email: 'Please\u0020enter\u0020a\u0020valid\u0020email\u0020address',
+    url: 'Please\u0020enter\u0020a\u0020valid\u0020URL',
+    date: 'Please\u0020enter\u0020a\u0020valid\u0020date',
+    dateISO: 'Please\u0020enter\u0020a\u0020valid\u0020date\u0020\u0028\u0020ISO\u0020\u0029',
+    number: 'Please\u0020enter\u0020a\u0020valid\u0020number',
+    creditcard: 'Please\u0020enter\u0020a\u0020valid\u0020credit\u0020card\u0020number',
+    digits: 'Please\u0020enter\u0020only\u0020digits',
+    equalTo: 'Please\u0020enter\u0020the\u0020same\u0020value\u0020again',
+    maxlength: $.validator.format('Please\u0020enter\u0020no\u0020more\u0020than\u0020\u007B0\u007D\u0020characters'),
+    minlength: $.validator.format('Please\u0020enter\u0020at\u0020least\u0020\u007B0\u007D\u0020characters'),
+    rangelength: $.validator.format('Please\u0020enter\u0020a\u0020value\u0020between\u0020\u007B0\u007D\u0020and\u0020\u007B1\u007D\u0020characters\u0020long'),
+    range: $.validator.format('Please\u0020enter\u0020a\u0020value\u0020between\u0020\u007B0\u007D\u0020and\u0020\u007B1\u007D'),
+    max: $.validator.format('Please\u0020enter\u0020a\u0020value\u0020less\u0020than\u0020or\u0020equal\u0020to\u0020\u007B0\u007D'),
+    min: $.validator.format('Please\u0020enter\u0020a\u0020value\u0020greater\u0020than\u0020or\u0020equal\u0020to\u0020\u007B0\u007D'),
+    validationFunctionForDateTime: $.validator.format('Please\u0020enter\u0020a\u0020valid\u0020date\u0020or\u0020time'),
+    validationFunctionForHex: $.validator.format('Please\u0020enter\u0020a\u0020valid\u0020HEX\u0020input'),
+    validationFunctionForMd5: $.validator.format('This\u0020column\u0020can\u0020not\u0020contain\u0020a\u002032\u0020chars\u0020value'),
+    validationFunctionForAesDesEncrypt: $.validator.format('These\u0020functions\u0020are\u0020meant\u0020to\u0020return\u0020a\u0020binary\u0020result\u003B\u0020to\u0020avoid\u0020inconsistent\u0020results\u0020you\u0020should\u0020store\u0020it\u0020in\u0020a\u0020BINARY,\u0020VARBINARY,\u0020or\u0020BLOB\u0020column.')
+  });
+}
+
+ConsoleEnterExecutes=false
+
+AJAX.scriptHandler
+  .add('vendor/jquery/jquery.min.js', 0)
+  .add('vendor/jquery/jquery-migrate.min.js', 0)
+  .add('vendor/sprintf.js', 1)
+  .add('ajax.js', 0)
+  .add('keyhandler.js', 1)
+  .add('vendor/jquery/jquery-ui.min.js', 0)
+  .add('name-conflict-fixes.js', 1)
+  .add('vendor/bootstrap/bootstrap.bundle.min.js', 1)
+  .add('vendor/js.cookie.js', 1)
+  .add('vendor/jquery/jquery.validate.min.js', 0)
+  .add('vendor/jquery/jquery-ui-timepicker-addon.js', 0)
+  .add('vendor/jquery/jquery.debounce-1.0.6.js', 0)
+  .add('menu_resizer.js', 1)
+  .add('cross_framing_protection.js', 0)
+  .add('messages.php', 0)
+  .add('config.js', 1)
+  .add('doclinks.js', 1)
+  .add('functions.js', 1)
+  .add('navigation.js', 1)
+  .add('indexes.js', 1)
+  .add('common.js', 1)
+  .add('page_settings.js', 1)
+  .add('vendor/codemirror/lib/codemirror.js', 0)
+  .add('vendor/codemirror/mode/sql/sql.js', 0)
+  .add('vendor/codemirror/addon/runmode/runmode.js', 0)
+  .add('vendor/codemirror/addon/hint/show-hint.js', 0)
+  .add('vendor/codemirror/addon/hint/sql-hint.js', 0)
+  .add('vendor/codemirror/addon/lint/lint.js', 0)
+  .add('codemirror/addon/lint/sql-lint.js', 0)
+  .add('vendor/tracekit.js', 1)
+  .add('error_report.js', 1)
+  .add('drag_drop_import.js', 1)
+  .add('shortcuts_handler.js', 1)
+  .add('console.js', 1)
+;
+$(function() {
+        AJAX.fireOnload('vendor/sprintf.js');
+        AJAX.fireOnload('keyhandler.js');
+        AJAX.fireOnload('name-conflict-fixes.js');
+      AJAX.fireOnload('vendor/bootstrap/bootstrap.bundle.min.js');
+      AJAX.fireOnload('vendor/js.cookie.js');
+            AJAX.fireOnload('menu_resizer.js');
+          AJAX.fireOnload('config.js');
+      AJAX.fireOnload('doclinks.js');
+      AJAX.fireOnload('functions.js');
+      AJAX.fireOnload('navigation.js');
+      AJAX.fireOnload('indexes.js');
+      AJAX.fireOnload('common.js');
+      AJAX.fireOnload('page_settings.js');
+                    AJAX.fireOnload('vendor/tracekit.js');
+      AJAX.fireOnload('error_report.js');
+      AJAX.fireOnload('drag_drop_import.js');
+      AJAX.fireOnload('shortcuts_handler.js');
+      AJAX.fireOnload('console.js');
+  });
+// ]]>
+</script>
+
+  <noscript><style>html{display:block}</style></noscript>
+</head>
+<body id=loginform>
+
+
+
+
+
+
+
+
+
+  <div id="page_content">
+
+
+    <div class="container">
+<div class="row">
+<div class="col-12">
+<a href="./url.php?url=https%3A%2F%2Fwww.phpmyadmin.net%2F" target="_blank" rel="noopener noreferrer" class="logo">
+<img src="./themes/pmahomme/img/logo_right.png" id="imLogo" name="imLogo" alt="phpMyAdmin" border="0">
+</a>
+<h1>Welcome to <bdo dir="ltr" lang="en">phpMyAdmin</bdo></h1>
+
+<noscript>
+<div class="alert alert-danger" role="alert">
+  <img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> Javascript must be enabled past this point!
+</div>
+
+</noscript>
+
+<div class="hide" id="js-https-mismatch">
+<div class="alert alert-danger" role="alert">
+  <img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> There is a mismatch between HTTPS indicated on the server and client. This can lead to a non working phpMyAdmin or a security risk. Please fix your server configuration to indicate HTTPS properly.
+</div>
+
+</div>
+
+
+
+
+
+  <div class='hide js-show'>
+    <div class="card mb-4">
+      <div class="card-header">
+        <span id="languageSelectLabel">
+          Language                  </span>
+      </div>
+      <div class="card-body">
+        <form method="get" action="index.php?route=/&lang=en" class="disableAjax">
+          <input type="hidden" name="lang" value="en"><input type="hidden" name="token" value="6d50363c7a2428535f6a533c59633143">
+          <select name="lang" class="form-select autosubmit" lang="en" dir="ltr" id="languageSelect" aria-labelledby="languageSelectLabel">
+                          <option value="sq">Shqip - Albanian</option>
+                          <option value="ar">&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577; - Arabic</option>
+                          <option value="hy">Հայերէն - Armenian</option>
+                          <option value="az">Az&#601;rbaycanca - Azerbaijani</option>
+                          <option value="bn">বাংলা - Bangla</option>
+                          <option value="be">&#1041;&#1077;&#1083;&#1072;&#1088;&#1091;&#1089;&#1082;&#1072;&#1103; - Belarusian</option>
+                          <option value="bg">&#1041;&#1098;&#1083;&#1075;&#1072;&#1088;&#1089;&#1082;&#1080; - Bulgarian</option>
+                          <option value="ca">Catal&agrave; - Catalan</option>
+                          <option value="zh_cn">&#20013;&#25991; - Chinese simplified</option>
+                          <option value="zh_tw">&#20013;&#25991; - Chinese traditional</option>
+                          <option value="cs">Čeština - Czech</option>
+                          <option value="da">Dansk - Danish</option>
+                          <option value="nl">Nederlands - Dutch</option>
+                          <option value="en" selected>English</option>
+                          <option value="en_gb">English (United Kingdom)</option>
+                          <option value="et">Eesti - Estonian</option>
+                          <option value="fi">Suomi - Finnish</option>
+                          <option value="fr">Fran&ccedil;ais - French</option>
+                          <option value="gl">Galego - Galician</option>
+                          <option value="ka">&#4325;&#4304;&#4320;&#4311;&#4323;&#4314;&#4312; - Georgian</option>
+                          <option value="de">Deutsch - German</option>
+                          <option value="el">&Epsilon;&lambda;&lambda;&eta;&nu;&iota;&kappa;&#940; - Greek</option>
+                          <option value="he">&#1506;&#1489;&#1512;&#1497;&#1514; - Hebrew</option>
+                          <option value="hu">Magyar - Hungarian</option>
+                          <option value="id">Bahasa Indonesia - Indonesian</option>
+                          <option value="ia">Interlingua</option>
+                          <option value="it">Italiano - Italian</option>
+                          <option value="ja">&#26085;&#26412;&#35486; - Japanese</option>
+                          <option value="kk">Қазақ - Kazakh</option>
+                          <option value="ko">&#54620;&#44397;&#50612; - Korean</option>
+                          <option value="nb">Norsk - Norwegian</option>
+                          <option value="pl">Polski - Polish</option>
+                          <option value="pt">Portugu&ecirc;s - Portuguese</option>
+                          <option value="pt_br">Portugu&ecirc;s (Brasil) - Portuguese (Brazil)</option>
+                          <option value="ro">Rom&acirc;n&#259; - Romanian</option>
+                          <option value="ru">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081; - Russian</option>
+                          <option value="si">&#3523;&#3538;&#3458;&#3524;&#3517; - Sinhala</option>
+                          <option value="sk">Sloven&#269;ina - Slovak</option>
+                          <option value="sl">Sloven&scaron;&#269;ina - Slovenian</option>
+                          <option value="es">Espa&ntilde;ol - Spanish</option>
+                          <option value="sv">Svenska - Swedish</option>
+                          <option value="ta">தமிழ் - Tamil</option>
+                          <option value="tr">T&uuml;rk&ccedil;e - Turkish</option>
+                          <option value="uk">&#1059;&#1082;&#1088;&#1072;&#1111;&#1085;&#1089;&#1100;&#1082;&#1072; - Ukrainian</option>
+                          <option value="ug">ئۇيغۇرچە - Uyghur</option>
+                          <option value="vi">Tiếng Việt - Vietnamese</option>
+                      </select>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<form method="post" id="login_form" action="index.php?route=/" name="login_form" class="disableAjax hide js-show">
+    <input type="hidden" name="lang" value="en"><input type="hidden" name="token" value="6d50363c7a2428535f6a533c59633143">
+  <input type="hidden" name="set_session" value="cf6c1b6656f80fa261c135699cc31629">
+
+  <div class="card mb-4">
+    <div class="card-header">
+      Log in      <a href="./doc/html/index.html" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help"></a>
+    </div>
+    <div class="card-body">
+
+      <div class="row mb-3">
+        <label for="input_username" class="col-sm-4 col-form-label">
+          Username:        </label>
+        <div class="col-sm-8">
+          <input type="text" name="pma_username" id="input_username" value="" class="form-control" autocomplete="username" spellcheck="false">
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="input_password" class="col-sm-4 col-form-label">
+          Password:        </label>
+        <div class="col-sm-8">
+          <input type="password" name="pma_password" id="input_password" value="" class="form-control" autocomplete="current-password" spellcheck="false">
+        </div>
+      </div>
+
+              <input type="hidden" name="server" value="1">
+          </div>
+    <div class="card-footer">
+              <input class="btn btn-primary" value="Log in" type="submit" id="input_go">
+          </div>
+  </div>
+</form>
+
+
+</div>
+
+
+
+  </div>
+  </body>
+</html>
+<!doctype html>
+<html lang=en>
+<title>Redirecting...</title>
+<h1>Redirecting...</h1>
+<p>You should be redirected automatically to the target URL: <a href="/login?next=/">/login?next=/</a>. If not, click the link.
+platform-traefik  | 2026-08-06T03:47:29Z INF Starting provider *acme.Provider
+platform-traefik  | 2026-08-06T03:47:29Z INF Testing certificate renew... acmeCA=https://acme-v02.api.letsencrypt.org/directory providerName=letsencrypt.acme
+platform-traefik  | 2026-08-06T03:47:29Z INF Starting provider *acme.ChallengeTLSALPN
+platform-traefik  | 2026-08-06T03:47:31Z INF Register... providerName=letsencrypt.acme
+root@ide:/opt/platform# cd /opt/platform
+git pull
+docker compose up -d --build frontend
+remote: Enumerating objects: 16, done.
+remote: Counting objects: 100% (16/16), done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 10 (delta 6), reused 9 (delta 5), pack-reused 0 (from 0)
+Unpacking objects: 100% (10/10), 2.06 KiB | 1.03 MiB/s, done.
+From https://github.com/mailsul/ide
+   bb06512..cb73582  main       -> origin/main
+Updating bb06512..cb73582
+Fast-forward
+ artifacts/ide-platform/src/App.tsx                                          | 15 +++++++++----
+ ...oot-ide-opt-platform-curl-k-https-api-premhub-site-api_1785988120951.txt | 44 +++++++++++++++++++++++++++++++++++++
+ 2 files changed, 55 insertions(+), 4 deletions(-)
+ create mode 100644 attached_assets/Pasted-root-ide-opt-platform-curl-k-https-api-premhub-site-api_1785988120951.txt
+[+] Building 18.7s (21/21) FINISHED
+ => [internal] load local bake definitions                                                                         0.0s
+ => => reading from stdin 587B                                                                                     0.0s
+ => [internal] load build definition from Dockerfile                                                               0.0s
+ => => transferring dockerfile: 996B                                                                               0.0s
+ => [internal] load metadata for docker.io/library/nginx:alpine                                                    1.5s
+ => [internal] load metadata for docker.io/library/node:20-slim                                                    1.5s
+ => [internal] load .dockerignore                                                                                  0.0s
+ => => transferring context: 2B                                                                                    0.0s
+ => [stage-1 1/3] FROM docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3c2c3aeac2  0.1s
+ => => resolve docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3c2c3aeac22d2a470c  0.1s
+ => [internal] load build context                                                                                  0.0s
+ => => transferring context: 11.28kB                                                                               0.0s
+ => [builder  1/10] FROM docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f01  0.1s
+ => => resolve docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f0193e162b5fe  0.1s
+ => CACHED [builder  2/10] WORKDIR /app                                                                            0.0s
+ => CACHED [builder  3/10] RUN npm install -g pnpm                                                                 0.0s
+ => CACHED [builder  4/10] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./                                 0.0s
+ => CACHED [builder  5/10] COPY tsconfig.base.json tsconfig.json ./                                                0.0s
+ => CACHED [builder  6/10] COPY lib/api-client-react ./lib/api-client-react                                        0.0s
+ => CACHED [builder  7/10] COPY lib/api-spec ./lib/api-spec                                                        0.0s
+ => [builder  8/10] COPY artifacts/ide-platform ./artifacts/ide-platform                                           0.1s
+ => [builder  9/10] RUN pnpm install --frozen-lockfile                                                             9.3s
+ => [builder 10/10] RUN pnpm --filter @workspace/ide-platform run build                                            6.7s
+ => CACHED [stage-1 2/3] COPY docker/nginx/nginx-frontend.conf /etc/nginx/conf.d/default.conf                      0.0s
+ => [stage-1 3/3] COPY --from=builder /app/artifacts/ide-platform/dist/public /usr/share/nginx/html                0.1s
+ => exporting to image                                                                                             0.5s
+ => => exporting layers                                                                                            0.2s
+ => => exporting manifest sha256:931e836c446c68b42af84ebe1423ee00420cac4bf98ca531800836192bed363e                  0.0s
+ => => exporting config sha256:bb9c948eb11e8115dc19be545dba3be65bb0aa9367e8457539a4c035be26fb5c                    0.0s
+ => => exporting attestation manifest sha256:95db7714b5589449b6d04bddb8e52ed932b6b9a09b32a6daac5290a896f11b6b      0.0s
+ => => exporting manifest list sha256:ffb74466b8cf19337f75962cd9ea472cbdd974c17afe2ca186f483705c543082             0.0s
+ => => naming to docker.io/library/platform-frontend:latest                                                        0.0s
+ => => unpacking to docker.io/library/platform-frontend:latest                                                     0.1s
+ => resolving provenance for metadata file                                                                         0.0s
+[+] up 2/2
+ ✔ Image platform-frontend     Built                                                                               18.7s
+ ✔ Container platform-frontend Started                                                                              0.6s
+root@ide:/opt/platform# curl https://api.premhub.site/api/healthz
+docker compose logs traefik | grep -i "obtain\|certif" | tail -10
+{"status":"ok"}platform-traefik  | 2026-08-06T03:47:29Z INF Testing certificate renew... acmeCA=https://acme-v02.api.letsencrypt.org/directory providerName=letsencrypt.acme
+root@ide:/opt/platform# cd /opt/platform
+git pull
+docker compose up -d --build frontend
+remote: Enumerating objects: 9, done.
+remote: Counting objects: 100% (9/9), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 6 (delta 3), reused 6 (delta 3), pack-reused 0 (from 0)
+Unpacking objects: 100% (6/6), 84.83 KiB | 5.66 MiB/s, done.
+From https://github.com/mailsul/ide
+   cb73582..2853411  main       -> origin/main
+Updating cb73582..2853411
+Fast-forward
+ PANDUAN-INSTALL-VPS.md                                                      | 218 ++++++++++--------
+ ...oot-ide-opt-platform-Di-VPS-tunggu-dulu-30-detik-lagi-_1785988444248.txt | 439 ++++++++++++++++++++++++++++++++++++
+ attached_assets/image_1785988386513.png                                     | Bin 0 -> 80256 bytes
+ 3 files changed, 557 insertions(+), 100 deletions(-)
+ create mode 100644 attached_assets/Pasted-root-ide-opt-platform-Di-VPS-tunggu-dulu-30-detik-lagi-_1785988444248.txt
+ create mode 100644 attached_assets/image_1785988386513.png
+[+] Building 1.8s (21/21) FINISHED
+ => [internal] load local bake definitions                                                                         0.0s
+ => => reading from stdin 587B                                                                                     0.0s
+ => [internal] load build definition from Dockerfile                                                               0.0s
+ => => transferring dockerfile: 996B                                                                               0.0s
+ => [internal] load metadata for docker.io/library/nginx:alpine                                                    1.3s
+ => [internal] load metadata for docker.io/library/node:20-slim                                                    1.3s
+ => [internal] load .dockerignore                                                                                  0.0s
+ => => transferring context: 2B                                                                                    0.0s
+ => [stage-1 1/3] FROM docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3c2c3aeac2  0.1s
+ => => resolve docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3c2c3aeac22d2a470c  0.1s
+ => [builder  1/10] FROM docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f01  0.1s
+ => => resolve docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f0193e162b5fe  0.1s
+ => [internal] load build context                                                                                  0.0s
+ => => transferring context: 7.52kB                                                                                0.0s
+ => CACHED [stage-1 2/3] COPY docker/nginx/nginx-frontend.conf /etc/nginx/conf.d/default.conf                      0.0s
+ => CACHED [builder  2/10] WORKDIR /app                                                                            0.0s
+ => CACHED [builder  3/10] RUN npm install -g pnpm                                                                 0.0s
+ => CACHED [builder  4/10] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./                                 0.0s
+ => CACHED [builder  5/10] COPY tsconfig.base.json tsconfig.json ./                                                0.0s
+ => CACHED [builder  6/10] COPY lib/api-client-react ./lib/api-client-react                                        0.0s
+ => CACHED [builder  7/10] COPY lib/api-spec ./lib/api-spec                                                        0.0s
+ => CACHED [builder  8/10] COPY artifacts/ide-platform ./artifacts/ide-platform                                    0.0s
+ => CACHED [builder  9/10] RUN pnpm install --frozen-lockfile                                                      0.0s
+ => CACHED [builder 10/10] RUN pnpm --filter @workspace/ide-platform run build                                     0.0s
+ => CACHED [stage-1 3/3] COPY --from=builder /app/artifacts/ide-platform/dist/public /usr/share/nginx/html         0.0s
+ => exporting to image                                                                                             0.2s
+ => => exporting layers                                                                                            0.0s
+ => => exporting manifest sha256:931e836c446c68b42af84ebe1423ee00420cac4bf98ca531800836192bed363e                  0.0s
+ => => exporting config sha256:bb9c948eb11e8115dc19be545dba3be65bb0aa9367e8457539a4c035be26fb5c                    0.0s
+ => => exporting attestation manifest sha256:3049e20618e7e6e198697db8002801ff3e49803a20c419e6c7ab136711d03cf8      0.0s
+ => => exporting manifest list sha256:07c4f90bdf2d4620b77f47dc5e37018474bf39276359d886483e66464e0cc99e             0.0s
+ => => naming to docker.io/library/platform-frontend:latest                                                        0.0s
+ => => unpacking to docker.io/library/platform-frontend:latest                                                     0.0s
+ => resolving provenance for metadata file                                                                         0.0s
+[+] up 2/2
+ ✔ Image platform-frontend     Built                                                                                1.9s
+ ✔ Container platform-frontend Running                                                                              0.0s
+root@ide:/opt/platform# cd /opt/platform
+git pull
+remote: Enumerating objects: 11, done.
+remote: Counting objects: 100% (11/11), done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 8 (delta 3), reused 7 (delta 2), pack-reused 0 (from 0)
+Unpacking objects: 100% (8/8), 99.43 KiB | 3.43 MiB/s, done.
+From https://github.com/mailsul/ide
+   2853411..bcf1f99  main       -> origin/main
+Updating 2853411..bcf1f99
+Fast-forward
+ PANDUAN-INSTALL-VPS.md                                                      |  121 ++-
+ ...indows-PowerShell-Copyright-C-Microsoft-Corporation-Al_1785985548226.txt |  926 ----------------
+ ...indows-PowerShell-Copyright-C-Microsoft-Corporation-Al_1785988881647.txt | 2026 +++++++++++++++++++++++++++++++++++
+ ...oot-ide-opt-platform-Di-VPS-tunggu-dulu-30-detik-lagi-_1785988444248.txt |  439 --------
+ ...oot-ide-opt-platform-cd-opt-platform-Ambil-fix-terbaru_1785985937674.txt |  110 --
+ ...oot-ide-opt-platform-cd-opt-platform-Ambil-fix-terbaru_1785986415534.txt |  156 ---
+ ...oot-ide-opt-platform-cd-opt-platform-git-pull-docker-c_1785986997526.txt |  133 ---
+ ...oot-ide-opt-platform-cd-opt-platform-git-pull-remote-E_1785987551382.txt |   38 -
+ ...oot-ide-opt-platform-curl-k-https-api-premhub-site-api_1785988120951.txt |   44 -
+ ...oot-ide-opt-platform-docker-compose-exec-backend-sh-c-_1785986746235.txt |   31 -
+ attached_assets/image_1785985942361.png                                     |  Bin 4876 -> 0 bytes
+ attached_assets/image_1785985950326.png                                     |  Bin 153657 -> 0 bytes
+ attached_assets/image_1785986641506.png                                     |  Bin 139280 -> 0 bytes
+ attached_assets/image_1785986978687.png                                     |  Bin 7629 -> 0 bytes
+ attached_assets/image_1785987561118.png                                     |  Bin 85609 -> 0 bytes
+ attached_assets/image_1785987668668.png                                     |  Bin 55834 -> 0 bytes
+ attached_assets/image_1785987815309.png                                     |  Bin 38215 -> 0 bytes
+ attached_assets/image_1785987932358.png                                     |  Bin 5394 -> 0 bytes
+ attached_assets/image_1785988386513.png                                     |  Bin 80256 -> 0 bytes
+ attached_assets/image_1785988897703.png                                     |  Bin 0 -> 73853 bytes
+ 20 files changed, 2122 insertions(+), 1902 deletions(-)
+ delete mode 100644 attached_assets/Pasted-Windows-PowerShell-Copyright-C-Microsoft-Corporation-Al_1785985548226.txt
+ create mode 100644 attached_assets/Pasted-Windows-PowerShell-Copyright-C-Microsoft-Corporation-Al_1785988881647.txt
+ delete mode 100644 attached_assets/Pasted-root-ide-opt-platform-Di-VPS-tunggu-dulu-30-detik-lagi-_1785988444248.txt
+ delete mode 100644 attached_assets/Pasted-root-ide-opt-platform-cd-opt-platform-Ambil-fix-terbaru_1785985937674.txt
+ delete mode 100644 attached_assets/Pasted-root-ide-opt-platform-cd-opt-platform-Ambil-fix-terbaru_1785986415534.txt
+ delete mode 100644 attached_assets/Pasted-root-ide-opt-platform-cd-opt-platform-git-pull-docker-c_1785986997526.txt
+ delete mode 100644 attached_assets/Pasted-root-ide-opt-platform-cd-opt-platform-git-pull-remote-E_1785987551382.txt
+ delete mode 100644 attached_assets/Pasted-root-ide-opt-platform-curl-k-https-api-premhub-site-api_1785988120951.txt
+ delete mode 100644 attached_assets/Pasted-root-ide-opt-platform-docker-compose-exec-backend-sh-c-_1785986746235.txt
+ delete mode 100644 attached_assets/image_1785985942361.png
+ delete mode 100644 attached_assets/image_1785985950326.png
+ delete mode 100644 attached_assets/image_1785986641506.png
+ delete mode 100644 attached_assets/image_1785986978687.png
+ delete mode 100644 attached_assets/image_1785987561118.png
+ delete mode 100644 attached_assets/image_1785987668668.png
+ delete mode 100644 attached_assets/image_1785987815309.png
+ delete mode 100644 attached_assets/image_1785987932358.png
+ delete mode 100644 attached_assets/image_1785988386513.png
+ create mode 100644 attached_assets/image_1785988897703.png
+root@ide:/opt/platform# nano .env
+root@ide:/opt/platform# docker compose down -v
+docker compose up -d --build
+[+] down 14/14
+ ✔ Container platform-frontend         Removed                                                                      0.3s
+ ✔ Container platform-backend          Removed                                                                     10.3s
+ ✔ Container platform-phpmyadmin       Removed                                                                      1.2s
+ ✔ Container platform-pgadmin          Removed                                                                      1.5s
+ ✔ Container platform-traefik          Removed                                                                      0.8s
+ ✔ Container platform-postgres-ws      Removed                                                                      0.3s
+ ✔ Container platform-mysql            Removed                                                                      1.0s
+ ✔ Container platform-postgres         Removed                                                                      0.3s
+ ✔ Volume platform_postgres_ws_data    Removed                                                                      0.0s
+ ✔ Volume platform_postgres_data       Removed                                                                      0.1s
+ ✔ Volume platform_mysql_data          Removed                                                                      0.1s
+ ✔ Volume platform_traefik_letsencrypt Removed                                                                      0.0s
+ ✔ Network platform-net                Removed                                                                      0.1s
+ ✔ Volume platform_pgadmin_data        Removed                                                                      0.1s
+[+] Building 2.1s (39/39) FINISHED
+ => [internal] load local bake definitions                                                                         0.0s
+ => => reading from stdin 1.00kB                                                                                   0.0s
+ => [frontend internal] load build definition from Dockerfile                                                      0.0s
+ => => transferring dockerfile: 996B                                                                               0.0s
+ => [backend internal] load build definition from Dockerfile                                                       0.1s
+ => => transferring dockerfile: 1.27kB                                                                             0.0s
+ => [frontend internal] load metadata for docker.io/library/nginx:alpine                                           1.2s
+ => [backend internal] load metadata for docker.io/library/node:20-slim                                            1.2s
+ => [backend internal] load .dockerignore                                                                          0.0s
+ => => transferring context: 2B                                                                                    0.0s
+ => [backend builder  1/10] FROM docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2d  0.1s
+ => => resolve docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f0193e162b5fe  0.1s
+ => [frontend stage-1 1/3] FROM docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3  0.1s
+ => => resolve docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3c2c3aeac22d2a470c  0.1s
+ => [frontend internal] load build context                                                                         0.0s
+ => => transferring context: 7.52kB                                                                                0.0s
+ => [backend internal] load build context                                                                          0.0s
+ => => transferring context: 7.66kB                                                                                0.0s
+ => CACHED [frontend stage-1 2/3] COPY docker/nginx/nginx-frontend.conf /etc/nginx/conf.d/default.conf             0.0s
+ => CACHED [backend builder  2/10] WORKDIR /app                                                                    0.0s
+ => CACHED [backend builder  3/10] RUN npm install -g pnpm                                                         0.0s
+ => CACHED [frontend builder  4/10] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./                        0.0s
+ => CACHED [frontend builder  5/10] COPY tsconfig.base.json tsconfig.json ./                                       0.0s
+ => CACHED [frontend builder  6/10] COPY lib/api-client-react ./lib/api-client-react                               0.0s
+ => CACHED [frontend builder  7/10] COPY lib/api-spec ./lib/api-spec                                               0.0s
+ => CACHED [frontend builder  8/10] COPY artifacts/ide-platform ./artifacts/ide-platform                           0.0s
+ => CACHED [frontend builder  9/10] RUN pnpm install --frozen-lockfile                                             0.0s
+ => CACHED [frontend builder 10/10] RUN pnpm --filter @workspace/ide-platform run build                            0.0s
+ => CACHED [frontend stage-1 3/3] COPY --from=builder /app/artifacts/ide-platform/dist/public /usr/share/nginx/ht  0.0s
+ => CACHED [backend builder  4/11] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./                         0.0s
+ => CACHED [backend stage-1  5/10] COPY lib/db/package.json ./lib/db/                                              0.0s
+ => CACHED [backend stage-1  6/10] COPY lib/api-zod/package.json ./lib/api-zod/                                    0.0s
+ => CACHED [backend stage-1  7/10] COPY artifacts/api-server/package.json ./artifacts/api-server/                  0.0s
+ => CACHED [backend stage-1  8/10] RUN pnpm install --frozen-lockfile --prod                                       0.0s
+ => CACHED [backend builder  5/11] COPY tsconfig.base.json tsconfig.json ./                                        0.0s
+ => CACHED [backend builder  6/11] COPY lib/db ./lib/db                                                            0.0s
+ => CACHED [backend builder  7/11] COPY lib/api-zod ./lib/api-zod                                                  0.0s
+ => CACHED [backend builder  8/11] COPY lib/api-spec ./lib/api-spec                                                0.0s
+ => CACHED [backend builder  9/11] COPY artifacts/api-server ./artifacts/api-server                                0.0s
+ => CACHED [backend builder 10/11] RUN pnpm install --frozen-lockfile                                              0.0s
+ => CACHED [backend builder 11/11] RUN pnpm --filter @workspace/api-server run build                               0.0s
+ => CACHED [backend stage-1  9/10] COPY --from=builder /app/artifacts/api-server/dist ./artifacts/api-server/dist  0.0s
+ => CACHED [backend stage-1 10/10] COPY --from=builder /app/lib/db ./lib/db                                        0.0s
+ => [backend] exporting to image                                                                                   0.3s
+ => => exporting layers                                                                                            0.0s
+ => => exporting manifest sha256:996af16e22a37f50b2fd50595170db9f4e5f511f846197f5ba8f3e1a5a833d25                  0.0s
+ => => exporting config sha256:2f099c10332a58e1187b61ee0730c73a1b27a3e448c39d550266f9e16ff00d39                    0.0s
+ => => exporting attestation manifest sha256:c8860f887c4ddb6e20c96a30cafa4cbd5ab984f000ebc72cf7b3190b41c8fff5      0.1s
+ => => exporting manifest list sha256:c8dd407e64c107087f94561c73d34abcea0ff61a3524bdaebf64c86520cab725             0.1s
+ => => naming to docker.io/library/platform-backend:latest                                                         0.0s
+ => => unpacking to docker.io/library/platform-backend:latest                                                      0.0s
+ => [frontend] exporting to image                                                                                  0.3s
+ => => exporting layers                                                                                            0.0s
+ => => exporting manifest sha256:931e836c446c68b42af84ebe1423ee00420cac4bf98ca531800836192bed363e                  0.0s
+ => => exporting config sha256:bb9c948eb11e8115dc19be545dba3be65bb0aa9367e8457539a4c035be26fb5c                    0.0s
+ => => exporting attestation manifest sha256:17fefc74880b4345d9d27d985ad748b8e21ce8bbec1d5d3f6b5f67d25b5003c2      0.1s
+ => => exporting manifest list sha256:8820bd07867bc6f3711457ecd064ccb06fcd228e69f77aa62c4113935e9ecc22             0.1s
+ => => naming to docker.io/library/platform-frontend:latest                                                        0.0s
+ => => unpacking to docker.io/library/platform-frontend:latest                                                     0.0s
+ => [backend] resolving provenance for metadata file                                                               0.0s
+ => [frontend] resolving provenance for metadata file                                                              0.0s
+[+] up 16/16
+ ✔ Image platform-backend              Built                                                                        2.1s
+ ✔ Image platform-frontend             Built                                                                        2.1s
+ ✔ Volume platform_postgres_ws_data    Created                                                                      0.0s
+ ✔ Volume platform_traefik_letsencrypt Created                                                                      0.0s
+ ✔ Network platform-net                Created                                                                      0.0s
+ ✔ Volume platform_pgadmin_data        Created                                                                      0.0s
+ ✔ Volume platform_postgres_data       Created                                                                      0.0s
+ ✔ Volume platform_mysql_data          Created                                                                      0.0s
+ ✔ Container platform-traefik          Started                                                                      1.3s
+ ✔ Container platform-postgres         Healthy                                                                     11.5s
+ ✔ Container platform-postgres-ws      Started                                                                      1.3s
+ ✔ Container platform-pgadmin          Started                                                                      1.1s
+ ✔ Container platform-phpmyadmin       Started                                                                      1.0s
+ ✔ Container platform-mysql            Started                                                                      1.1s
+ ✔ Container platform-frontend         Started                                                                      1.3s
+ ✔ Container platform-backend          Started                                                                     11.3s
+root@ide:/opt/platform# docker compose ps
+NAME                   IMAGE                   COMMAND                  SERVICE       CREATED          STATUS                    PORTS
+platform-backend       platform-backend        "docker-entrypoint.s…"   backend       57 seconds ago   Up 45 seconds             8080/tcp
+platform-frontend      platform-frontend       "/docker-entrypoint.…"   frontend      58 seconds ago   Up 56 seconds             80/tcp
+platform-mysql         mysql:8.0               "docker-entrypoint.s…"   mysql         58 seconds ago   Up 56 seconds             3306/tcp, 33060/tcp
+platform-pgadmin       dpage/pgadmin4:latest   "/entrypoint.sh"         pgadmin       58 seconds ago   Up 56 seconds             80/tcp, 443/tcp
+platform-phpmyadmin    phpmyadmin:latest       "/docker-entrypoint.…"   phpmyadmin    58 seconds ago   Up 56 seconds             80/tcp
+platform-postgres      postgres:16-alpine      "docker-entrypoint.s…"   postgres      58 seconds ago   Up 56 seconds (healthy)   5432/tcp
+platform-postgres-ws   postgres:16-alpine      "docker-entrypoint.s…"   postgres-ws   58 seconds ago   Up 56 seconds             5432/tcp
+platform-traefik       traefik:v3.3            "/entrypoint.sh --pr…"   traefik       58 seconds ago   Up 56 seconds             0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp
+root@ide:/opt/platform# docker compose exec backend sh -c "cd /app/lib/db && pnpm run push"
+
+> @workspace/db@0.0.0 push /app/lib/db
+> drizzle-kit push --config ./drizzle.config.ts
+
+Reading config file '/app/lib/db/drizzle.config.ts'
+Using 'pg' driver for database querying
+[✓] Pulling schema from database...
+[✓] Changes applied
+root@ide:/opt/platform# curl -X POST https://api.premhub.site/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","email":"maraazn069@gmail.com","password":"password123","fullName":"Admin"}'
+{"user":{"id":"usr_b8a31db570f3b01296cc4884","username":"admin","fullName":"Admin","email":"maraazn069@gmail.com","role":"admin","plan":"free","createdAt":"2026-08-06T04:11:08.246Z","onboardingCompleted":false},"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c3JfYjhhMzFkYjU3MGYzYjAxMjk2Y2M0ODg0IiwiZW1haWwiOiJtYXJhYXpuMDY5QGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4NTk4OTQ2OCwiZXhwIjoxNzg2NTk0MjY4fQ._X73VMqUMwtyTwlMCsjlnNSTFK7SCzBIIOJ5NNyl7Lo"}root@ide:/opt/platform# cd /opt/platforcd /opt/platform
+
+# Hapus akun lama dan buat ulang dengan password Anda
+curl -X POST https://api.premhub.site/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","email":"maraazn069@gmail.com","password":"intinya ini password","fullName":"Admin"}'
+{"error":"Email already # Hapus user lama via database langsungapus user lama via database langsung
+docker compose exec postgres psql -U platform -d platform -c "DELETE FROM users WHERE email='maraazn069@gmail.com';"
+
+# Buat ulang dengan password Anda
+curl -X POST https://api.premhub.site/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","email":"maraazn069@gmail.com","password":"intinya ini password","fullName":"Admin"}'
+DELETE 1
+{"user":{"id":"usr_91c02044b7233672312cfc9c","username":"admin","fullName":"Admin","email":"maraazn069@gmail.com","role":"admin","plan":"free","createdAt":"2026-08-06T04:18:56.776Z","onboardingCompleted":false},"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c3JfOTFjMDIwNDRiNzIzMzY3MjMxMmNmYzljIiwiZW1haWwiOiJtYXJhYXpuMDY5QGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4NTk4OTkzNiwiZXhwIjoxNzg2NTk0NzM2fQ.yE6PWmYAGwBDSRQDfIIWh7tHguzyp20ZyYzy7xyVttY"}root@ide:/opt/platform# # Hapus user la# Hapus user lama via database langsung
+docker compose exec postgres psql -U platform -d platform -c "DELETE FROM users WHERE email='maraazn069@gmail.com';"
+DELETE 1
+root@ide:/opt/platform# cd /opt/platform
+git pull
+docker compose up -d --build frontend
+remote: Enumerating objects: 28, done.
+remote: Counting objects: 100% (28/28), done.
+remote: Compressing objects: 100% (12/12), done.
+remote: Total 20 (delta 10), reused 18 (delta 8), pack-reused 0 (from 0)
+Unpacking objects: 100% (20/20), 90.73 KiB | 3.13 MiB/s, done.
+From https://github.com/mailsul/ide
+   bcf1f99..ca8b2e1  main       -> origin/main
+Updating bcf1f99..ca8b2e1
+Fast-forward
+ artifacts/ide-platform/src/pages/login.tsx                                  |    2 +-
+ artifacts/ide-platform/src/pages/setup.tsx                                  |    2 +-
+ ...indows-PowerShell-Copyright-C-Microsoft-Corporation-Al_1785988881647.txt | 2026 -----------------------------------
+ attached_assets/image_1785988897703.png                                     |  Bin 73853 -> 0 bytes
+ 4 files changed, 2 insertions(+), 2028 deletions(-)
+ delete mode 100644 attached_assets/Pasted-Windows-PowerShell-Copyright-C-Microsoft-Corporation-Al_1785988881647.txt
+ delete mode 100644 attached_assets/image_1785988897703.png
+[+] Building 17.9s (21/21) FINISHED
+ => [internal] load local bake definitions                                                                         0.0s
+ => => reading from stdin 587B                                                                                     0.0s
+ => [internal] load build definition from Dockerfile                                                               0.0s
+ => => transferring dockerfile: 996B                                                                               0.0s
+ => [internal] load metadata for docker.io/library/nginx:alpine                                                    1.4s
+ => [internal] load metadata for docker.io/library/node:20-slim                                                    1.5s
+ => [internal] load .dockerignore                                                                                  0.0s
+ => => transferring context: 2B                                                                                    0.0s
+ => [internal] load build context                                                                                  0.0s
+ => => transferring context: 17.23kB                                                                               0.0s
+ => [stage-1 1/3] FROM docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3c2c3aeac2  0.1s
+ => => resolve docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3c2c3aeac22d2a470c  0.1s
+ => [builder  1/10] FROM docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f01  0.1s
+ => => resolve docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f0193e162b5fe  0.1s
+ => CACHED [builder  2/10] WORKDIR /app                                                                            0.0s
+ => CACHED [builder  3/10] RUN npm install -g pnpm                                                                 0.0s
+ => CACHED [builder  4/10] COPY package.json pnpm-workspace.yaml  npm-lock.yaml ./                                 0.0s
+ => CACHED [builder  5/10] COPY tsconfig.base.json tsconfig.json ./                                                0.0s
+ => CACHED [builder  6/10] COPY lib/api-client-react ./lib/api-client-react                                        0.0s
+ => CACHED [builder  7/10] COPY lib/api-spec ./lib/api-spec                                                        0.0s
+ => [builder  8/10] COPY artifacts/ide-platform ./artifacts/ide-platform                                           0.1s
+ => [builder  9/10] RUN pnpm install --frozen-lockfile                                                             8.7s
+ => [builder 10/10] RUN pnpm --filter @workspace/ide-platform run build                                            6.6s
+ => CACHED [stage-1 2/3] COPY docker/nginx/nginx-frontend.conf /etc/nginx/conf.d/default.conf                      0.0s
+ => [stage-1 3/3] COPY --from=builder /app/artifacts/ide-platform/dist/public /usr/share/nginx/html                0.1s
+ => exporting to image                                                                                             0.4s
+ => => exporting layers                                                                                            0.2s
+ => => exporting manifest sha256:0855e1abb23f21ce031806978d21055cccea58bb634a735add415089d05abcf9                  0.0s
+ => => exporting config sha256:0b5b43afaff14fc6920750dc8d8d88429cc159dbeac5001717e38487ba839d67                    0.0s
+ => => exporting attestation manifest sha256:c326b9e10f0bc868a42a8e3d43eb00833640777038951965e4b5d8eab2e8ce90      0.0s
+ => => exporting manifest list sha256:06049a8a01a88e4b64831fe3fc470a27a36c004fb1fc0fbcb7e79b40158bffc7             0.0s
+ => => naming to docker.io/library/platform-frontend:latest                                                        0.0s
+ => => unpacking to docker.io/library/platform-frontend:latest                                                     0.1s
+ => resolving provenance for metadata file                                                                         0.0s
+[+] up 2/2
+ ✔ Image platform-frontend     Built                                                                               18.0s
+ ✔ Container platform-frontend Started                                                                              0.6s
+root@ide:/opt/platform# curl -X POST https://api.premhub.site/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","email":"maraazn069@gmail.com","password":"intinya ini password","fullName":"Admin"}'
+{"user":{"id":"usr_87d42ca84edcf9b5bf9dfaac","username":"admin","fullName":"Admin","email":"maraazn069@gmail.com","role":"admin","plan":"free","createdAt":"2026-08-06T04:28:17.791Z","onboardingCompleted":false},"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c3JfODdkNDJjYTg0ZWRjZjliNWJmOWRmYWFjIiwiZW1haWwiOiJtYXJhYXpuMDY5QGdtYWlsLmNvbSIsInJvbGU                                                                                                                        
+root@ide:/opt/platform# cd /opt/platform
+git pull
+docker compose up -d --build frontend
+remote: Enumerating objects: 22, done.
+remote: Counting objects: 100% (22/22), done.
+remote: Compressing objects: 100% (10/10), done.
+remote: Total 16 (delta 7), reused 15 (delta 6), pack-reused 0 (from 0)
+Unpacking objects: 100% (16/16), 187.62 KiB | 3.35 MiB/s, done.
+From https://github.com/mailsul/ide
+   ca8b2e1..4188eec  main       -> origin/main
+Updating ca8b2e1..4188eec
+Fast-forward
+ PANDUAN-INSTALL-VPS.md                                                      |  148 ++-
+ artifacts/ide-platform/src/main.tsx                                         |    9 +-
+ ...indows-PowerShell-Copyright-C-Microsoft-Corporation-Al_1785990627704.txt | 2273 +++++++++++++++++++++++++++++++++++
+ attached_assets/image_1785990818508.png                                     |  Bin 0 -> 112932 bytes
+ attached_assets/image_1785990876822.png                                     |  Bin 0 -> 58113 bytes
+ 5 files changed, 2414 insertions(+), 16 deletions(-)
+ create mode 100644 attached_assets/Pasted-Windows-PowerShell-Copyright-C-Microsoft-Corporation-Al_1785990627704.txt
+ create mode 100644 attached_assets/image_1785990818508.png
+ create mode 100644 attached_assets/image_1785990876822.png
+[+] Building 18.2s (21/21) FINISHED
+ => [internal] load local bake definitions                                                                         0.0s
+ => => reading from stdin 587B                                                                                     0.0s
+ => [internal] load build definition from Dockerfile                                                               0.0s
+ => => transferring dockerfile: 996B                                                                               0.0s
+ => [internal] load metadata for docker.io/library/nginx:alpine                                                    1.2s
+ => [internal] load metadata for docker.io/library/node:20-slim                                                    1.2s
+ => [internal] load .dockerignore                                                                                  0.0s
+ => => transferring context: 2B                                                                                    0.0s
+ => [builder  1/10] FROM docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f01  0.1s
+ => => resolve docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f0193e162b5fe  0.1s
+ => [stage-1 1/3] FROM docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3c2c3aeac2  0.1s
+ => => resolve docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3c2c3aeac22d2a470c  0.1s
+ => [internal] load build context                                                                                  0.0s
+ => => transferring context: 8.00kB                                                                                0.0s
+ => CACHED [builder  2/10] WORKDIR /app                                                                            0.0s
+ => CACHED [builder  3/10] RUN npm install -g pnpm                                                                 0.0s
+ => CACHED [builder  4/10] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./                                 0.0s
+ => CACHED [builder  5/10] COPY tsconfig.base.json tsconfig.json ./                                                0.0s
+ => CACHED [builder  6/10] COPY lib/api-client-react ./lib/api-client-react                                        0.0s
+ => CACHED [builder  7/10] COPY lib/api-spec ./lib/api-spec                                                        0.0s
+ => [builder  8/10] COPY artifacts/ide-platform ./artifacts/ide-platform                                           0.1s
+ => [builder  9/10] RUN pnpm install --frozen-lockfile                                                             9.2s
+ => [builder 10/10] RUN pnpm --filter @workspace/ide-platform run build                                            6.6s
+ => CACHED [stage-1 2/3] COPY docker/nginx/nginx-frontend.conf /etc/nginx/conf.d/default.conf                      0.0s
+ => [stage-1 3/3] COPY --from=builder /app/artifacts/ide-platform/dist/public /usr/share/nginx/html                0.1s
+ => exporting to image                                                                                             0.4s
+ => => exporting layers                                                                                            0.2s
+ => => exporting manifest sha256:a8da041ff9be38308ee3e615cd9064f8d49e1a6f7a1be10b89cf5106de74e998                  0.0s
+ => => exporting config sha256:1f289c475ef7fb94aa37c1a2e09c0127e43a6ae849375172d2a38ccd0aa223f3                    0.0s
+ => => exporting attestation manifest sha256:5ea45b3d6f378c091fec175d5b93d3867d956933b25c38b2c46c2d81e8f3a72a      0.0s
+ => => exporting manifest list sha256:d8584c482d611370a34efa41e5bd9b97bedb7f73c3fc5e030d3f97cc1d7d2aa6             0.0s
+ => => naming to docker.io/library/platform-frontend:latest                                                        0.0s
+ => => unpacking to docker.io/library/platform-frontend:latest                                                     0.1s
+ => resolving provenance for metadata file                                                                         0.0s
+[+] up 2/2
+ ✔ Image platform-frontend     Built                                                                               18.2s
+ ✔ Container platform-frontend Started                                                                              0.5s
+root@ide:/opt/platform# cd /opt/platform
+git pull
+docker compose up -d --build frontend
+remote: Enumerating objects: 11, done.
+remote: Counting objects: 100% (11/11), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 6 (delta 4), reused 6 (delta 4), pack-reused 0 (from 0)
+Unpacking objects: 100% (6/6), 706 bytes | 706.00 KiB/s, done.
+From https://github.com/mailsul/ide
+   4188eec..9e63a71  main       -> origin/main
+Updating 4188eec..9e63a71
+Fast-forward
+ artifacts/ide-platform/src/main.tsx | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+[+] Building 18.1s (21/21) FINISHED
+ => [internal] load local bake definitions                                                                         0.0s
+ => => reading from stdin 587B                                                                                     0.0s
+ => [internal] load build definition from Dockerfile                                                               0.0s
+ => => transferring dockerfile: 996B                                                                               0.0s
+ => [internal] load metadata for docker.io/library/nginx:alpine                                                    1.2s
+ => [internal] load metadata for docker.io/library/node:20-slim                                                    1.2s
+ => [internal] load .dockerignore                                                                                  0.0s
+ => => transferring context: 2B                                                                                    0.0s
+ => [builder  1/10] FROM docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f01  0.1s
+ => => resolve docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f0193e162b5fe  0.1s
+ => [stage-1 1/3] FROM docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3c2c3aeac2  0.1s
+ => => resolve docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3c2c3aeac22d2a470c  0.1s
+ => [internal] load build context                                                                                  0.0s
+ => => transferring context: 8.22kB                                                                                0.0s
+ => CACHED [builder  2/10] WORKDIR /app                                                                            0.0s
+ => CACHED [builder  3/10] RUN npm install -g pnpm                                                                 0.0s
+ => CACHED [builder  4/10] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./                                 0.0s
+ => CACHED [builder  5/10] COPY tsconfig.base.json tsconfig.json ./                                                0.0s
+ => CACHED [builder  6/10] COPY lib/api-client-react ./lib/api-client-react                                        0.0s
+ => CACHED [builder  7/10] COPY lib/api-spec ./lib/api-spec                                                        0.0s
+ => [builder  8/10] COPY artifacts/ide-platform ./artifacts/ide-platform                                           0.1s
+ => [builder  9/10] RUN pnpm install --frozen-lockfile                                                             9.1s
+ => [builder 10/10] RUN pnpm --filter @workspace/ide-platform run build                                            6.7s
+ => CACHED [stage-1 2/3] COPY docker/nginx/nginx-frontend.conf /etc/nginx/conf.d/default.conf                      0.0s
+ => [stage-1 3/3] COPY --from=builder /app/artifacts/ide-platform/dist/public /usr/share/nginx/html                0.1s
+ => exporting to image                                                                                             0.4s
+ => => exporting layers                                                                                            0.2s
+ => => exporting manifest sha256:c2383dfd5b6834232cf40dba6b3dac43c827d8f9f2db5e43128fc0cfa6ccce0e                  0.0s
+ => => exporting config sha256:d086225a1bd6de5cbb0d00b2e8d458038873d2c01a5297c54bcfb8ef4b4c2754                    0.0s
+ => => exporting attestation manifest sha256:f31c6a7570ff8c46e65a527c36ced1255766c46c53718dea9101efeda7d430ce      0.0s
+ => => exporting manifest list sha256:1516240782561745b3293b197a9b3ef66f1ed60073732501c87a2f5f2271d29b             0.0s
+ => => naming to docker.io/library/platform-frontend:latest                                                        0.0s
+ => => unpacking to docker.io/library/platform-frontend:latest                                                     0.1s
+ => resolving provenance for metadata file                                                                         0.0s
+[+] up 2/2
+ ✔ Image platform-frontend     Built                                                                               18.1s
+ ✔ Container platform-frontend Started                                                                              0.5s
+root@ide:/opt/platform# cd /opt/platform
+git pull
+docker compose up -d --build frontend backend
+remote: Enumerating objects: 41, done.
+remote: Counting objects: 100% (41/41), done.
+remote: Compressing objects: 100% (7/7), done.
+remote: Total 24 (delta 17), reused 24 (delta 17), pack-reused 0 (from 0)
+Unpacking objects: 100% (24/24), 197.79 KiB | 3.88 MiB/s, done.
+From https://github.com/mailsul/ide
+   9e63a71..e818e35  main       -> origin/main
+Updating 9e63a71..e818e35
+Fast-forward
+ artifacts/api-server/src/lib/auth.ts                   |   4 +-
+ artifacts/api-server/src/routes/auth.ts                |   4 +-
+ artifacts/ide-platform/src/components/auth-context.tsx |  36 ++++-
+ artifacts/ide-platform/src/components/layout.tsx       | 154 ++++++++++++------
+ artifacts/ide-platform/src/pages/login.tsx             |  91 ++++++++---
+ artifacts/ide-platform/src/pages/new-workspace.tsx     | 482 ++++++++++++++++++++++++++++++++++++++++++++-------------
+ attached_assets/image_1785991223565.png                | Bin 0 -> 121108 bytes
+ attached_assets/image_1785991616009.png                | Bin 0 -> 84635 bytes
+ attached_assets/image_1785991813880.png                | Bin 0 -> 7111 bytes
+ 9 files changed, 580 insertions(+), 191 deletions(-)
+ create mode 100644 attached_assets/image_1785991223565.png
+ create mode 100644 attached_assets/image_1785991616009.png
+ create mode 100644 attached_assets/image_1785991813880.png
+[+] Building 21.9s (39/39) FINISHED
+ => [internal] load local bake definitions                                                                         0.0s
+ => => reading from stdin 1.00kB                                                                                   0.0s
+ => [backend internal] load build definition from Dockerfile                                                       0.0s
+ => => transferring dockerfile: 1.27kB                                                                             0.0s
+ => [frontend internal] load build definition from Dockerfile                                                      0.0s
+ => => transferring dockerfile: 996B                                                                               0.0s
+ => [backend internal] load metadata for docker.io/library/node:20-slim                                            1.4s
+ => [frontend internal] load metadata for docker.io/library/nginx:alpine                                           1.4s
+ => [frontend internal] load .dockerignore                                                                         0.0s
+ => => transferring context: 2B                                                                                    0.0s
+ => [frontend builder  1/11] FROM docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2  0.1s
+ => => resolve docker.io/library/node:20-slim@sha256:2cf067cfed83d5ea958367df9f966191a942351a2df77d6f0193e162b5fe  0.1s
+ => [backend internal] load build context                                                                          0.1s
+ => => transferring context: 124.84kB                                                                              0.0s
+ => [frontend internal] load build context                                                                         0.1s
+ => => transferring context: 517.81kB                                                                              0.0s
+ => [frontend stage-1 1/3] FROM docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3  0.1s
+ => => resolve docker.io/library/nginx:alpine@sha256:4a73073bd557c65b759505da037898b61f1be6cbcc3c2c3aeac22d2a470c  0.1s
+ => CACHED [backend builder  2/11] WORKDIR /app                                                                    0.0s
+ => CACHED [backend builder  3/11] RUN npm install -g pnpm                                                         0.0s
+ => CACHED [frontend builder  4/10] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./                        0.0s
+ => CACHED [frontend builder  5/10] COPY tsconfig.base.json tsconfig.json ./                                       0.0s
+ => CACHED [frontend builder  6/10] COPY lib/api-client-react ./lib/api-client-react                               0.0s
+ => CACHED [frontend builder  7/10] COPY lib/api-spec ./lib/api-spec                                               0.0s
+ => [frontend builder  8/10] COPY artifacts/ide-platform ./artifacts/ide-platform                                  0.2s
+ => CACHED [backend builder  4/11] COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./                         0.0s
+ => CACHED [backend builder  5/11] COPY tsconfig.base.json tsconfig.json ./                                        0.0s
+ => CACHED [backend builder  6/11] COPY lib/db ./lib/db                                                            0.0s
+ => CACHED [backend builder  7/11] COPY lib/api-zod ./lib/api-zod                                                  0.0s
+ => CACHED [backend builder  8/11] COPY lib/api-spec ./lib/api-spec                                                0.0s
+ => [backend builder  9/11] COPY artifacts/api-server ./artifacts/api-server                                       0.2s
+ => [backend builder 10/11] RUN pnpm install --frozen-lockfile                                                    11.4s
+ => [frontend builder  9/10] RUN pnpm install --frozen-lockfile                                                   12.0s
+ => [backend builder 11/11] RUN pnpm --filter @workspace/api-server run build                                      1.5s
+ => [frontend builder 10/10] RUN pnpm --filter @workspace/ide-platform run build                                   7.3s
+ => CACHED [backend stage-1  5/10] COPY lib/db/package.json ./lib/db/                                              0.0s
+ => CACHED [backend stage-1  6/10] COPY lib/api-zod/package.json ./lib/api-zod/                                    0.0s
+ => CACHED [backend stage-1  7/10] COPY artifacts/api-server/package.json ./artifacts/api-server/                  0.0s
+ => CACHED [backend stage-1  8/10] RUN pnpm install --frozen-lockfile --prod                                       0.0s
+ => [backend stage-1  9/10] COPY --from=builder /app/artifacts/api-server/dist ./artifacts/api-server/dist         0.1s
+ => [backend stage-1 10/10] COPY --from=builder /app/lib/db ./lib/db                                               0.1s
+ => [backend] exporting to image                                                                                   0.9s
+ => => exporting layers                                                                                            0.6s
+ => => exporting manifest sha256:a9608626c1424e609854386d90fb0d23b5ef2f4a6d17f71f0f2db61f39815550                  0.0s
+ => => exporting config sha256:49c253c0d15ad00986dfb87e2dd3e107bbc92ce8f06fe8c77b9ab38bfecb6fc3                    0.0s
+ => => exporting attestation manifest sha256:d436d0354fcc0edc2c930e2251cb7a0387864b3fbbdde70d4f48f8fc25c69381      0.0s
+ => => exporting manifest list sha256:de8d66e2cfc267585f0ccff3587a672a8c172f9cd8fd159c2e472360febf3eb8             0.0s
+ => => naming to docker.io/library/platform-backend:latest                                                         0.0s
+ => => unpacking to docker.io/library/platform-backend:latest                                                      0.1s
+ => [backend] resolving provenance for metadata file                                                               0.0s
+ => CACHED [frontend stage-1 2/3] COPY docker/nginx/nginx-frontend.conf /etc/nginx/conf.d/default.conf             0.0s
+ => [frontend stage-1 3/3] COPY --from=builder /app/artifacts/ide-platform/dist/public /usr/share/nginx/html       0.1s
+ => [frontend] exporting to image                                                                                  0.4s
+ => => exporting layers                                                                                            0.2s
+ => => exporting manifest sha256:af0f874642a3c7c570a84d2df912ff242ea6407edfd2437eec80d3cb27d3d271                  0.0s
+ => => exporting config sha256:3905dbcd12a2b968ec04eb0dbe3e42a34fd40ad94925e1ff910f52abb4f67b9e                    0.0s
+ => => exporting attestation manifest sha256:021ae8433cdc52996844ada8f3a3c1db59245704f8b09fc90204f2e0c9dd44ad      0.0s
+ => => exporting manifest list sha256:7e55bfacda2163e0750b24a98b2a8b192f55f704a16e0197e0b1b7429d8075b2             0.0s
+ => => naming to docker.io/library/platform-frontend:latest                                                        0.0s
+ => => unpacking to docker.io/library/platform-frontend:latest                                                     0.0s
+ => [frontend] resolving provenance for metadata file                                                              0.0s
+[+] up 5/5
+ ✔ Image platform-frontend     Built                                                                               22.0s
+ ✔ Image platform-backend      Built                                                                               22.0s
+ ✔ Container platform-postgres Healthy                                                                             11.0s
+ ✔ Container platform-frontend Started                                                                             10.7s
+ ✔ Container platform-backend  Started                                                                             11.2s
+root@ide:/opt/platform#
