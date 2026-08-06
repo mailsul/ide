@@ -1,0 +1,51 @@
+# ─── Dependencies ─────────────────────────────────────────────────────────────
+node_modules/
+.pnpm-store/
+.pnpm-debug.log
+
+# ─── Build outputs ────────────────────────────────────────────────────────────
+dist/
+build/
+.cache/
+*.tsbuildinfo
+
+# ─── Environment — JANGAN pernah commit file ini! ─────────────────────────────
+.env
+.env.local
+.env.production
+.env.staging
+
+# ─── Replit-specific — tidak dibutuhkan di GitHub / VPS ──────────────────────
+.replit
+.replitignore
+.local/
+.cache/
+.agents/
+.config/
+replit-clone-prompt.md
+
+# ─── Mockup sandbox (Replit design tool, bukan bagian platform) ───────────────
+artifacts/mockup-sandbox/
+
+# ─── Traefik dynamic config (digenerate otomatis saat runtime) ────────────────
+docker/traefik/dynamic/*.yml
+!docker/traefik/dynamic/.gitkeep
+
+# ─── Data user & workspace (bukan kode) ──────────────────────────────────────
+workspaces/
+letsencrypt/
+
+# ─── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ─── OS / Editor ──────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo

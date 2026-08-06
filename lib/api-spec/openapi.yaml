@@ -1,0 +1,1794 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: IDE Platform API — Replit-like workspace platform
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: auth
+    description: Authentication
+  - name: workspaces
+    description: Workspace management
+  - name: files
+    description: File management
+  - name: ports
+    description: Port management
+  - name: secrets
+    description: Secrets management
+  - name: workflows
+    description: Workflow management
+  - name: databases
+    description: Database provisioning
+  - name: domains
+    description: Domain management
+  - name: monitoring
+    description: Resource monitoring
+  - name: admin
+    description: Admin operations
+  - name: dashboard
+    description: Dashboard stats
+
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  # ─── AUTH ───────────────────────────────────────────────────────────────────
+  /auth/register:
+    post:
+      operationId: register
+      tags: [auth]
+      summary: Register new user (first user becomes admin)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: Registration disabled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /auth/login:
+    post:
+      operationId: login
+      tags: [auth]
+      summary: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /auth/logout:
+    post:
+      operationId: logout
+      tags: [auth]
+      summary: Logout
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /auth/me:
+    get:
+      operationId: getMe
+      tags: [auth]
+      summary: Get current user
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /auth/setup-status:
+    get:
+      operationId: getSetupStatus
+      tags: [auth]
+      summary: Check if platform has any users (first-run setup)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SetupStatus"
+
+  # ─── DASHBOARD ──────────────────────────────────────────────────────────────
+  /dashboard/stats:
+    get:
+      operationId: getDashboardStats
+      tags: [dashboard]
+      summary: Get dashboard summary stats for current user
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardStats"
+
+  /dashboard/activity:
+    get:
+      operationId: getRecentActivity
+      tags: [dashboard]
+      summary: Get recent workspace activity feed
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ActivityItem"
+
+  # ─── WORKSPACES ─────────────────────────────────────────────────────────────
+  /workspaces:
+    get:
+      operationId: listWorkspaces
+      tags: [workspaces]
+      summary: List current user's workspaces
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Workspace"
+
+    post:
+      operationId: createWorkspace
+      tags: [workspaces]
+      summary: Create a new workspace
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkspaceInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Workspace"
+
+  /workspaces/{workspaceId}:
+    get:
+      operationId: getWorkspace
+      tags: [workspaces]
+      summary: Get workspace by ID
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Workspace"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    patch:
+      operationId: updateWorkspace
+      tags: [workspaces]
+      summary: Update workspace
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkspaceUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Workspace"
+
+    delete:
+      operationId: deleteWorkspace
+      tags: [workspaces]
+      summary: Delete workspace
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /workspaces/{workspaceId}/start:
+    post:
+      operationId: startWorkspace
+      tags: [workspaces]
+      summary: Start workspace container
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Workspace"
+
+  /workspaces/{workspaceId}/stop:
+    post:
+      operationId: stopWorkspace
+      tags: [workspaces]
+      summary: Stop workspace container
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Workspace"
+
+  /workspaces/{workspaceId}/publish:
+    post:
+      operationId: publishWorkspace
+      tags: [workspaces]
+      summary: Publish workspace (permanent URL, always-on)
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Workspace"
+
+  /workspaces/{workspaceId}/unpublish:
+    post:
+      operationId: unpublishWorkspace
+      tags: [workspaces]
+      summary: Unpublish workspace
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Workspace"
+
+  # ─── FILES ──────────────────────────────────────────────────────────────────
+  /workspaces/{workspaceId}/files:
+    get:
+      operationId: listFiles
+      tags: [files]
+      summary: List all files in workspace as a tree
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FileNode"
+
+    post:
+      operationId: createFile
+      tags: [files]
+      summary: Create a new file or folder
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FileInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileNode"
+
+  /workspaces/{workspaceId}/files/read:
+    post:
+      operationId: readFileContent
+      tags: [files]
+      summary: Get file content by path (path in body)
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FilePathInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileContent"
+
+  /workspaces/{workspaceId}/files/write:
+    post:
+      operationId: writeFileContent
+      tags: [files]
+      summary: Write/overwrite file content
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FileContentUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /workspaces/{workspaceId}/files/rename:
+    post:
+      operationId: renameFile
+      tags: [files]
+      summary: Rename or move a file/folder
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FileRenameInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /workspaces/{workspaceId}/files/delete:
+    post:
+      operationId: deleteFile
+      tags: [files]
+      summary: Delete a file or folder
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FileDeleteInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  # ─── PORTS ──────────────────────────────────────────────────────────────────
+  /workspaces/{workspaceId}/ports:
+    get:
+      operationId: listPorts
+      tags: [ports]
+      summary: List exposed ports
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Port"
+
+    post:
+      operationId: createPort
+      tags: [ports]
+      summary: Expose a port
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PortInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Port"
+
+  /workspaces/{workspaceId}/ports/{portId}:
+    delete:
+      operationId: deletePort
+      tags: [ports]
+      summary: Remove an exposed port
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: portId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  # ─── SECRETS ────────────────────────────────────────────────────────────────
+  /workspaces/{workspaceId}/secrets:
+    get:
+      operationId: listSecrets
+      tags: [secrets]
+      summary: List secrets (keys only, values masked)
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Secret"
+
+    post:
+      operationId: createSecret
+      tags: [secrets]
+      summary: Create a secret
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SecretInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Secret"
+
+  /workspaces/{workspaceId}/secrets/{secretId}:
+    patch:
+      operationId: updateSecret
+      tags: [secrets]
+      summary: Update a secret value
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: secretId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SecretUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Secret"
+
+    delete:
+      operationId: deleteSecret
+      tags: [secrets]
+      summary: Delete a secret
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: secretId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  # ─── WORKFLOWS ──────────────────────────────────────────────────────────────
+  /workspaces/{workspaceId}/workflows:
+    get:
+      operationId: listWorkflows
+      tags: [workflows]
+      summary: List workflows
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Workflow"
+
+    post:
+      operationId: createWorkflow
+      tags: [workflows]
+      summary: Create a workflow
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkflowInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Workflow"
+
+  /workspaces/{workspaceId}/workflows/{workflowId}:
+    patch:
+      operationId: updateWorkflow
+      tags: [workflows]
+      summary: Update a workflow
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: workflowId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkflowUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Workflow"
+
+    delete:
+      operationId: deleteWorkflow
+      tags: [workflows]
+      summary: Delete a workflow
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: workflowId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /workspaces/{workspaceId}/workflows/{workflowId}/start:
+    post:
+      operationId: startWorkflow
+      tags: [workflows]
+      summary: Start a workflow
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: workflowId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Workflow"
+
+  /workspaces/{workspaceId}/workflows/{workflowId}/stop:
+    post:
+      operationId: stopWorkflow
+      tags: [workflows]
+      summary: Stop a workflow
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: workflowId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Workflow"
+
+  /workspaces/{workspaceId}/workflows/{workflowId}/logs:
+    get:
+      operationId: getWorkflowLogs
+      tags: [workflows]
+      summary: Get recent log output for a workflow
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: workflowId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkflowLogs"
+
+  # ─── DATABASES ──────────────────────────────────────────────────────────────
+  /workspaces/{workspaceId}/databases:
+    get:
+      operationId: listDatabases
+      tags: [databases]
+      summary: List provisioned databases
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Database"
+
+    post:
+      operationId: createDatabase
+      tags: [databases]
+      summary: Provision a database
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DatabaseInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Database"
+
+  /workspaces/{workspaceId}/databases/{databaseId}:
+    delete:
+      operationId: deleteDatabase
+      tags: [databases]
+      summary: Drop a database
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: databaseId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /workspaces/{workspaceId}/databases/{databaseId}/reset-password:
+    post:
+      operationId: resetDatabasePassword
+      tags: [databases]
+      summary: Reset database password
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: databaseId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Database"
+
+  # ─── DOMAINS ────────────────────────────────────────────────────────────────
+  /workspaces/{workspaceId}/domains:
+    get:
+      operationId: listDomains
+      tags: [domains]
+      summary: List domains attached to workspace
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Domain"
+
+    post:
+      operationId: createDomain
+      tags: [domains]
+      summary: Add a domain to workspace
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DomainInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Domain"
+
+  /workspaces/{workspaceId}/domains/{domainId}:
+    delete:
+      operationId: deleteDomain
+      tags: [domains]
+      summary: Remove a domain
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: domainId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /workspaces/{workspaceId}/domains/{domainId}/verify:
+    post:
+      operationId: verifyDomain
+      tags: [domains]
+      summary: Verify DNS for a domain
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: domainId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Domain"
+
+  # ─── MONITORING ─────────────────────────────────────────────────────────────
+  /workspaces/{workspaceId}/monitoring:
+    get:
+      operationId: getMonitoring
+      tags: [monitoring]
+      summary: Get resource usage stats
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MonitoringStats"
+
+  # ─── ADMIN ──────────────────────────────────────────────────────────────────
+  /admin/users:
+    get:
+      operationId: adminListUsers
+      tags: [admin]
+      summary: List all users (admin only)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AdminUser"
+
+    post:
+      operationId: adminCreateUser
+      tags: [admin]
+      summary: Create a new user (admin only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminUserInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminUser"
+
+  /admin/users/{userId}:
+    patch:
+      operationId: adminUpdateUser
+      tags: [admin]
+      summary: Update user (admin only)
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminUserUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminUser"
+
+    delete:
+      operationId: adminDeleteUser
+      tags: [admin]
+      summary: Delete user (admin only)
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+  /admin/workspaces:
+    get:
+      operationId: adminListWorkspaces
+      tags: [admin]
+      summary: List all workspaces across all users (admin only)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Workspace"
+
+  /admin/stats:
+    get:
+      operationId: adminGetStats
+      tags: [admin]
+      summary: Get platform-wide stats (admin only)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminStats"
+
+  /admin/settings:
+    get:
+      operationId: adminGetSettings
+      tags: [admin]
+      summary: Get platform settings (admin only)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlatformSettings"
+
+    patch:
+      operationId: adminUpdateSettings
+      tags: [admin]
+      summary: Update platform settings (admin only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlatformSettingsUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlatformSettings"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+
+    SuccessResponse:
+      type: object
+      required: [success]
+      properties:
+        success:
+          type: boolean
+        message:
+          type: ["string", "null"]
+
+    # ─── AUTH ────────────────────────────────────────────────────────────────
+    RegisterInput:
+      type: object
+      required: [username, email, password]
+      properties:
+        username:
+          type: string
+          minLength: 2
+          maxLength: 50
+        fullName:
+          type: ["string", "null"]
+        email:
+          type: string
+        password:
+          type: string
+          minLength: 8
+
+    LoginInput:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+
+    AuthResponse:
+      type: object
+      required: [user, token]
+      properties:
+        user:
+          $ref: "#/components/schemas/User"
+        token:
+          type: string
+
+    User:
+      type: object
+      required: [id, username, email, role, plan, createdAt, onboardingCompleted]
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+        fullName:
+          type: ["string", "null"]
+        email:
+          type: string
+        role:
+          type: string
+          enum: [admin, user]
+        plan:
+          type: string
+          enum: [free, pro, team]
+        createdAt:
+          type: string
+          format: date-time
+        onboardingCompleted:
+          type: boolean
+
+    SetupStatus:
+      type: object
+      required: [needsSetup, userCount]
+      properties:
+        needsSetup:
+          type: boolean
+        userCount:
+          type: number
+
+    # ─── DASHBOARD ───────────────────────────────────────────────────────────
+    DashboardStats:
+      type: object
+      required: [totalWorkspaces, runningWorkspaces, publishedWorkspaces, totalDatabases, onboardingProgress]
+      properties:
+        totalWorkspaces:
+          type: number
+        runningWorkspaces:
+          type: number
+        publishedWorkspaces:
+          type: number
+        totalDatabases:
+          type: number
+        onboardingProgress:
+          $ref: "#/components/schemas/OnboardingProgress"
+
+    OnboardingProgress:
+      type: object
+      required: [accountCreated, firstWorkspaceCreated, codeRan, websitePublished, customDomainConnected, percentage]
+      properties:
+        accountCreated:
+          type: boolean
+        firstWorkspaceCreated:
+          type: boolean
+        codeRan:
+          type: boolean
+        websitePublished:
+          type: boolean
+        customDomainConnected:
+          type: boolean
+        percentage:
+          type: number
+
+    ActivityItem:
+      type: object
+      required: [id, type, workspaceName, message, createdAt]
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [workspace_created, workspace_started, workspace_stopped, workspace_published, file_created, workflow_run, database_provisioned]
+        workspaceName:
+          type: string
+        workspaceId:
+          type: string
+        message:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    # ─── WORKSPACE ───────────────────────────────────────────────────────────
+    Workspace:
+      type: object
+      required: [id, name, slug, language, status, isPublished, userId, createdAt, lastActive]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        description:
+          type: ["string", "null"]
+        language:
+          type: string
+        status:
+          type: string
+          enum: [running, stopped, sleeping, error, starting]
+        isPublished:
+          type: boolean
+        publishedUrl:
+          type: ["string", "null"]
+        devUrl:
+          type: ["string", "null"]
+        userId:
+          type: string
+        username:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+          format: date-time
+        lastActive:
+          type: string
+          format: date-time
+
+    WorkspaceInput:
+      type: object
+      required: [name, language]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type: ["string", "null"]
+        language:
+          type: string
+          enum: [nodejs, python, php, go, rust, java, ruby, dotnet, deno, bash, html, cpp]
+
+    WorkspaceUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: ["string", "null"]
+
+    # ─── FILES ───────────────────────────────────────────────────────────────
+    FileNode:
+      type: object
+      required: [name, path, type]
+      properties:
+        name:
+          type: string
+        path:
+          type: string
+        type:
+          type: string
+          enum: [file, directory]
+        size:
+          type: ["number", "null"]
+        children:
+          type: ["array", "null"]
+          items:
+            $ref: "#/components/schemas/FileNode"
+
+    FileContent:
+      type: object
+      required: [path, content]
+      properties:
+        path:
+          type: string
+        content:
+          type: string
+        language:
+          type: ["string", "null"]
+
+    FilePathInput:
+      type: object
+      required: [path]
+      properties:
+        path:
+          type: string
+
+    FileInput:
+      type: object
+      required: [path, type]
+      properties:
+        path:
+          type: string
+        type:
+          type: string
+          enum: [file, directory]
+        content:
+          type: ["string", "null"]
+
+    FileContentUpdate:
+      type: object
+      required: [path, content]
+      properties:
+        path:
+          type: string
+        content:
+          type: string
+
+    FileRenameInput:
+      type: object
+      required: [oldPath, newPath]
+      properties:
+        oldPath:
+          type: string
+        newPath:
+          type: string
+
+    FileDeleteInput:
+      type: object
+      required: [path]
+      properties:
+        path:
+          type: string
+
+    # ─── PORT ────────────────────────────────────────────────────────────────
+    Port:
+      type: object
+      required: [id, workspaceId, internalPort, name, isPrivate, externalUrl]
+      properties:
+        id:
+          type: string
+        workspaceId:
+          type: string
+        internalPort:
+          type: number
+        name:
+          type: string
+        isPrivate:
+          type: boolean
+        externalUrl:
+          type: ["string", "null"]
+        pid:
+          type: ["number", "null"]
+
+    PortInput:
+      type: object
+      required: [internalPort, name]
+      properties:
+        internalPort:
+          type: number
+        name:
+          type: string
+        isPrivate:
+          type: boolean
+
+    # ─── SECRET ──────────────────────────────────────────────────────────────
+    Secret:
+      type: object
+      required: [id, workspaceId, key, createdAt]
+      properties:
+        id:
+          type: string
+        workspaceId:
+          type: string
+        key:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    SecretInput:
+      type: object
+      required: [key, value]
+      properties:
+        key:
+          type: string
+          minLength: 1
+        value:
+          type: string
+
+    SecretUpdate:
+      type: object
+      required: [value]
+      properties:
+        value:
+          type: string
+
+    # ─── WORKFLOW ────────────────────────────────────────────────────────────
+    Workflow:
+      type: object
+      required: [id, workspaceId, name, command, autoStart, status]
+      properties:
+        id:
+          type: string
+        workspaceId:
+          type: string
+        name:
+          type: string
+        command:
+          type: string
+        port:
+          type: ["number", "null"]
+        autoStart:
+          type: boolean
+        status:
+          type: string
+          enum: [running, stopped, error]
+        pid:
+          type: ["number", "null"]
+
+    WorkflowInput:
+      type: object
+      required: [name, command]
+      properties:
+        name:
+          type: string
+          minLength: 1
+        command:
+          type: string
+          minLength: 1
+        port:
+          type: ["number", "null"]
+        autoStart:
+          type: boolean
+
+    WorkflowUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        command:
+          type: string
+        port:
+          type: ["number", "null"]
+        autoStart:
+          type: boolean
+
+    WorkflowLogs:
+      type: object
+      required: [workflowId, lines]
+      properties:
+        workflowId:
+          type: string
+        lines:
+          type: array
+          items:
+            type: string
+
+    # ─── DATABASE ────────────────────────────────────────────────────────────
+    Database:
+      type: object
+      required: [id, workspaceId, dbType, dbName, dbUser, dbHost, dbPort, createdAt]
+      properties:
+        id:
+          type: string
+        workspaceId:
+          type: string
+        dbType:
+          type: string
+          enum: [mysql, postgres]
+        dbName:
+          type: string
+        dbUser:
+          type: string
+        dbHost:
+          type: string
+        dbPort:
+          type: number
+        dbPassword:
+          type: ["string", "null"]
+        connectionUrl:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+          format: date-time
+
+    DatabaseInput:
+      type: object
+      required: [dbType]
+      properties:
+        dbType:
+          type: string
+          enum: [mysql, postgres]
+
+    # ─── DOMAIN ──────────────────────────────────────────────────────────────
+    Domain:
+      type: object
+      required: [id, workspaceId, domain, status, createdAt]
+      properties:
+        id:
+          type: string
+        workspaceId:
+          type: string
+        domain:
+          type: string
+        status:
+          type: string
+          enum: [pending, active, error]
+        sslStatus:
+          type: ["string", "null"]
+        dnsRecord:
+          $ref: "#/components/schemas/DnsRecord"
+        createdAt:
+          type: string
+          format: date-time
+
+    DnsRecord:
+      type: object
+      required: [type, name, value]
+      properties:
+        type:
+          type: string
+        name:
+          type: string
+        value:
+          type: string
+
+    DomainInput:
+      type: object
+      required: [domain]
+      properties:
+        domain:
+          type: string
+
+    # ─── MONITORING ──────────────────────────────────────────────────────────
+    MonitoringStats:
+      type: object
+      required: [cpuPercent, memoryMb, memoryLimitMb, diskMb, diskLimitMb, networkIn, networkOut, uptime]
+      properties:
+        cpuPercent:
+          type: number
+        memoryMb:
+          type: number
+        memoryLimitMb:
+          type: number
+        diskMb:
+          type: number
+        diskLimitMb:
+          type: number
+        networkIn:
+          type: number
+        networkOut:
+          type: number
+        uptime:
+          type: number
+
+    # ─── ADMIN ───────────────────────────────────────────────────────────────
+    AdminUser:
+      type: object
+      required: [id, username, email, role, plan, workspaceCount, createdAt]
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+        fullName:
+          type: ["string", "null"]
+        email:
+          type: string
+        role:
+          type: string
+          enum: [admin, user]
+        plan:
+          type: string
+          enum: [free, pro, team]
+        workspaceCount:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+
+    AdminUserInput:
+      type: object
+      required: [username, email, password]
+      properties:
+        username:
+          type: string
+        fullName:
+          type: ["string", "null"]
+        email:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+          enum: [admin, user]
+        plan:
+          type: string
+          enum: [free, pro, team]
+
+    AdminUserUpdate:
+      type: object
+      properties:
+        role:
+          type: string
+          enum: [admin, user]
+        plan:
+          type: string
+          enum: [free, pro, team]
+        password:
+          type: ["string", "null"]
+
+    AdminStats:
+      type: object
+      required: [totalUsers, totalWorkspaces, runningWorkspaces, publishedWorkspaces, totalDatabases]
+      properties:
+        totalUsers:
+          type: number
+        totalWorkspaces:
+          type: number
+        runningWorkspaces:
+          type: number
+        publishedWorkspaces:
+          type: number
+        totalDatabases:
+          type: number
+
+    PlatformSettings:
+      type: object
+      required: [platformName, domain, registrationEnabled, defaultPlan]
+      properties:
+        platformName:
+          type: string
+        domain:
+          type: string
+        registrationEnabled:
+          type: boolean
+        defaultPlan:
+          type: string
+          enum: [free, pro, team]
+        maxWorkspacesPerUser:
+          type: number
+        maxRamMb:
+          type: number
+        maxDiskMb:
+          type: number
+
+    PlatformSettingsUpdate:
+      type: object
+      properties:
+        platformName:
+          type: string
+        domain:
+          type: string
+        registrationEnabled:
+          type: boolean
+        defaultPlan:
+          type: string
+          enum: [free, pro, team]
+        maxWorkspacesPerUser:
+          type: number
+        maxRamMb:
+          type: number
+        maxDiskMb:
+          type: number

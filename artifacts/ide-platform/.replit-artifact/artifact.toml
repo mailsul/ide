@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "IDE Platform"
+description = "A Replit-like self-hosted web IDE platform. Users can create isolated workspaces, write code in a Monaco editor, run terminals, manage files, configure workflows, expose ports, store secrets, manage databases (MySQL/PostgreSQL), and publish websites with custom domains. Includes multi-user auth, admin panel, and beginner-friendly onboarding guides."
+version = "1.0.0"
+id = "artifacts/ide-platform"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21690
+
+[services.development]
+run = "pnpm --filter @workspace/ide-platform run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/ide-platform", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/ide-platform/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21690"
+BASE_PATH = "/"
