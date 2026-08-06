@@ -1,0 +1,107 @@
+root@ide:/opt/platform# cd /opt
+
+# Hapus folder yang bukan git repo
+rm -rf platform
+
+# Clone ulang dari GitHub
+git clone https://github.com/mailsul/ide.git platform
+
+# Masuk ke folder project
+cd platform
+
+# Cek isinya
+ls
+Cloning into 'platform'...
+remote: Enumerating objects: 264, done.
+remote: Counting objects: 100% (264/264), done.
+remote: Compressing objects: 100% (198/198), done.
+remote: Total 264 (delta 55), reused 264 (delta 55), pack-reused 0 (from 0)
+Receiving objects: 100% (264/264), 272.77 KiB | 4.79 MiB/s, done.
+Resolving deltas: 100% (55/55), done.
+PANDUAN-INSTALL-VPS.md  docker              lib             pnpm-workspace.yaml  tsconfig.base.json
+artifacts               docker-compose.yml  package.json    replit.md            tsconfig.json
+attached_assets         github_sync.sh      pnpm-lock.yaml  scripts
+root@ide:/opt/platform# # Verifikasi folder docker ada
+ls docker/workspace-base/
+
+# Build workspace base image
+docker build -t platform/workspace-base:latest docker/workspace-base/
+Dockerfile
+[+] Building 112.4s (8/16)                                                                               docker:default
+ => [internal] load build definition from Dockerfile                                                               0.1s
+ => => transferring dockerfile: 2.01kB                                                                             0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:22.04                                                    2.5s
+ => [internal] load .dockerignore                                                                                  0.0s
+ => => transferring context: 2B                                                                                    0.0s
+ => [ 1/13] FROM docker.io/library/ubuntu:22.04@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d  1.5s
+ => => resolve docker.io/library/ubuntu:22.04@sha256:3b06811b2afd352be909dd088a004166d665dc76d38b13eada33522a9d91  0.0s
+ => => sha256:39a945af8df2ad9343f141c82355d3f2c4b576d432eda34c460d630607462b60 29.74MB / 29.74MB                   0.6s
+ => => extracting sha256:39a945af8df2ad9343f141c82355d3f2c4b576d432eda34c460d630607462b60                          0.7s
+ => [ 2/13] RUN apt-get update && apt-get install -y   curl wget git vim nano zip unzip   build-essential cmake   47.8s
+ => [ 3/13] RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -   && apt-get install -y nodejs   && np  29.7s
+ => [ 4/13] RUN apt-get update && apt-get install -y   python3.11 python3-pip python3-venv python3.11-venv   &&   24.6s
+ => ERROR [ 5/13] RUN apt-get update && apt-get install -y   php8.2 php8.2-cli php8.2-curl php8.2-mbstring   php8  6.0s
+------
+ > [ 5/13] RUN apt-get update && apt-get install -y   php8.2 php8.2-cli php8.2-curl php8.2-mbstring   php8.2-xml php8.2-mysql php8.2-pgsql php8.2-zip   && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer   && rm -rf /var/lib/apt/lists/*:
+0.473 Get:1 https://deb.nodesource.com/node_20.x nodistro InRelease [12.1 kB]
+0.542 Get:2 https://deb.nodesource.com/node_20.x nodistro/main amd64 Packages [14.7 kB]
+0.921 Get:3 http://archive.ubuntu.com/ubuntu jammy InRelease [270 kB]
+0.932 Get:4 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+1.149 Get:5 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [4190 kB]
+1.289 Get:6 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [7545 kB]
+1.343 Get:7 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [1314 kB]
+1.353 Get:8 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [84.1 kB]
+1.365 Get:9 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+1.688 Get:10 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+1.777 Get:11 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [266 kB]
+1.812 Get:12 http://archive.ubuntu.com/ubuntu jammy/restricted amd64 Packages [164 kB]
+1.828 Get:13 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages [1792 kB]
+1.885 Get:14 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [17.5 MB]
+1.991 Get:15 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [7836 kB]
+2.022 Get:16 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1616 kB]
+2.029 Get:17 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [92.7 kB]
+2.033 Get:18 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [4524 kB]
+2.056 Get:19 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [35.6 kB]
+2.061 Get:20 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [82.8 kB]
+3.023 Fetched 47.7 MB in 3s (17.4 MB/s)
+3.023 Reading package lists...
+3.966 Reading package lists...
+4.861 Building dependency tree...
+5.028 Reading state information...
+5.302 E: Unable to locate package php8.2
+5.302 E: Couldn't find any package by glob 'php8.2'
+5.302 E: Couldn't find any package by regex 'php8.2'
+5.302 E: Unable to locate package php8.2-cli
+5.302 E: Couldn't find any package by glob 'php8.2-cli'
+5.302 E: Couldn't find any package by regex 'php8.2-cli'
+5.302 E: Unable to locate package php8.2-curl
+5.302 E: Couldn't find any package by glob 'php8.2-curl'
+5.302 E: Couldn't find any package by regex 'php8.2-curl'
+5.302 E: Unable to locate package php8.2-mbstring
+5.302 E: Couldn't find any package by glob 'php8.2-mbstring'
+5.302 E: Couldn't find any package by regex 'php8.2-mbstring'
+5.302 E: Unable to locate package php8.2-xml
+5.302 E: Couldn't find any package by glob 'php8.2-xml'
+5.302 E: Couldn't find any package by regex 'php8.2-xml'
+5.302 E: Unable to locate package php8.2-mysql
+5.302 E: Couldn't find any package by glob 'php8.2-mysql'
+5.302 E: Couldn't find any package by regex 'php8.2-mysql'
+5.302 E: Unable to locate package php8.2-pgsql
+5.302 E: Couldn't find any package by glob 'php8.2-pgsql'
+5.302 E: Couldn't find any package by regex 'php8.2-pgsql'
+5.302 E: Unable to locate package php8.2-zip
+5.302 E: Couldn't find any package by glob 'php8.2-zip'
+5.302 E: Couldn't find any package by regex 'php8.2-zip'
+------
+Dockerfile:26
+--------------------
+  25 |     # PHP 8.2 + Composer
+  26 | >>> RUN apt-get update && apt-get install -y \
+  27 | >>>   php8.2 php8.2-cli php8.2-curl php8.2-mbstring \
+  28 | >>>   php8.2-xml php8.2-mysql php8.2-pgsql php8.2-zip \
+  29 | >>>   && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+  30 | >>>   && rm -rf /var/lib/apt/lists/*
+  31 |
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/sh -c apt-get update && apt-get install -y   php8.2 php8.2-cli php8.2-curl php8.2-mbstring   php8.2-xml php8.2-mysql php8.2-pgsql php8.2-zip   && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer   && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100
+root@ide:/opt/platform#
