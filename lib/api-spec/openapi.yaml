@@ -1377,7 +1377,7 @@ components:
           type: ["string", "null"]
         language:
           type: string
-          enum: [nodejs, python, php, go, rust, java, ruby, dotnet, deno, bash, html, cpp]
+          enum: [empty, nodejs, python, php, go, rust, java, ruby, dotnet, deno, bash, html, cpp]
 
     WorkspaceUpdate:
       type: object

@@ -168,7 +168,7 @@ export const createWorkspaceBodyNameMax = 100;
 export const CreateWorkspaceBody = zod.object({
   "name": zod.string().min(1).max(createWorkspaceBodyNameMax),
   "description": zod.string().nullish(),
-  "language": zod.enum(['nodejs', 'python', 'php', 'go', 'rust', 'java', 'ruby', 'dotnet', 'deno', 'bash', 'html', 'cpp'])
+  "language": zod.enum(['empty', 'nodejs', 'python', 'php', 'go', 'rust', 'java', 'ruby', 'dotnet', 'deno', 'bash', 'html', 'cpp'])
 })
 
 export const CreateWorkspaceResponse = zod.object({

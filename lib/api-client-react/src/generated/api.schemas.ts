@@ -150,6 +150,7 @@ export type WorkspaceInputLanguage = typeof WorkspaceInputLanguage[keyof typeof 
 
 
 export const WorkspaceInputLanguage = {
+  empty: 'empty',
   nodejs: 'nodejs',
   python: 'python',
   php: 'php',

@@ -30,6 +30,19 @@ export interface PackageManagerDef {
 }
 
 export const WORKSPACE_TEMPLATES: WorkspaceTemplate[] = [
+  // ─── Blank workspace ───────────────────────────────────────────────────────
+  {
+    id: "empty",
+    name: "Empty",
+    description: "Workspace kosong tanpa file awal atau runtime project. Mulai dari nol.",
+    category: "language",
+    runtimes: [],
+    icon: "□",
+    badgeColors: [],
+    packageManagers: [],
+    defaultRunCommand: "",
+  },
+
   // ─── Backend Single-Language ───────────────────────────────────────────────
   {
     id: "nodejs",
@@ -426,9 +439,10 @@ export const CATEGORY_LABELS: Record<string, string> = {
 
 export const CATEGORY_ORDER = ["fullstack", "devops", "backend", "frontend", "language"];
 
-/** Get template by id, fallback ke nodejs */
+/** Get template by id, fallback ke nodejs untuk workspace lama/invalid. */
 export function getTemplate(id: string): WorkspaceTemplate {
-  return WORKSPACE_TEMPLATES.find(t => t.id === id) ?? WORKSPACE_TEMPLATES[0];
+  return WORKSPACE_TEMPLATES.find(t => t.id === id)
+    ?? WORKSPACE_TEMPLATES.find(t => t.id === "nodejs")!;
 }
 
 /** Templates yang ditampilkan di popular section */

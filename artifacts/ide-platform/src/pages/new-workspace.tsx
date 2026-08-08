@@ -109,9 +109,10 @@ function TemplatePicker({
   const [activeCategory, setActiveCategory] = useState<string>("popular");
 
   const categories = ["popular", ...CATEGORY_ORDER];
+  const emptyTemplate = WORKSPACE_TEMPLATES.find((t) => t.id === "empty");
   const displayTemplates =
     activeCategory === "popular"
-      ? POPULAR_TEMPLATES
+      ? POPULAR_TEMPLATES.filter((t) => t.id !== "empty")
       : WORKSPACE_TEMPLATES.filter((t) => t.category === activeCategory);
 
   return (
@@ -145,6 +146,15 @@ function TemplatePicker({
           </button>
         ))}
       </div>
+
+      {/* Blank template is intentionally always visible, like Replit's Empty option. */}
+      {emptyTemplate && (
+        <TemplateCard
+          template={emptyTemplate}
+          isSelected={value === emptyTemplate.id}
+          onClick={() => onChange(emptyTemplate.id)}
+        />
+      )}
 
       {/* Docker-in-Docker notice */}
       {(activeCategory === "devops" || activeCategory === "fullstack") && (
@@ -197,7 +207,7 @@ function EmptyTab() {
   const createMutation = useCreateWorkspace();
   const form = useForm<z.infer<typeof baseSchema>>({
     resolver: zodResolver(baseSchema),
-    defaultValues: { name: "", description: "", language: "nodejs" },
+    defaultValues: { name: "", description: "", language: "empty" },
   });
 
   const selectedLanguage = form.watch("language");
@@ -257,7 +267,7 @@ function EmptyTab() {
               <div className="bg-muted/20 border border-border/30 rounded-lg px-3 py-2 space-y-1">
                 <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">Config Runner</p>
                 <p className="text-[11px] text-muted-foreground">
-                  Taruh <code className="font-mono text-primary bg-primary/10 px-1 rounded">.workspace.toml</code> di root workspace untuk konfigurasi run commands, environment, dan packages.
+                  Workspace Empty dimulai tanpa file awal. Buat file dan konfigurasi sendiri dari editor, atau tambahkan <code className="font-mono text-primary bg-primary/10 px-1 rounded">.workspace.toml</code> untuk mengatur run commands, environment, dan packages.
                 </p>
               </div>
 

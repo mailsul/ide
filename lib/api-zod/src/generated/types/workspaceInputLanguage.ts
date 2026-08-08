@@ -10,6 +10,8 @@ export type WorkspaceInputLanguage = typeof WorkspaceInputLanguage[keyof typeof 
 
 
 export const WorkspaceInputLanguage = {
+  empty: 'empty',
+
   // ─── Single-language templates ─────────────────────────────────────────────
   nodejs: 'nodejs',
   python: 'python',
