@@ -19,7 +19,7 @@ const loginSchema = z.object({
 
 export default function LoginPage() {
   const [, setLocation] = useLocation();
-  const { login } = useAuth();
+  const { login, sessionError, clearSessionError } = useAuth();
   const loginMutation = useLogin();
 
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -28,6 +28,7 @@ export default function LoginPage() {
   });
 
   const onSubmit = (data: z.infer<typeof loginSchema>) => {
+    clearSessionError();
     loginMutation.mutate(
       // cast karena generated type belum include rememberMe — field extra tetap dikirim ke backend
       { data: data as any },
@@ -122,6 +123,12 @@ export default function LoginPage() {
                     </FormItem>
                   )}
                 />
+
+                {sessionError && !loginMutation.error && (
+                  <div className="text-sm text-amber-500 font-medium p-3 bg-amber-500/10 rounded-md border border-amber-500/20">
+                    {sessionError}
+                  </div>
+                )}
 
                 {loginMutation.error && (
                   <div className="text-sm text-destructive font-medium p-3 bg-destructive/10 rounded-md border border-destructive/20">

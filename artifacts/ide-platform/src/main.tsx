@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import { setBaseUrl, setAuthTokenGetter } from '@workspace/api-client-react';
 import App from './App';
+import { getStoredToken } from './lib/token-storage';
 
 import './index.css';
 
@@ -12,7 +13,9 @@ if (apiUrl && apiUrl !== '/api') {
 }
 
 // Pasang token getter — setiap request API akan otomatis menyertakan
-// Authorization: Bearer <token> jika token ada di localStorage
-setAuthTokenGetter(() => localStorage.getItem('ide_token'));
+// Authorization: Bearer <token>. Getter membaca localStorage DAN
+// sessionStorage, karena login tanpa "Ingat saya" menyimpan token di
+// sessionStorage.
+setAuthTokenGetter(() => getStoredToken());
 
 createRoot(document.getElementById('root')!).render(<App />);

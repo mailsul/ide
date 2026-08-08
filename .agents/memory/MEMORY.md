@@ -1,0 +1,1 @@
+- [Web auth token storage](web-auth-token-storage.md) — token hidup di localStorage ATAU sessionStorage; baca lewat helper bersama, kalau tidak login terlihat "stuck".
